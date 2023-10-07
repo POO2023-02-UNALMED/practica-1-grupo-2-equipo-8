@@ -1,3 +1,4 @@
+// Si se instancia List, se debería usar array list o LinkedList
 package abastecimiento;
 
 import java.util.ArrayList;
