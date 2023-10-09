@@ -1,28 +1,102 @@
 package compras;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Caja {
-    private String idCaja;
-    private double dineroDisponible;
+    private double dineroActual;
+    private List<Double> preciosProductosCatalogo = new ArrayList<>();
+    private List<Double> preciosIngredientesCatalogo = new ArrayList<>();
+    private List<Double> preciosIngredientesNoUsados = new ArrayList<>();
+    
 
-    public Caja(String idCaja, double dineroDisponible) {
-        this.idCaja = idCaja;
-        this.dineroDisponible = dineroDisponible;
+    public Caja(double dineroActual, List<Double> preciosProductosCatalogo,List<Double> preciosIngredientesCatalogo,List<Double> preciosIngredientesNoUsados) {
+       this.dineroActual=dineroActual;
+       this.preciosProductosCatalogo=preciosProductosCatalogo;
+       this.preciosIngredientesCatalogo=preciosIngredientesCatalogo ;
+       this.preciosIngredientesNoUsados=preciosIngredientesNoUsados;  	
     }
 
+    public  List<String> verHistorialDeCompras() {
+    	
+    }
+    
+    public void calcularRentabilidad() {
+    	
+    }
+    
+    public void agregarProductoCaja() {
+    	
+    }
+    public void eliminarProductoCaja() {
+    	
+    }
+    public void  venderIngredientes(){
+    	
+    }    
+    public void calcularCostoProducto() {
+    	
+    }
+    public void cantidadDineroAPedir() {
+    
+    }
+    public  void descontarDinero(){
+    	
+    }    
+    public void renegociacion() {
+    	}
+    public void sumarDineroCompra(List<Double> listaPrecios) {
+    	
+    }
+    public  void generarCodigoCompra() {
+    	
+    }
+    public void calcularCosto() {
+    	
+    }
+    
+    
+    
     // Métodos getter y setter
-    public String getIdCaja() {
-        return idCaja;
-    }
+	public double getDineroActual() {
+		return dineroActual;
+	}
 
-    public void setIdCaja(String idCaja) {
-        this.idCaja = idCaja;
-    }
 
-    public double getDineroDisponible() {
-        return dineroDisponible;
-    }
+	public void setDineroActual(double dineroActual) {
+		this.dineroActual = dineroActual;
+	}
 
-    public void setDineroDisponible(double dineroDisponible) {
-        this.dineroDisponible = dineroDisponible;
-    }
+
+	public List<Double> getPreciosProductosCatalogo() {
+		return preciosProductosCatalogo;
+	}
+
+
+	public void setPreciosProductosCatalogo(List<Double> preciosProductosCatalogo) {
+		this.preciosProductosCatalogo = preciosProductosCatalogo;
+	}
+
+
+	public List<Double> getPreciosIngredientesCatalogo() {
+		return preciosIngredientesCatalogo;
+	}
+
+
+	public void setPreciosIngredientesCatalogo(List<Double> preciosIngredientesCatalogo) {
+		this.preciosIngredientesCatalogo = preciosIngredientesCatalogo;
+	}
+
+
+	public List<Double> getPreciosIngredientesNoUsados() {
+		return preciosIngredientesNoUsados;
+	}
+
+
+	public void setPreciosIngredientesNoUsados(List<Double> preciosIngredientesNoUsados) {
+		this.preciosIngredientesNoUsados = preciosIngredientesNoUsados;
+	}
+
+   
+    
 }
