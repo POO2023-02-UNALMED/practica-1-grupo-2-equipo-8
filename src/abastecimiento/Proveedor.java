@@ -17,6 +17,7 @@ public class Proveedor {
     }
 
     // Métodos getter y setter
+    
     public String getIdProveedor() {
         return idProveedor;
     }
