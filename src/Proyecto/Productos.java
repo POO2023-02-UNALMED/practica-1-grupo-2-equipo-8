@@ -1,4 +1,4 @@
-package compras;
+package Proyecto;
 
 public class Productos {
     public String nombre;
