@@ -1,6 +1,5 @@
 package compras;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Carrito {
@@ -31,6 +30,18 @@ public class Carrito {
 
 	public void setProductosIngresados(List<Productos> productosIngresados) {
 		this.productosIngresados = productosIngresados;
+	}
+
+	private void EliminarProductoCarrito(){
+		;
+	}
+
+	private void AgregarProductoCarrito(){
+		;
+	}
+
+	private void ComprarProductos(){
+		;
 	}
 }
 

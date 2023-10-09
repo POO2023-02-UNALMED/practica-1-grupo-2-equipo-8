@@ -1,6 +1,7 @@
 package compras;
 
 import java.util.ArrayList;
+
 public class Bodega {
     public Carrito Carrito;
     public Caja Caja;
@@ -86,4 +87,53 @@ public class Bodega {
     public void setAlmacenamientoTotal(ArrayList<Integer> almacenamientoTotal) {
         AlmacenamientoTotal = almacenamientoTotal;
     }
+
+    private ArrayList MostrarCatalogo(){
+        return null;
+    }
+
+    private void EliminarProductoBodega(){
+        ;
+    }
+
+    private ArrayList VerIngredientesUsados(){
+        return null;
+    }
+
+    private void ElegirIngredientes(){
+        ;
+    }
+
+    private ArrayList VerIngredientesPosibles(){
+        return null;
+    }
+
+    private String VerEscasezIngredientes(){
+        ;
+    }
+
+    private void ConfirmarDisponibilidadProductos(){
+        ;
+    }
+
+    private void ConfirmarDisponibilidadIngredientes(){
+        ;
+    }
+
+    private void LiberarAlmacenamiento(){
+        ;
+    }
+
+    private void OcuparAlmacenamiento(){
+        ;
+    }
+
+    public void CalcularAlmacenamiento(){
+        ;
+    }
+
+    public void ConfirmarEspacioDisponible(){
+        ;
+    }
+
 }

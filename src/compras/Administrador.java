@@ -64,6 +64,31 @@ public class Administrador {
     public void setCaja(compras.Caja caja) {
         Caja = caja;
     }
+
+    private void AgregarProducto(){
+        ;
+    }
+
+    private void EliminarProducto(){
+        ;
+    }
+
+    private void ComprarMateriaPrima(){
+        ;
+    }
+
+    private void VentaPorEncargo(){
+        ;
+    }
+
+    public void ReiniciarInteraccion(){
+        ;
+    }
+
+    public void CambiarListaProduccionDiaria(){
+        ;
+    }
+
 }
 
 

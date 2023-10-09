@@ -18,7 +18,7 @@ public class Caja {
     }
 
     public  List<String> verHistorialDeCompras() {
-    	
+        return null;
     }
     
     public void calcularRentabilidad() {
@@ -97,6 +97,51 @@ public class Caja {
 		this.preciosIngredientesNoUsados = preciosIngredientesNoUsados;
 	}
 
-   
-    
+    private ArrayList<String> VerHistorialCompras(){
+        return null;
+    }
+
+    private void CalcularRentabilidad(){
+        ;
+    }
+
+    private void AgregarProductoCaja(){
+        ;
+    }
+
+    private void EliminarProducto(){
+        ;
+    }
+
+    private void VenderIngrediente(){
+        ;
+    }
+
+    private void CalcularCostoProductoNuevo(){
+        ;
+    }
+
+    private void CantidadDineroAPedir(){
+        ;
+    }
+
+    private void DescontarDinero(){
+        ;
+    }
+
+    private void Renegociacion() {
+        ;
+    }
+
+    private void SumarDineroCompra(){
+        ;
+    }
+
+    private void GenerarCodigoCompra(){
+        ;
+    }
+
+    private void CalcularCosto(){
+        ;
+    }
 }
