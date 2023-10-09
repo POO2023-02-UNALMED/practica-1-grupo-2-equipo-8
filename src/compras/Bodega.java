@@ -109,7 +109,7 @@ public class Bodega {
     }
 
     private String VerEscasezIngredientes(){
-        ;
+        return null;
     }
 
     private void ConfirmarDisponibilidadProductos(){

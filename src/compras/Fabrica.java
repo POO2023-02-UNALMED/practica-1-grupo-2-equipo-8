@@ -1,17 +1,20 @@
 package compras;
 
+import productos.Producto;
+
 import java.util.List;
 import java.util.ArrayList;
 
 
 public class Fabrica {
 	private Bodega bodega;
-	private List<Producto> ListaDeProductosDiarios;
+	private List<Producto> ListaDeProductosDiarios = new ArrayList<Producto>();
 	
 	
 
-	public Fabrica() {
-		
+	public Fabrica(Bodega bodega, List<Producto> ListaDeProductosDiarios) {
+		this.bodega = bodega;
+		this.ListaDeProductosDiarios = ListaDeProductosDiarios;
 	}
 	
 	public void eliminarProductoFabrica() {
@@ -31,8 +34,8 @@ public class Fabrica {
 		
 	}
 	public String generarCodigoTanda() {
-		
-	}
+        return null;
+    }
 //	Getters y Setters
 
 	public Bodega getBodega() {
