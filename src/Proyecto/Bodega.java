@@ -1,4 +1,4 @@
-package compras;
+package Proyecto;
 
 import java.util.ArrayList;
 
@@ -24,35 +24,35 @@ public class Bodega {
         this.AlmacenamientoProductos = AlmacenamientoProductos;
     }
 
-    public compras.Carrito getCarrito() {
+    public Proyecto.Carrito getCarrito() {
         return Carrito;
     }
 
-    public void setCarrito(compras.Carrito carrito) {
+    public void setCarrito(Proyecto.Carrito carrito) {
         Carrito = carrito;
     }
 
-    public compras.Caja getCaja() {
+    public Proyecto.Caja getCaja() {
         return Caja;
     }
 
-    public void setCaja(compras.Caja caja) {
+    public void setCaja(Proyecto.Caja caja) {
         Caja = caja;
     }
 
-    public compras.Productos getProductos() {
+    public Proyecto.Productos getProductos() {
         return Productos;
     }
 
-    public void setProductos(compras.Productos productos) {
+    public void setProductos(Proyecto.Productos productos) {
         Productos = productos;
     }
 
-    public compras.Fabrica getFabrica() {
+    public Proyecto.Fabrica getFabrica() {
         return Fabrica;
     }
 
-    public void setFabrica(compras.Fabrica fabrica) {
+    public void setFabrica(Proyecto.Fabrica fabrica) {
         Fabrica = fabrica;
     }
 

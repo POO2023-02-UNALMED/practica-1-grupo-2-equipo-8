@@ -1,4 +1,4 @@
-package compras;
+package Proyecto;
 
 public class Administrador {
 
@@ -17,51 +17,51 @@ public class Administrador {
         this.Rastreo = Rastreo;
     }
 
-    public compras.Carrito getCarrito() {
+    public Proyecto.Carrito getCarrito() {
         return Carrito;
     }
 
-    public void setCarrito(compras.Carrito carrito) {
+    public void setCarrito(Proyecto.Carrito carrito) {
         Carrito = carrito;
     }
 
-    public compras.Bodega getBodega() {
+    public Proyecto.Bodega getBodega() {
         return Bodega;
     }
 
-    public void setBodega(compras.Bodega bodega) {
+    public void setBodega(Proyecto.Bodega bodega) {
         Bodega = bodega;
     }
 
-    public compras.Productos getProductos() {
+    public Proyecto.Productos getProductos() {
         return Productos;
     }
 
-    public void setProductos(compras.Productos productos) {
+    public void setProductos(Proyecto.Productos productos) {
         Productos = productos;
     }
 
-    public compras.Fabrica getFabrica() {
+    public Proyecto.Fabrica getFabrica() {
         return Fabrica;
     }
 
-    public void setFabrica(compras.Fabrica fabrica) {
+    public void setFabrica(Proyecto.Fabrica fabrica) {
         Fabrica = fabrica;
     }
 
-    public compras.Rastreo getRastreo() {
+    public Proyecto.Rastreo getRastreo() {
         return Rastreo;
     }
 
-    public void setRastreo(compras.Rastreo rastreo) {
+    public void setRastreo(Proyecto.Rastreo rastreo) {
         Rastreo = rastreo;
     }
 
-    public compras.Caja getCaja() {
+    public Proyecto.Caja getCaja() {
         return Caja;
     }
 
-    public void setCaja(compras.Caja caja) {
+    public void setCaja(Proyecto.Caja caja) {
         Caja = caja;
     }
 

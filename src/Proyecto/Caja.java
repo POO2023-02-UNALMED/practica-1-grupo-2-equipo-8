@@ -1,4 +1,4 @@
-package compras;
+package Proyecto;
 
 import java.util.ArrayList;
 import java.util.List;
