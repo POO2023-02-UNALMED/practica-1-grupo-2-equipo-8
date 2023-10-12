@@ -8,9 +8,15 @@ public class Bodega {
     public Productos Productos;
     public Fabrica Fabrica;
     public ArrayList<String> ListaIngredientesAlmacenados = new ArrayList<>();
-    public ArrayList<Integer> AlmacenamientoTotal = new ArrayList<>();
+    public ArrayList<String> ListaProductosAlmacenados = new ArrayList<>();
+    public ArrayList<Integer> NumeroIngredientesAlmacenados = new ArrayList<>();
+    public ArrayList<Integer> EspacioAlmacenamientoTotal = new ArrayList<>();
     public int AlmacenamientoIngredientes;
     public int AlmacenamientoProductos;
+    public ArrayList<String> ListaProductosAltaDemanda = new ArrayList<>();
+    public ArrayList<String> ListaProductosBajaDemanda = new ArrayList<>();
+    public ArrayList<Integer> EstanciaEnBodega = new ArrayList<>();
+
 
     public  Bodega(Carrito Carrito, Caja Caja, Productos Productos, Fabrica Fabrica, ArrayList<String> ListaIngredientesAlmacenados,
                    ArrayList<Integer> AlmacenamientoTotal, int AlmacenamientoIngredientes, int AlmacenamientoProductos){
@@ -19,7 +25,7 @@ public class Bodega {
         this.Productos = Productos;
         this.Fabrica = Fabrica;
         this.ListaIngredientesAlmacenados = ListaIngredientesAlmacenados;
-        this.AlmacenamientoTotal = AlmacenamientoTotal;
+        this.EspacioAlmacenamientoTotal = AlmacenamientoTotal;
         this.AlmacenamientoIngredientes = AlmacenamientoIngredientes;
         this.AlmacenamientoProductos = AlmacenamientoProductos;
     }
@@ -81,30 +87,89 @@ public class Bodega {
     }
 
     public ArrayList<Integer> getAlmacenamientoTotal() {
-        return AlmacenamientoTotal;
+        return EspacioAlmacenamientoTotal;
     }
 
     public void setAlmacenamientoTotal(ArrayList<Integer> almacenamientoTotal) {
-        AlmacenamientoTotal = almacenamientoTotal;
+        EspacioAlmacenamientoTotal = almacenamientoTotal;
     }
+    
+    
 
-    private ArrayList MostrarCatalogo(){
+    public ArrayList<String> getListaProductosAlmacenados() {
+		return ListaProductosAlmacenados;
+	}
+
+	public void setListaProductosAlmacenados(ArrayList<String> listaProductosAlmacenados) {
+		ListaProductosAlmacenados = listaProductosAlmacenados;
+	}
+
+	public ArrayList<Integer> getNumeroIngredientesAlmacenados() {
+		return NumeroIngredientesAlmacenados;
+	}
+
+	public void setNumeroIngredientesAlmacenados(ArrayList<Integer> numeroIngredientesAlmacenados) {
+		NumeroIngredientesAlmacenados = numeroIngredientesAlmacenados;
+	}
+
+	public ArrayList<Integer> getEspacioAlmacenamientoTotal() {
+		return EspacioAlmacenamientoTotal;
+	}
+
+	public void setEspacioAlmacenamientoTotal(ArrayList<Integer> espacioAlmacenamientoTotal) {
+		EspacioAlmacenamientoTotal = espacioAlmacenamientoTotal;
+	}
+
+	public ArrayList<String> getListaProductosAltaDemanda() {
+		return ListaProductosAltaDemanda;
+	}
+
+	public void setListaProductosAltaDemanda(ArrayList<String> listaProductosAltaDemanda) {
+		ListaProductosAltaDemanda = listaProductosAltaDemanda;
+	}
+
+	public ArrayList<String> getListaProductosBajaDemanda() {
+		return ListaProductosBajaDemanda;
+	}
+
+	public void setListaProductosBajaDemanda(ArrayList<String> listaProductosBajaDemanda) {
+		ListaProductosBajaDemanda = listaProductosBajaDemanda;
+	}
+
+	public ArrayList<Integer> getEstanciaEnBodega() {
+		return EstanciaEnBodega;
+	}
+
+	public void setEstanciaEnBodega(ArrayList<Integer> estanciaEnBodega) {
+		EstanciaEnBodega = estanciaEnBodega;
+	}
+
+	private ArrayList MostrarCatalogo(){
         return null;
     }
 
-    private void EliminarProductoBodega(){
+	private void AgregarProductoBodega(String producto){
         ;
     }
 
-    private ArrayList VerIngredientesUsados(){
-        return null;
+	
+	private void EliminarProductoBodega(String producto){
+        ;
     }
 
+    private ArrayList<?> VerIngredientesUsados(){
+        return null;
+    }
+    
+    private void VerOtrosIngredientes(){
+        ;
+    }
+    
     private void ElegirIngredientes(){
         ;
     }
 
-    private ArrayList VerIngredientesPosibles(){
+    private ArrayList<?> VerIngredientesPosibles(){
         return null;
     }
 
