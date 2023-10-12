@@ -1,18 +1,15 @@
 package Proyecto;
 
-import productos.Producto;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Fabrica {
 	private Bodega bodega;
-	private List<Producto> ListaDeProductosDiarios = new ArrayList<Producto>();
+	private List<Productos> ListaDeProductosDiarios = new ArrayList<Productos>();
 	
 	
-
-	public Fabrica(Bodega bodega, List<Producto> ListaDeProductosDiarios) {
+	public Fabrica(Bodega bodega, List<Productos> ListaDeProductosDiarios) {
 		this.bodega = bodega;
 		this.ListaDeProductosDiarios = ListaDeProductosDiarios;
 	}
@@ -46,11 +43,11 @@ public class Fabrica {
 		this.bodega = bodega;
 	}
 
-	public List<Producto> getListaDeProductosDiarios() {
+	public List<Productos> getListaDeProductosDiarios() {
 		return ListaDeProductosDiarios;
 	}
 
-	public void setListaDeProductosDiarios(List<Producto> listaDeProductosDiarios) {
+	public void setListaDeProductosDiarios(List<Productos> listaDeProductosDiarios) {
 		ListaDeProductosDiarios = listaDeProductosDiarios;
 	}
 
