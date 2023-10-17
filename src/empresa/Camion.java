@@ -8,7 +8,7 @@ public class Camion {
 	private String modelo;
 	private int caparcidad;
 	private List<Envio> envios = new ArrayList<Envio>();
-	
+	private String placa;
 	
 	
 	public void agregarEnvio(Envio envio) {
