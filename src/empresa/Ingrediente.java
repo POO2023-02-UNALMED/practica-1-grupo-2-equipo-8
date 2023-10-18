@@ -1,8 +1,7 @@
 package empresa;
 import java.util.List;
-import compras.Producto;
 
-public class Ingrediente implements Producto {
+public class Ingrediente {
     private String nombre;
     private int costo;
     private final long identificador;
