@@ -3,7 +3,7 @@ package empresa;
 import java.util.HashMap;
 import java.util.Map;
 import compras.Bodega;
-import compras.Producto;
+import producto.Producto;
 
 public class Fabrica {
     private final String NIT; // NIT es constante y se inicializa en el constructor
