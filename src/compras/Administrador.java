@@ -1,30 +1,26 @@
 package compras;
 
+import java.util.HashMap;
+
+import empresa.Camion;
+
 public class Administrador {
 
-    private Carrito Carrito;
     private Bodega Bodega;
-    private Productos Productos;
-    private Fabrica Fabrica;
-    private Rastreo Rastreo;
     private Caja Caja;
+    private HashMap<String, Integer> Productos = new HashMap<String, Integer>();
+    private Camion Camion;
+    private Fabrica Fabrica;
 
-    public Administrador(Carrito Carrito, Bodega Bodega, Productos Productos, Fabrica Fabrica, Rastreo Rastreo, Caja Caja){
-        this.Carrito = Carrito;
-        this.Bodega = Bodega;
-        this.Productos = Productos;
-        this.Fabrica = Fabrica;
-        this.Rastreo = Rastreo;
+    public Administrador(compras.Bodega bodega, Caja caja, HashMap<String, Integer> productos, Camion camion, Fabrica fabrica) {
+        Bodega = bodega;
+        Caja = caja;
+        Productos = productos;
+        Camion = camion;
+        Fabrica = fabrica;
     }
 
-    public compras.Carrito getCarrito() {
-        return Carrito;
-    }
-
-    public void setCarrito(compras.Carrito carrito) {
-        Carrito = carrito;
-    }
-
+    //Getters y Setters
     public compras.Bodega getBodega() {
         return Bodega;
     }
@@ -33,37 +29,50 @@ public class Administrador {
         Bodega = bodega;
     }
 
-    public compras.Productos getProductos() {
-        return Productos;
-    }
-
-    public void setProductos(compras.Productos productos) {
-        Productos = productos;
-    }
-
-    public compras.Fabrica getFabrica() {
-        return Fabrica;
-    }
-
-    public void setFabrica(compras.Fabrica fabrica) {
-        Fabrica = fabrica;
-    }
-
-    public compras.Rastreo getRastreo() {
-        return Rastreo;
-    }
-
-    public void setRastreo(compras.Rastreo rastreo) {
-        Rastreo = rastreo;
-    }
-
-    public compras.Caja getCaja() {
+    public Caja getCaja() {
         return Caja;
     }
 
-    public void setCaja(compras.Caja caja) {
+    public void setCaja(Caja caja) {
         Caja = caja;
     }
+
+    public HashMap<String, Integer> getProductos() {
+        return Productos;
+    }
+
+    public void setProductos(HashMap<String, Integer> productos) {
+        Productos = productos;
+    }
+
+    public empresa.Camion getCamion() {
+        return Camion;
+    }
+
+    public void setCamion(empresa.Camion camion) {
+        Camion = camion;
+    }
+
+    public Fabrica getFabrica() {
+        return Fabrica;
+    }
+
+    public void setFabrica(Fabrica fabrica) {
+        Fabrica = fabrica;
+    }
+
+    //Metodos de la clase Administrador
+
+    //iniciarSesion(): Metodo que se ejecuta cada vez que el Administrador inicie sesiòn en cada interacciòn que tenga con el software
+    private static String iniciarSesion(){
+        return "Iniciar Sesion";
+    }
+
+    //acabarSesion(): Metodo que se ejecuta cada vez que termine la interaccion del Administrador con el software
+    private String acabarSesion(){
+        return "Acabar Sesiòn";
+    }
+    
 }
 
 
