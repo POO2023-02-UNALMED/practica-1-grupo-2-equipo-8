@@ -29,7 +29,12 @@ public class Producto {
         this.tiempoProduccion = tiempoProduccion;
     }
 
-    public int getEspacioAlmacenamiento() {
+    public Producto(String nombre2, int espacioAlmacenamiento2, HashMap<String, Integer> ingredientesNecesarios2,
+			int costo2, String iD2, int precio2, int peso2, int diasEnBodega, String fechaVencimiento,
+			int tiempoProduccion2) {
+	}
+
+	public int getEspacioAlmacenamiento() {
 		return espacioAlmacenamiento;
 	}
 
