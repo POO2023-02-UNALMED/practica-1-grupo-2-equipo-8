@@ -3,7 +3,7 @@ package empresa;
 import java.util.HashMap;
 import java.util.Map;
 import compras.Bodega;
-
+import compras.Producto;
 
 public class Fabrica {
     private final String NIT; // NIT es constante y se inicializa en el constructor
@@ -24,11 +24,10 @@ public class Fabrica {
 
     public String imprimirCambiosFabrica() {
         // Implementación para imprimir los cambios en la fábrica
-        return ""; // Devuelve una cadena vacía como marcador de posición
+        return ""; 
     }
 
     public void finalizarProduccion(Map<Producto, Integer> produccionPorPedido) {
-        // Implementación para finalizar la producción por pedido
-        // Se asume que produccionPorPedido es un mapeo de Producto a cantidad
+        
     }
 }
