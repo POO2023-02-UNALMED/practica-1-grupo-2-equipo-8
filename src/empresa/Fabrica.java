@@ -1,14 +1,13 @@
 package empresa;
 
 import java.util.HashMap;
-import java.util.Map;
 import compras.Bodega;
 import compras.Producto;
 
 public class Fabrica {
     private final String NIT; // NIT es constante y se inicializa en el constructor
     private String direccion;
-    private Map<Producto, Integer> produccionDiaria;
+    private HashMap<Producto, Integer> produccionDiaria;
     private Bodega bodega;
 
     public Fabrica(String NIT, String direccion) {
@@ -27,7 +26,7 @@ public class Fabrica {
         return ""; 
     }
 
-    public void finalizarProduccion(Map<Producto, Integer> produccionPorPedido) {
+    public void finalizarProduccion(HashMap<Producto, Integer> produccionPorPedido) {
         
     }
 }
