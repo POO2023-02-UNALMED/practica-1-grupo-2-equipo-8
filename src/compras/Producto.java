@@ -1,6 +1,6 @@
 package compras;
 
-public class Productos {
+public class Producto {
 	private String nombre;
 	private String tipo;
 	private String nit;
