@@ -8,7 +8,7 @@ public class Bodega {
 	private String identificador;
 	private HashMap<Producto, Integer> productos = new HashMap<>();
 	private int espacioAlmacenamiento;
-	private HashMap<ingredientes, Integer> Ingredientes = new HashMap<>();
+	private HashMap<Ingredientes, Integer> ingredientes = new HashMap<>();
 	private static int cantidadProductosTotales;
 	private List<String> listaProductosAltaDemanda;
     private List<String> listaProductosBajaDemanda;
@@ -25,7 +25,6 @@ public class Bodega {
         // Implementa la lógica para pedir cantidad de ingredientes
         // Puedes utilizar las listas y el HashMap para llevar un seguimiento de los ingredientes
     }
-
     // Confirmar disponibilidad de ingredientes
     public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
         // Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
@@ -38,6 +37,63 @@ public class Bodega {
         // Puedes utilizar el HashMap y las listas para realizar este cálculo
         return 0; // Reemplaza con el cálculo real
     }
+
+    public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+
+	public HashMap<Producto, Integer> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(HashMap<Producto, Integer> productos) {
+		this.productos = productos;
+	}
+
+	public int getEspacioAlmacenamiento() {
+		return espacioAlmacenamiento;
+	}
+
+	public void setEspacioAlmacenamiento(int espacioAlmacenamiento) {
+		this.espacioAlmacenamiento = espacioAlmacenamiento;
+	}
+
+	public HashMap<Ingredientes, Integer> getIngredientes() {
+		return ingredientes;
+	}
+
+	public void setIngredientes(HashMap<Ingredientes, Integer> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
+
+	public static int getCantidadProductosTotales() {
+		return cantidadProductosTotales;
+	}
+
+	public static void setCantidadProductosTotales(int cantidadProductosTotales) {
+		Bodega.cantidadProductosTotales = cantidadProductosTotales;
+	}
+
+	public List<String> getListaProductosAltaDemanda() {
+		return listaProductosAltaDemanda;
+	}
+
+	public void setListaProductosAltaDemanda(List<String> listaProductosAltaDemanda) {
+		this.listaProductosAltaDemanda = listaProductosAltaDemanda;
+	}
+
+	public List<String> getListaProductosBajaDemanda() {
+		return listaProductosBajaDemanda;
+	}
+
+	public void setListaProductosBajaDemanda(List<String> listaProductosBajaDemanda) {
+		this.listaProductosBajaDemanda = listaProductosBajaDemanda;
+	}
+
 }
 
 
