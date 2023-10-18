@@ -3,6 +3,7 @@ package compras;
 import java.util.HashMap;
 
 import empresa.Camion;
+import empresa.Fabrica;
 
 public class Administrador {
 
