@@ -1,9 +1,6 @@
-package compras;
+package empresa;
 
 import java.util.HashMap;
-
-import empresa.Camion;
-import empresa.Fabrica;
 
 public class Administrador {
 
@@ -13,7 +10,7 @@ public class Administrador {
     private Camion Camion;
     private Fabrica Fabrica;
 
-    public Administrador(compras.Bodega bodega, Caja caja, HashMap<String, Integer> productos, Camion camion, Fabrica fabrica) {
+    public Administrador(empresa.Bodega bodega, Caja caja, HashMap<String, Integer> productos, Camion camion, Fabrica fabrica) {
         Bodega = bodega;
         Caja = caja;
         Productos = productos;
@@ -22,11 +19,11 @@ public class Administrador {
     }
 
     //Getters y Setters
-    public compras.Bodega getBodega() {
+    public empresa.Bodega getBodega() {
         return Bodega;
     }
 
-    public void setBodega(compras.Bodega bodega) {
+    public void setBodega(empresa.Bodega bodega) {
         Bodega = bodega;
     }
 

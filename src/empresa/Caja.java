@@ -1,5 +1,5 @@
-package compras;
-
+package empresa;
+import producto.Producto;
 import java.util.HashMap;
 
 public class Caja {

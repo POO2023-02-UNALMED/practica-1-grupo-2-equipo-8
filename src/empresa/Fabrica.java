@@ -1,7 +1,7 @@
 package empresa;
 
 import java.util.HashMap;
-import compras.Bodega;
+
 import producto.Producto;
 
 public class Fabrica {

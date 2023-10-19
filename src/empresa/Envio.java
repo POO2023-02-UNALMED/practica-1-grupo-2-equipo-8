@@ -2,8 +2,7 @@ package empresa;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import productos.Producto;
+import producto.*;
 
 //OJO FALTA CAMBIAR LO DE CAJA CUANDO SE AGREGUE  UN PRODUCTO AQUÍ PERO NECESITO SABER COMO ES CAJA
 public class Envio {
@@ -16,7 +15,7 @@ public class Envio {
 	
 //	Constructor
 	 public Envio(int codigoDeEnvio, Camion camionAsignado, List<Producto> productos, Caja caja) {
-		 	int pesoTotal;
+		 	int pesoTotal = 0;
 	        this.codigoDeEnvio = codigoDeEnvio;
 	        this.camionAsignado = camionAsignado;
 	        this.productos = productos;
@@ -32,13 +31,15 @@ public class Envio {
 //	 FuncionesDelUML
 	 public void anadirProducto(Producto producto) {
 		 this.productos.add(producto);
-		 this.pesoTotal+=producto.peso;
+		 this.pesoTotal+=producto.getPeso();
+		 this.getCaja().ingresarDinero(producto.getPrecio());
 	 }
 	 
 	 public void eliminarProducto(Producto producto) {
 		 if (this.productos.contains(producto)){
 			 this.productos.remove(producto);
-			 this.pesoTotal-=producto.peso;
+			 this.pesoTotal-=producto.getPeso();
+			 this.getCaja().restarDinero(producto.getPrecio());
 			 
 		 }
 	 }

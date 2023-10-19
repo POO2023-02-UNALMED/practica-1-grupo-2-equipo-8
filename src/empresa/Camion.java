@@ -20,6 +20,7 @@ public class Camion {
 		envio.setAsignadoAUnCamion(true);
 		
 		
+		
 	}
 	
 	public void eliminarEnvio(Envio envio) {

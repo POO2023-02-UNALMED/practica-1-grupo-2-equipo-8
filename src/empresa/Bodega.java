@@ -1,14 +1,14 @@
-package compras;
+package empresa;
 import java.util.HashMap;
 import java.util.List;
-import Producto;
-import Ingrediente;
+import producto.Producto;
+
 
 public class Bodega {
 	private String identificador;
 	private HashMap<Producto, Integer> productos = new HashMap<>();
 	private int espacioAlmacenamiento;
-	private HashMap<Ingredientes, Integer> ingredientes = new HashMap<>();
+	private HashMap<Ingrediente, Integer> ingredientes = new HashMap<>();
 	private static int cantidadProductosTotales;
 	private List<String> listaProductosAltaDemanda;
     private List<String> listaProductosBajaDemanda;
@@ -62,11 +62,11 @@ public class Bodega {
 		this.espacioAlmacenamiento = espacioAlmacenamiento;
 	}
 
-	public HashMap<Ingredientes, Integer> getIngredientes() {
+	public HashMap<Ingrediente, Integer> getIngredientes() {
 		return ingredientes;
 	}
 
-	public void setIngredientes(HashMap<Ingredientes, Integer> ingredientes) {
+	public void setIngredientes(HashMap<Ingrediente, Integer> ingredientes) {
 		this.ingredientes = ingredientes;
 	}
 
