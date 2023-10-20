@@ -66,7 +66,8 @@ public class Administrador {
     private static String iniciarSesion(){
         
 
-        public static void iniciarSesion(String[] args){}
+        //public static void iniciarSesion(String[] args){}
+
         //Se crea un objeto Scanner para leer la respuesta del usuario al mensaje a continuacion
         Scanner numero = new Scanner(System.in);
 
