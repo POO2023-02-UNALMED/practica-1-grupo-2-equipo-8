@@ -14,7 +14,7 @@ public class Main {
 		Ingrediente ingrediente7 = new Ingrediente("Chocolate", 6, 7, 150, "01/01/2023");
 		Ingrediente ingrediente8 = new Ingrediente("Canela", 3, 8, 50, "01/01/2024");
 		Ingrediente ingrediente9 = new Ingrediente("Vainilla", 5, 9, 50, "01/01/2023");
-		Ingrediente ingrediente10 = new Ingrediente("Nuez", 4, 10, 200, "01/01/2024");
+		Ingrediente ingrediente10 = new Ingrediente("Harina", 4, 10, 200, "01/01/2024");
 		System.out.println(Ingrediente.obtenerListaIngredientes());
 
 	}

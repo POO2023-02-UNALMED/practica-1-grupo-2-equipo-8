@@ -2,29 +2,42 @@ package empresa;
 import java.util.List;
 import java.util.ArrayList;
 public class Ingrediente {
-    private String nombre;
+	
+    private String nombre; 
     private int costo;
     private final long identificador;
-    private int espacioAlmacenamiento;
-    private String fechaVencimiento;
-    static private List<Ingrediente> ingredientesDisponibles;
-
-    public Ingrediente(String nombre, int costo, long identificador, int espacioAlmacenamiento, String fechaVencimiento) {
+    private int espacioAlmacenamiento;//espacio que ocupara el producto en bodega
+    static private List<Ingrediente> ingredientesDisponibles;//Estatico debido a que cuando se crea un ingrediente con un nombre diferente a los ya existentes a la lista se agrega uno nuevo
+    
+    
+//Constructor
+    public Ingrediente(String nombre, int costo, long identificador, int espacioAlmacenamiento ) {
         this.nombre = nombre;
         this.costo = costo;
         this.identificador = identificador;
         this.espacioAlmacenamiento = espacioAlmacenamiento;
-        this.fechaVencimiento = fechaVencimiento;
-
         // Verifica si ingredientesDisponibles es null y, si lo es, inicializa la lista
         if (Ingrediente.ingredientesDisponibles == null) {
-            Ingrediente.ingredientesDisponibles = new ArrayList<Ingrediente>();
+            Ingrediente.ingredientesDisponibles = new ArrayList<Ingrediente>();}
+        
+//      Este boolean se usará para saber si un ingrediente se crea dos veces que solo aparezca una vez en la lista  
+        boolean ingredienteDuplicado = false;
+        
+        // Itera sobre la lista de ingredientes disponibles para buscar duplicados
+        for (Ingrediente ingrediente : Ingrediente.ingredientesDisponibles) {
+            if (ingrediente.getNombre().equals(this.nombre)) {
+                // Ya existe un ingrediente con el mismo nombre
+                ingredienteDuplicado = true;
+                break;
+            }
         }
-
-        Ingrediente.ingredientesDisponibles.add(this);
+        
+        // Si no se encontró un ingrediente duplicado, agrega el nuevo ingrediente
+        if (!ingredienteDuplicado) {
+            Ingrediente.ingredientesDisponibles.add(this);
+        }
     }
-
-
+//Función para printear la lista de manera organizada e indexada
     public static String obtenerListaIngredientes() {
         StringBuilder resultado = new StringBuilder();
         resultado.append("Lista de ingredientes disponibles:\n\n");
@@ -32,8 +45,7 @@ public class Ingrediente {
 
         for (Ingrediente ingrediente : Ingrediente.ingredientesDisponibles) {
             resultado.append(numeracion).append(". ").append(ingrediente.getNombre()).append(" - Costo: $").append(ingrediente.getCosto())
-                    .append(" - Espacio de almacenamiento: ").append(ingrediente.getEspacioAlmacenamiento()).append(" - Fecha de vencimiento: ")
-                    .append(ingrediente.getFechaVencimiento()).append("\n");
+                    .append(" - Espacio de almacenamiento: ").append(ingrediente.getEspacioAlmacenamiento()).append("\n");
             numeracion++;
         }
 
@@ -42,7 +54,7 @@ public class Ingrediente {
 
 
 
-    
+    //Setters y getters
     public static List<Ingrediente> getIngredientesDisponibles() {
 		return ingredientesDisponibles;
 	}
@@ -71,7 +83,4 @@ public class Ingrediente {
     }
 
     
-    public String getFechaVencimiento() {
-        return fechaVencimiento;
-    }
 }

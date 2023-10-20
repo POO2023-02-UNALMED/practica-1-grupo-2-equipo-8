@@ -13,7 +13,7 @@ class Tortas extends Producto {
         this.porciones = porciones;
         this.cobertura = cobertura;
     }
-
+    
 	public int getPorciones() {
 		return porciones;
 	}

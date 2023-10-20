@@ -6,8 +6,6 @@ import java.util.List;
 public class Producto {
     private String nombre;
     private int espacioAlmacenamiento;
-    
-
 	private HashMap<String, Integer> ingredientesNecesarios;
     private int costo;
     private String ID;
@@ -15,6 +13,7 @@ public class Producto {
     private int peso;
     private int diasVencimiento;
     private int tiempoProduccion;
+    private int diasDeProduccion;
 
     public Producto(String nombre, int espacioAlmacenamiento, HashMap<String, Integer> ingredientesNecesarios, int costo,
                     String ID, int precio, int peso, int diasVencimiento, int tiempoProduccion) {
