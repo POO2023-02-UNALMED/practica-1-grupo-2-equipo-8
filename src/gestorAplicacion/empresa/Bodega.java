@@ -1,10 +1,13 @@
 package gestorAplicacion.empresa;
-import java.util.HashMap;
-import java.util.List;
+
 import gestorAplicacion.producto.Producto;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
 
-public class Bodega {
+
+public class Bodega implements Serializable {
 	private String identificador;
 	private HashMap<Producto, Integer> productos = new HashMap<>();
 	private int espacioAlmacenamiento;

@@ -1,8 +1,9 @@
 package gestorAplicacion.empresa;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Ingrediente {
+public class Ingrediente implements Serializable {
     private String nombre;
     private int costo;
     private final long identificador;

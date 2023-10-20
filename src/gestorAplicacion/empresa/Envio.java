@@ -1,11 +1,13 @@
 package gestorAplicacion.empresa;
 
+import gestorAplicacion.producto.Producto;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import gestorAplicacion.producto.*;
 
 //OJO FALTA CAMBIAR LO DE CAJA CUANDO SE AGREGUE  UN PRODUCTO AQUÍ PERO NECESITO SABER COMO ES CAJA
-public class Envio {
+public class Envio implements Serializable {
 	
 	private int codigoDeEnvio;
 	private Camion camionAsignado;

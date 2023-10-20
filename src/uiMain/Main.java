@@ -1,9 +1,13 @@
 package uiMain;
+
 import gestorAplicacion.empresa.Ingrediente;
+
+import java.io.*;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, ClassNotFoundException {
+
 //		Instanciamos ingredientes
 		
 		Ingrediente ingrediente1 = new Ingrediente("Harina", 5, 1, 500, "01/01/2024");
@@ -18,6 +22,18 @@ public class Main {
 		Ingrediente ingrediente10 = new Ingrediente("Nuez", 4, 10, 200, "01/01/2024");
 		System.out.println(Ingrediente.obtenerListaIngredientes());
 
+		//Fichero ingrediente1 Serializador
+		/*FileOutputStream fileOutputStream = new FileOutputStream("ficheroFabrica.txt");
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		objectOutputStream.writeObject(ingrediente1);
+		objectOutputStream.close();
+
+		//Fichero ingrediente1 Deserializador
+		FileInputStream fileInputStream = new FileInputStream("ficheroFabrica.txt");
+		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+		Ingrediente ingredienteEnFichero = (Ingrediente) objectInputStream.readObject();
+		objectInputStream.close();
+		System.out.println(ingredienteEnFichero); */
 	}
 
 }

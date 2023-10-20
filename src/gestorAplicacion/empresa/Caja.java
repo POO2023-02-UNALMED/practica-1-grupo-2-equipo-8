@@ -1,8 +1,10 @@
 package gestorAplicacion.empresa;
 import gestorAplicacion.producto.Producto;
+
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Caja {
+public class Caja implements Serializable {
 	static private int dinero;
 	static private HashMap<Producto, Integer> historialVentas = new HashMap<>();
 	

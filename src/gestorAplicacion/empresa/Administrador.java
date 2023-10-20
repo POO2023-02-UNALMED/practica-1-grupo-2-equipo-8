@@ -1,9 +1,10 @@
 package gestorAplicacion.empresa;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Administrador {
+public class Administrador implements Serializable {
 
     private Bodega Bodega;
     private Caja Caja;
