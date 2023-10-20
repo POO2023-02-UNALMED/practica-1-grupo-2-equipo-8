@@ -9,7 +9,7 @@ public class Ingrediente implements Serializable {
     private final long identificador;
     private int espacioAlmacenamiento;
     private String fechaVencimiento;
-    static private List<Ingrediente> ingredientesDisponibles;
+    static private List<Ingrediente> ingredientesDisponibles; // ¿Atributo de clase?
 
     public Ingrediente(String nombre, int costo, long identificador, int espacioAlmacenamiento, String fechaVencimiento) {
         this.nombre = nombre;

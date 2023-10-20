@@ -1,5 +1,6 @@
 package uiMain;
 
+import baseDeDatos.SerializadorIngredientes;
 import gestorAplicacion.empresa.Ingrediente;
 
 import java.io.*;
@@ -24,28 +25,7 @@ public class Main {
 		//Se imprime cada ingrediente con su respectiva informacion
 		System.out.println(Ingrediente.obtenerListaIngredientes());
 
-		//Se añaden los ingredientes al Fichero ficheroIngrediente.txt mediante Serializador
-		FileOutputStream fileOutputStream = new FileOutputStream("ficheroIngrediente.txt");
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-		objectOutputStream.writeObject(ingrediente1);
-		objectOutputStream.writeObject(ingrediente2);
-		objectOutputStream.writeObject(ingrediente3);
-		objectOutputStream.writeObject(ingrediente4);
-		objectOutputStream.writeObject(ingrediente5);
-		objectOutputStream.writeObject(ingrediente6);
-		objectOutputStream.writeObject(ingrediente7);
-		objectOutputStream.writeObject(ingrediente8);
-		objectOutputStream.writeObject(ingrediente9);
-		objectOutputStream.writeObject(ingrediente10);
-		objectOutputStream.close();
-
-		//Se busca imprimir la lista de Ingredientes de ficheroIngrediente.txt
-		//Pero solo se imprime el primer ingrediente y sus datos
-		/*FileInputStream fileInputStream = new FileInputStream("ficheroIngrediente.txt");
-		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-		Ingrediente ingredienteEnFichero = (Ingrediente) objectInputStream.readObject();
-		objectInputStream.close();
-		System.out.println(ingredienteEnFichero); */
+		new SerializadorIngredientes();
 
 	}
 
