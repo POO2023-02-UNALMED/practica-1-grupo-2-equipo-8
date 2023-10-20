@@ -3,8 +3,8 @@ import producto.Producto;
 import java.util.HashMap;
 
 public class Caja {
-	private int dinero;
-	private HashMap<Producto, Integer> historialVentas = new HashMap<>();
+	static private int dinero;
+	static private HashMap<Producto, Integer> historialVentas = new HashMap<>();
 
     // Declaración del método para mostrar el historial de compras
     public void verHistorialCompras() {
@@ -13,10 +13,12 @@ public class Caja {
 
     // Declaración del método para ingresar dinero en la caja
     public void ingresarDinero(int cantidad) {
+    	Caja.dinero+=cantidad;
     	
     }
     // Declaración del método para restar dinero de la caja
     public void restarDinero(int cantidad) {
+    	Caja.dinero+=cantidad;
     	
     }
     
@@ -25,7 +27,7 @@ public class Caja {
 	}
 
 	public void setDinero(int dinero) {
-		this.dinero = dinero;
+		Caja.dinero = dinero;
 	}
 
 	public HashMap<Producto, Integer> getHistorialVentas() {
