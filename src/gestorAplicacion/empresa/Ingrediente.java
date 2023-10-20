@@ -1,6 +1,7 @@
-package empresa;
+package gestorAplicacion.empresa;
 import java.util.List;
 import java.util.ArrayList;
+
 public class Ingrediente {
     private String nombre;
     private int costo;

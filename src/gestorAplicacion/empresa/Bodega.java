@@ -1,7 +1,7 @@
-package empresa;
+package gestorAplicacion.empresa;
 import java.util.HashMap;
 import java.util.List;
-import producto.Producto;
+import gestorAplicacion.producto.Producto;
 
 
 public class Bodega {

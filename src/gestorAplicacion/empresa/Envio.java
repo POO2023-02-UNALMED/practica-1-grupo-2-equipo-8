@@ -1,8 +1,8 @@
-package empresa;
+package gestorAplicacion.empresa;
 
 import java.util.ArrayList;
 import java.util.List;
-import producto.*;
+import gestorAplicacion.producto.*;
 
 //OJO FALTA CAMBIAR LO DE CAJA CUANDO SE AGREGUE  UN PRODUCTO AQUÍ PERO NECESITO SABER COMO ES CAJA
 public class Envio {

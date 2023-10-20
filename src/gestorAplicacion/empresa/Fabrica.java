@@ -1,6 +1,6 @@
-package empresa;
+package gestorAplicacion.empresa;
 
-import producto.Producto;
+import gestorAplicacion.producto.Producto;
 
 import java.util.HashMap;
 

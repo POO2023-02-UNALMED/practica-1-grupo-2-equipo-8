@@ -1,4 +1,4 @@
-package producto;
+package gestorAplicacion.producto;
 
 import java.util.HashMap;
 

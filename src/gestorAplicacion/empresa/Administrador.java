@@ -1,4 +1,4 @@
-package empresa;
+package gestorAplicacion.empresa;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -22,11 +22,11 @@ public class Administrador {
     }
 
     //Getters y Setters
-    public empresa.Bodega getBodega() {
+    public Bodega getBodega() {
         return Bodega;
     }
 
-    public void setBodega(empresa.Bodega bodega) {
+    public void setBodega(Bodega bodega) {
         Bodega = bodega;
     }
 
@@ -46,11 +46,11 @@ public class Administrador {
         Productos = productos;
     }
 
-    public empresa.Camion getCamion() {
+    public Camion getCamion() {
         return Camion;
     }
 
-    public void setCamion(empresa.Camion camion) {
+    public void setCamion(Camion camion) {
         Camion = camion;
     }
 

@@ -1,4 +1,4 @@
-package empresa;
+package gestorAplicacion.empresa;
 import java.util.ArrayList;
 import java.util.List;
 

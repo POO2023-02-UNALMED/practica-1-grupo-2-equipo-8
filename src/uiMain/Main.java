@@ -1,5 +1,6 @@
-package MAIN;
-import empresa.Ingrediente;
+package uiMain;
+import gestorAplicacion.empresa.Ingrediente;
+
 public class Main {
 
 	public static void main(String[] args) {

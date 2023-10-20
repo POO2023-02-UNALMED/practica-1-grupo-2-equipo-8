@@ -1,5 +1,5 @@
-package empresa;
-import producto.Producto;
+package gestorAplicacion.empresa;
+import gestorAplicacion.producto.Producto;
 import java.util.HashMap;
 
 public class Caja {
