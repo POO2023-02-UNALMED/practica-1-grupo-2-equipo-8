@@ -20,20 +20,33 @@ public class Main {
 		Ingrediente ingrediente8 = new Ingrediente("Canela", 3, 8, 50, "01/01/2024");
 		Ingrediente ingrediente9 = new Ingrediente("Vainilla", 5, 9, 50, "01/01/2023");
 		Ingrediente ingrediente10 = new Ingrediente("Nuez", 4, 10, 200, "01/01/2024");
+
+		//Se imprime cada ingrediente con su respectiva informacion
 		System.out.println(Ingrediente.obtenerListaIngredientes());
 
-		//Fichero ingrediente1 Serializador
-		/*FileOutputStream fileOutputStream = new FileOutputStream("ficheroFabrica.txt");
+		//Se añaden los ingredientes al Fichero ficheroIngrediente.txt mediante Serializador
+		FileOutputStream fileOutputStream = new FileOutputStream("ficheroIngrediente.txt");
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 		objectOutputStream.writeObject(ingrediente1);
+		objectOutputStream.writeObject(ingrediente2);
+		objectOutputStream.writeObject(ingrediente3);
+		objectOutputStream.writeObject(ingrediente4);
+		objectOutputStream.writeObject(ingrediente5);
+		objectOutputStream.writeObject(ingrediente6);
+		objectOutputStream.writeObject(ingrediente7);
+		objectOutputStream.writeObject(ingrediente8);
+		objectOutputStream.writeObject(ingrediente9);
+		objectOutputStream.writeObject(ingrediente10);
 		objectOutputStream.close();
 
-		//Fichero ingrediente1 Deserializador
-		FileInputStream fileInputStream = new FileInputStream("ficheroFabrica.txt");
+		//Se busca imprimir la lista de Ingredientes de ficheroIngrediente.txt
+		//Pero solo se imprime el primer ingrediente y sus datos
+		/*FileInputStream fileInputStream = new FileInputStream("ficheroIngrediente.txt");
 		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 		Ingrediente ingredienteEnFichero = (Ingrediente) objectInputStream.readObject();
 		objectInputStream.close();
 		System.out.println(ingredienteEnFichero); */
+
 	}
 
 }

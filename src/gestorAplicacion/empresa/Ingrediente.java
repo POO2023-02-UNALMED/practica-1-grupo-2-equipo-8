@@ -76,4 +76,13 @@ public class Ingrediente implements Serializable {
     public String getFechaVencimiento() {
         return fechaVencimiento;
     }
+
+    //Metodo toString para poder guardar e imprimir los elementos en el Serializable correspendiente de forma legible
+    @Override
+    public String toString() {
+        return "[Ingrediente " + nombre + "] Costo = $" + costo + ", ID = " + identificador +
+                ", Espacio de Almacenamiento = " + espacioAlmacenamiento + ", Fecha de Vencimiento = " + fechaVencimiento;
+    }
 }
+
+
