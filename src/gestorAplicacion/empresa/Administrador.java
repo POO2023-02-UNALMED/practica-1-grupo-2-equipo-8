@@ -67,7 +67,7 @@ public class Administrador implements Serializable {
     //Metodos de la clase Administrador
 
     //iniciarSesion(): Metodo que se ejecuta cada vez que el Administrador inicie sesiòn en cada interacciòn que tenga con el software
-    private static String iniciarSesion(){
+    public static String iniciarSesion(){
 
         //public static void iniciarSesion(String[] args){}
 

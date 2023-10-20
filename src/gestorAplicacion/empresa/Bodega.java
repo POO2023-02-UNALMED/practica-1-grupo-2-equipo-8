@@ -16,7 +16,8 @@ public class Bodega implements Serializable {
 	private List<String> listaProductosAltaDemanda;
     private List<String> listaProductosBajaDemanda;
     
- // Mostrar ingredientes escasos
+ // Mostrar ingredientes escasoslñ{
+
     public String mostrarIngredientesEscasos() {
         // Implementa la lógica para mostrar ingredientes escasos y devuelve una cadena
         // Puedes utilizar las listas y el HashMap para determinar ingredientes escasos

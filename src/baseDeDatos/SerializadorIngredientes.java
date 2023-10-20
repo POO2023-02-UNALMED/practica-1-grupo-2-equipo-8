@@ -14,6 +14,7 @@ public class SerializadorIngredientes {
     private final String DIR = "ficheroIngrediente.txt";
 
     public SerializadorIngredientes() throws FileNotFoundException {
+
         //Se crea el archivo fichero
         fileOutputStream = new FileOutputStream(DIR);
     }

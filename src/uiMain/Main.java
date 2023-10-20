@@ -1,7 +1,9 @@
 package uiMain;
 
 import baseDeDatos.SerializadorIngredientes;
+import gestorAplicacion.empresa.Administrador;
 import gestorAplicacion.empresa.Ingrediente;
+import gestorAplicacion.empresa.Administrador;
 
 import java.io.*;
 
@@ -22,8 +24,11 @@ public class Main {
 		Ingrediente ingrediente9 = new Ingrediente("Vainilla", 5, 9, 50, "01/01/2023");
 		Ingrediente ingrediente10 = new Ingrediente("Nuez", 4, 10, 200, "01/01/2024");
 
+		//Se ejecuta la funcion Administrador
+		Administrador.iniciarSesion();
+
 		//Se imprime cada ingrediente con su respectiva informacion
-		System.out.println(Ingrediente.obtenerListaIngredientes());
+		//System.out.println(Ingrediente.obtenerListaIngredientes());
 
 		new SerializadorIngredientes();
 
