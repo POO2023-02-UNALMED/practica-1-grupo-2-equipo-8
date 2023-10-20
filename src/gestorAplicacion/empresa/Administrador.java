@@ -1,9 +1,10 @@
-package empresa;
+package gestorAplicacion.empresa;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Administrador {
+public class Administrador implements Serializable {
 
     private Bodega Bodega;
     private Caja Caja;
@@ -22,11 +23,11 @@ public class Administrador {
     }
 
     //Getters y Setters
-    public empresa.Bodega getBodega() {
+    public Bodega getBodega() {
         return Bodega;
     }
 
-    public void setBodega(empresa.Bodega bodega) {
+    public void setBodega(Bodega bodega) {
         Bodega = bodega;
     }
 
@@ -46,11 +47,11 @@ public class Administrador {
         Productos = productos;
     }
 
-    public empresa.Camion getCamion() {
+    public Camion getCamion() {
         return Camion;
     }
 
-    public void setCamion(empresa.Camion camion) {
+    public void setCamion(Camion camion) {
         Camion = camion;
     }
 
@@ -66,7 +67,7 @@ public class Administrador {
     //Metodos de la clase Administrador
 
     //iniciarSesion(): Metodo que se ejecuta cada vez que el Administrador inicie sesiòn en cada interacciòn que tenga con el software
-    private static String iniciarSesion(){
+    public static String iniciarSesion(){
 
         //public static void iniciarSesion(String[] args){}
 

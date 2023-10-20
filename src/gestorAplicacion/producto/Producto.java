@@ -1,9 +1,10 @@
-package producto;
+package gestorAplicacion.producto;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Producto {
+public class Producto implements Serializable {
     private String nombre;
     private int espacioAlmacenamiento;
 	private HashMap<String, Integer> ingredientesNecesarios;

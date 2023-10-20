@@ -1,9 +1,10 @@
-package empresa;
+package gestorAplicacion.empresa;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Camion {
+public class Camion implements Serializable {
 	private String marca;
 	private String modelo;
 	private int caparcidad;

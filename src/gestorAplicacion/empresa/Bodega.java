@@ -1,10 +1,13 @@
-package empresa;
+package gestorAplicacion.empresa;
+
+import gestorAplicacion.producto.Producto;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-import producto.Producto;
 
 
-public class Bodega {
+public class Bodega implements Serializable {
 	private String identificador;
 	private HashMap<Producto, Integer> productos = new HashMap<>();
 	private int espacioAlmacenamiento;
@@ -13,7 +16,8 @@ public class Bodega {
 	private List<String> listaProductosAltaDemanda;
     private List<String> listaProductosBajaDemanda;
     
- // Mostrar ingredientes escasos
+ // Mostrar ingredientes escasoslñ{
+
     public String mostrarIngredientesEscasos() {
         // Implementa la lógica para mostrar ingredientes escasos y devuelve una cadena
         // Puedes utilizar las listas y el HashMap para determinar ingredientes escasos

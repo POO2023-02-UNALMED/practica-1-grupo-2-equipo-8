@@ -8,4 +8,5 @@ public class Serializador {
     //Crear los archivos .txt
     //Se hace en base de archivos temporales
 
+
 }
