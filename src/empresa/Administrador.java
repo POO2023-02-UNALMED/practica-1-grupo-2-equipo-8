@@ -7,16 +7,18 @@ public class Administrador {
 
     private Bodega Bodega;
     private Caja Caja;
-    private HashMap<String, Integer> Productos = new HashMap<String, Integer>();
+    private HashMap<String, Integer> Productos ;
     private Camion Camion;
     private Fabrica Fabrica;
 
-    public Administrador(empresa.Bodega bodega, Caja caja, HashMap<String, Integer> productos, Camion camion, Fabrica fabrica) {
-        Bodega = bodega;
-        Caja = caja;
-        Productos = productos;
-        Camion = camion;
-        Fabrica = fabrica;
+
+    public Administrador() {
+        Bodega = new Bodega();
+        Caja = new Caja();
+        //Productos = Producto.  Implementar metodo de clase ObtenerProductos;
+        Camion = new Camion();
+        //Fabrica = new Fabrica(); Implementar dependiendo de Decision de Fabrica
+
     }
 
     //Getters y Setters
@@ -60,13 +62,15 @@ public class Administrador {
         Fabrica = fabrica;
     }
 
+
     //Metodos de la clase Administrador
 
     //iniciarSesion(): Metodo que se ejecuta cada vez que el Administrador inicie sesiòn en cada interacciòn que tenga con el software
     private static String iniciarSesion(){
-        
 
         //public static void iniciarSesion(String[] args){}
+
+        //while
 
         //Se crea un objeto Scanner para leer la respuesta del usuario al mensaje a continuacion
         Scanner numero = new Scanner(System.in);
@@ -83,14 +87,19 @@ public class Administrador {
 
         } else if(opcionElegida == 2){
 
-            
-
         } else if(opcionElegida == 3){
 
         } else if (opcionElegida == 4){
 
+            //Metodo de clase
+            //Producto.MostrarProductos();
+
+
         } else if (opcionElegida == 5){
-            
+
+            //Metodo de clase
+            //Producto.MostrarProductos();
+
         };
 
         //Retorno a eliminarse cuando se corrija el codigo
@@ -103,7 +112,7 @@ public class Administrador {
         //Mensaje de despedida
         return "Muchas gracias por usar el software de DeliHorno. Que tenga un feliz dia.";
     }
-    
+
 }
 
 
