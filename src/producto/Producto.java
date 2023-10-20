@@ -111,5 +111,7 @@ public class Producto {
         return (diasTranscurridos > this.diasVencimiento) ? 0 : this.diasVencimiento - diasTranscurridos;
     }
 
+	//Metodos de Clase: Obtener/Eliminar Productos
+
 }
 
