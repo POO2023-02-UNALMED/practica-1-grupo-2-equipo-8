@@ -14,6 +14,7 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     private int diasBodega;
     private int tiempoProduccion;
     private int diasDeProduccion;
+    private boolean asignadoAEnvio=false;
 
     public Producto(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
                     String ID, int peso) {
@@ -98,8 +99,17 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
 
-    /*
+    public boolean isAsignadoAEnvio() {
+		return asignadoAEnvio;
+	}
+
+	public void setAsignadoAEnvio(boolean asignadoAEnvio) {
+		this.asignadoAEnvio = asignadoAEnvio;
+	}
+
+	/*
      * 	Metodo que retorna un String con los ingredientes y su correspondiente cantidad que 
      *  necesita un Producto
      */

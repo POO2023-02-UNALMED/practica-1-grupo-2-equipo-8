@@ -40,7 +40,64 @@ public class Ingrediente implements IProductoIngrediente{
             Ingrediente.ingredientesDisponibles.add(this);
         }
     }
-//    Sobrecarga necesaria para hacer 
+//    Sobrecarga necesaria para hacer el pedido de insumos en bodega
+    
+    public Ingrediente(String nombre) {
+        this.nombre = nombre;
+        
+        // Establecer valores predeterminados según el nombre del ingrediente
+        switch (nombre.toLowerCase()) {
+            case "harina":
+                this.precio = calcularPrecio(2);  // Precio base para harina
+                this.identificador = 1;  // Identificador para harina
+                this.espacioAlmacenamiento = 10;  // Espacio de almacenamiento para harina
+                break;
+            case "huevos":
+                this.precio = calcularPrecio(1);  // Precio base para huevos
+                this.identificador = 2;  // Identificador para huevos
+                this.espacioAlmacenamiento = 5;  // Espacio de almacenamiento para huevos
+                break;
+            case "azucar":
+                this.precio = calcularPrecio(3);  // Precio base para azúcar
+                this.identificador = 3;  // Identificador para azúcar
+                this.espacioAlmacenamiento = 8;  // Espacio de almacenamiento para azúcar
+                break;
+            case "leche":
+                this.precio = calcularPrecio(4);  // Precio base para leche
+                this.identificador = 4;  // Identificador para leche
+                this.espacioAlmacenamiento = 7;  // Espacio de almacenamiento para leche
+                break;
+            default:
+                // Establecer valores predeterminados genéricos
+                this.precio = calcularPrecio(1);
+                this.identificador = 5;
+                this.espacioAlmacenamiento = 5;
+                break;
+        }
+
+        // Verificar si ingredientesDisponibles es null y, si lo es, inicializar la lista
+        if (Ingrediente.ingredientesDisponibles == null) {
+            Ingrediente.ingredientesDisponibles = new ArrayList<Ingrediente>();
+        }
+        
+        // Usar un boolean para verificar duplicados
+        boolean ingredienteDuplicado = false;
+        
+        // Iterar sobre la lista de ingredientes disponibles para buscar duplicados
+        for (Ingrediente ingrediente : Ingrediente.ingredientesDisponibles) {
+            if (ingrediente.getNombre().equals(this.nombre)) {
+                // Ya existe un ingrediente con el mismo nombre
+                ingredienteDuplicado = true;
+                break;
+            }
+        }
+        
+        // Si no se encontró un ingrediente duplicado, agregar el nuevo ingrediente
+        if (!ingredienteDuplicado) {
+            Ingrediente.ingredientesDisponibles.add(this);
+        }
+    }
+
     
     
     

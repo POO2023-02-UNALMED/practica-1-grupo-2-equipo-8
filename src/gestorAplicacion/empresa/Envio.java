@@ -18,10 +18,9 @@ public class Envio implements Serializable {
 	private static List<Envio> listaEnvios = new ArrayList<Envio>();
 //	Constructor
 	
-	 public Envio(int codigoDeEnvio, Camion camionAsignado, List<Producto> productos, Caja caja) {
+	 public Envio(int codigoDeEnvio, List<Producto> productos, Caja caja) {
 		 	int pesoTotal = 0;
 	        this.codigoDeEnvio = codigoDeEnvio;
-	        this.camionAsignado = camionAsignado;
 	        this.productos = productos;
 	        this.caja = caja;
 	        for(Producto producto:productos) {
@@ -103,6 +102,14 @@ public class Envio implements Serializable {
 
 	public void setAsignadoAUnCamion(boolean asignadoAUnCamion) {
 		this.asignadoAUnCamion = asignadoAUnCamion;
+	}
+
+	public static List<Envio> getListaEnvios() {
+		return listaEnvios;
+	}
+
+	public static void setListaEnvios(List<Envio> listaEnvios) {
+		Envio.listaEnvios = listaEnvios;
 	}
 	 
 	 
