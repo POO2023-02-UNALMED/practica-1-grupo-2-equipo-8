@@ -1,17 +1,26 @@
 package gestorAplicacion.producto;
 
 import java.util.HashMap;
+import gestorAplicacion.empresa.Ingrediente;
 
-class Donas extends Producto {
+public class Donas extends Producto {
     private boolean chips;
     private String cobertura;
 
-    public Donas(String nombre, int espacioAlmacenamiento, HashMap<String, Integer> ingredientesNecesarios, int costo,
-                String ID, int precio, int peso, int diasEnBodega, String fechaVencimiento, int tiempoProduccion,
-                boolean chips, String cobertura) {
-        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, costo, ID, precio, peso, diasEnBodega, fechaVencimiento, tiempoProduccion);
+    public Donas(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+                String ID, int peso, int diasEnBodega, int tiempoProduccion, boolean chips, String cobertura) {
+        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso, diasEnBodega);
         this.chips = chips;
         this.cobertura = cobertura;
+    }
+    
+    @Override
+    public String listaCaracteristicas() {
+    	String str = this.toString();
+    	str = str + "Chips: " +  (this.isChips() ? "Si" : "No") + "\n";
+    	str = str + "Cobertura: " + this.getCobertura() + "\n";
+    	str = str + "-".repeat(50) + "\n";
+    	return str;
     }
 
 	public boolean isChips() {

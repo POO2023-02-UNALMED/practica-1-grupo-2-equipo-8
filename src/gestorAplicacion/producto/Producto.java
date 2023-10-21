@@ -1,38 +1,31 @@
 package gestorAplicacion.producto;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.*;
+import gestorAplicacion.empresa.Ingrediente;
 
-public class Producto implements Serializable {
+public abstract class Producto implements Serializable, IProductoIngrediente {
     private String nombre;
     private int espacioAlmacenamiento;
-	private HashMap<String, Integer> ingredientesNecesarios;
-    private int costo;
+	private HashMap<Ingrediente, Integer> ingredientesNecesarios;
     private String ID;
     private int precio;
     private int peso;
-    private int diasVencimiento;
+    private int diasBodega;
     private int tiempoProduccion;
     private int diasDeProduccion;
 
-    public Producto(String nombre, int espacioAlmacenamiento, HashMap<String, Integer> ingredientesNecesarios, int costo,
-                    String ID, int precio, int peso, int diasVencimiento, int tiempoProduccion) {
+    public Producto(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+                    String ID, int peso, int tiempoProduccion) {
         this.nombre = nombre;
         this.espacioAlmacenamiento = espacioAlmacenamiento;
         this.ingredientesNecesarios = ingredientesNecesarios;
-        this.costo = costo;
+        this.precio = this.calcularPrecio(precioBase);
         this.ID = ID;
-        this.precio = precio;
         this.peso = peso;
-        this.diasVencimiento(diasVencimiento);
+        this.setDiasBodega(0);
         this.tiempoProduccion = tiempoProduccion;
     }
-
-    public Producto(String nombre2, int espacioAlmacenamiento2, HashMap<String, Integer> ingredientesNecesarios2,
-			int costo2, String iD2, int precio2, int peso2, int diasEnBodega, String fechaVencimiento,
-			int tiempoProduccion2) {
-	}
 
 	public int getEspacioAlmacenamiento() {
 		return espacioAlmacenamiento;
@@ -42,20 +35,12 @@ public class Producto implements Serializable {
 		this.espacioAlmacenamiento = espacioAlmacenamiento;
 	}
 
-	public HashMap<String, Integer> getIngredientesNecesarios() {
+	public HashMap<Ingrediente, Integer> getIngredientesNecesarios() {
 		return ingredientesNecesarios;
 	}
 
-	public void setIngredientesNecesarios(HashMap<String, Integer> ingredientesNecesarios) {
+	public void setIngredientesNecesarios(HashMap<Ingrediente, Integer> ingredientesNecesarios) {
 		this.ingredientesNecesarios = ingredientesNecesarios;
-	}
-
-	public int getCosto() {
-		return costo;
-	}
-
-	public void setCosto(int costo) {
-		this.costo = costo;
 	}
 
 	public String getID() {
@@ -86,7 +71,22 @@ public class Producto implements Serializable {
 	public int getTiempoProduccion() {
 		return tiempoProduccion;
 	}
+	
+	public int getDiasDeProduccion() {
+		return diasDeProduccion;
+	}
 
+	public void setDiasDeProduccion(int diasDeProduccion) {
+		this.diasDeProduccion = diasDeProduccion;
+	}
+
+	public int getDiasBodega() {
+		return diasBodega;
+	}
+
+	public void setDiasBodega(int diasBodega) {
+		this.diasBodega = diasBodega;
+	}
 	public void setTiempoProduccion(int tiempoProduccion) {
 		this.tiempoProduccion = tiempoProduccion;
 	}
@@ -98,19 +98,59 @@ public class Producto implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public static List<String> MostrarProductos(List<Producto> productos) {
-        List<String> listaProductos = new ArrayList<>();
-        for (Producto producto : productos) {
-            listaProductos.add("Nombre: " + producto.getNombre() + ", Precio: " + producto.getPrecio());
-        }
-        return listaProductos;
-    }
-    
-    public int diasVencimiento(int diasTranscurridos) {
-        return (diasTranscurridos > this.diasVencimiento) ? 0 : this.diasVencimiento - diasTranscurridos;
-    }
 
+    /*
+     * 	Metodo que retorna un String con los ingredientes y su correspondiente cantidad que 
+     *  necesita un Producto
+     */
+    public String listarIngredientesNecesarios(){
+    	StringBuilder str = new StringBuilder();
+    	this.ingredientesNecesarios.forEach((Ingrediente ingrediente, Integer cantidad)->{
+    		str.append("Necesita la cantidad de " + cantidad.toString() + " " + ingrediente.getNombre() + ".\n");
+    	});
+    	return str.toString();
+    };
+    
+    
+    /*
+     * 	Metodo que calcula el precio de un producto, recibiendo como parametro un precio base 
+     * 	y retorna la suma de este precio con el precio de todos sus ingredientes.
+     */
+    @Override
+    public int calcularPrecio(int precioBase) {
+    	AtomicInteger precio = new AtomicInteger((precioBase >= 0)? precioBase : 0);
+    	this.ingredientesNecesarios.forEach((Ingrediente ingrediente, Integer cantidad)->{
+    		precio.addAndGet(ingrediente.getPrecio()*cantidad);
+    	});
+    	return precio.get();
+    }
+    
+    public String toString() {
+    	String saltoLinea = "\n";
+    	StringBuilder str = new StringBuilder("-".repeat(50) + saltoLinea);
+    	str.append("Nombre: " + this.getNombre() + saltoLinea);
+    	str.append("Espacio almacenamiento: " + this.getEspacioAlmacenamiento() + saltoLinea);
+    	str.append("ID: " + this.getID() + saltoLinea);
+    	String[] ingredientesNecesarios = this.listarIngredientesNecesarios().split(saltoLinea);
+    	str.append("Ingredientes Necesarios: \n");
+    	for(String ingrediente: ingredientesNecesarios) {
+    		str.append("\t" + ingrediente + "\n");
+    	}
+    	str.append("Precio: " + this.getPrecio() + saltoLinea);
+    	str.append("Peso: " + this.getPeso() + saltoLinea);
+    	str.append("Dias en bodega: " + this.getDiasBodega() + saltoLinea);
+    	str.append("Tiempo de produccion: " + this.getTiempoProduccion() + saltoLinea);
+    	str.append("Dias de produccion: " + this.getDiasDeProduccion() + saltoLinea);
+    	
+    	return str.toString();
+    }
+    
+    /*
+     * Metodo abstracto para que las clases hijas las implementen con sus respectivos
+     * atributos
+     */
+    public abstract String listaCaracteristicas();
+    
 	//Metodos de Clase: Obtener/Eliminar Productos
 
 }

@@ -1,17 +1,26 @@
 package gestorAplicacion.producto;
 
 import java.util.HashMap;
+import gestorAplicacion.empresa.Ingrediente;
 
-class Tortas extends Producto {
+public class Tortas extends Producto {
     private int porciones;
     private String cobertura;
 
-    public Tortas(String nombre, int espacioAlmacenamiento, HashMap<String, Integer> ingredientesNecesarios, int costo,
-                  String ID, int precio, int peso, int diasEnBodega, String fechaVencimiento, int tiempoProduccion,
-                  int porciones, String cobertura) {
-        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, costo, ID, precio, peso, diasEnBodega, fechaVencimiento, tiempoProduccion);
+    public Tortas(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> hashMap, int precioBase,
+                  String ID, int peso, int diasEnBodega, int tiempoProduccion, int porciones, String cobertura) {
+        super(nombre, espacioAlmacenamiento, hashMap, precioBase, ID, peso, diasEnBodega);
         this.porciones = porciones;
         this.cobertura = cobertura;
+    }
+    
+    @Override
+    public String listaCaracteristicas() {
+    	String str = this.toString();
+    	str = str + "Porciones: " +  this.getPorciones() + "\n";
+    	str = str + "Cobertura: " + this.getCobertura() + "\n";
+    	str = str + "-".repeat(50) + "\n";
+    	return str;
     }
     
 	public int getPorciones() {

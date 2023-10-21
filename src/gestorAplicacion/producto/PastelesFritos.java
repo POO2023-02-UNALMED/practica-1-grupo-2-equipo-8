@@ -1,11 +1,21 @@
 package gestorAplicacion.producto;
 
 import java.util.HashMap;
+import gestorAplicacion.empresa.Ingrediente;
 
-class PastelesFritos extends Producto {
+public class PastelesFritos extends Producto {
     private boolean dulce;
     private String salsa;
 
+    @Override
+    public String listaCaracteristicas() {
+    	String str = this.toString();
+    	str = str + "Dulce: " +  (this.isDulce() ? "Si" : "No") + "\n";
+    	str = str + "Salsa: " + this.getSalsa() + "\n";
+    	str = str + "-".repeat(50) + "\n";
+    	return str;
+    }
+    
     public boolean isDulce() {
 		return dulce;
 	}
@@ -22,10 +32,9 @@ class PastelesFritos extends Producto {
 		this.salsa = salsa;
 	}
 
-	public PastelesFritos(String nombre, int espacioAlmacenamiento, HashMap<String, Integer> ingredientesNecesarios, int costo,
-                          String ID, int precio, int peso, int diasEnBodega, String fechaVencimiento, int tiempoProduccion,
-                          boolean dulce, String salsa) {
-        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, costo, ID, precio, peso, diasEnBodega, fechaVencimiento, tiempoProduccion);
+	public PastelesFritos(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+                          String ID, int peso, int diasEnBodega, int tiempoProduccion, boolean dulce, String salsa) {
+        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso, diasEnBodega);
         this.dulce = dulce;
         this.salsa = salsa;
     }
