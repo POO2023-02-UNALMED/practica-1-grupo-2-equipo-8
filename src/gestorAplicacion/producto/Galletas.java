@@ -8,8 +8,8 @@ public class Galletas extends Producto {
     private String relleno;
 
     public Galletas(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
-                    String ID,  int peso, int diasEnBodega, int tiempoProduccion, boolean chips, String relleno) {
-        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso, diasEnBodega);
+                    String ID,  int peso,  boolean chips, String relleno) {
+        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso);
         this.chips = chips;
         this.relleno = relleno;
     }

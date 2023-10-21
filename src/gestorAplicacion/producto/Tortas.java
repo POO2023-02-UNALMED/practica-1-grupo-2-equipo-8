@@ -8,8 +8,8 @@ public class Tortas extends Producto {
     private String cobertura;
 
     public Tortas(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> hashMap, int precioBase,
-                  String ID, int peso, int diasEnBodega, int tiempoProduccion, int porciones, String cobertura) {
-        super(nombre, espacioAlmacenamiento, hashMap, precioBase, ID, peso, diasEnBodega);
+                  String ID, int peso,  int porciones, String cobertura) {
+        super(nombre, espacioAlmacenamiento, hashMap, precioBase, ID, peso);
         this.porciones = porciones;
         this.cobertura = cobertura;
     }

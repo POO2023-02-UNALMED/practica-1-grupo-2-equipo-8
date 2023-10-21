@@ -8,8 +8,8 @@ public class Donas extends Producto {
     private String cobertura;
 
     public Donas(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
-                String ID, int peso, int diasEnBodega, int tiempoProduccion, boolean chips, String cobertura) {
-        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso, diasEnBodega);
+                String ID, int peso, boolean chips, String cobertura) {
+        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso);
         this.chips = chips;
         this.cobertura = cobertura;
     }

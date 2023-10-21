@@ -16,7 +16,7 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     private int diasDeProduccion;
 
     public Producto(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
-                    String ID, int peso, int tiempoProduccion) {
+                    String ID, int peso) {
         this.nombre = nombre;
         this.espacioAlmacenamiento = espacioAlmacenamiento;
         this.ingredientesNecesarios = ingredientesNecesarios;
@@ -24,7 +24,7 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
         this.ID = ID;
         this.peso = peso;
         this.setDiasBodega(0);
-        this.tiempoProduccion = tiempoProduccion;
+       
     }
 
 	public int getEspacioAlmacenamiento() {

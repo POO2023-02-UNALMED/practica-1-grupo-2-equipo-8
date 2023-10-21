@@ -5,26 +5,36 @@ import gestorAplicacion.producto.Producto;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.ArrayList;
 
 public class Bodega implements Serializable {
 	private String identificador;
-	private HashMap<Producto, Integer> productos = new HashMap<>();
+	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
-	private HashMap<Ingrediente, Integer> ingredientes = new HashMap<>();
+	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
 	private static int cantidadProductosTotales;
-	private List<String> listaProductosAltaDemanda;
-    private List<String> listaProductosBajaDemanda;
+	private List<Producto> productos =new ArrayList<Producto>();	
+	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
+	
+//	¿Para qué hacer esto?, en bodega con el historial de ventas se puede sacar esta info
+//	private List<String> listaProductosAltaDemanda;
+//    private List<String> listaProductosBajaDemanda;
     
- // Mostrar ingredientes escasoslñ{
+ // Mostrar ingredientes escasos generara una lista con aquellos ingredientes menores de 10 en la variable contabilidad ingredientes
 
     public String mostrarIngredientesEscasos() {
-        // Implementa la lógica para mostrar ingredientes escasos y devuelve una cadena
-        // Puedes utilizar las listas y el HashMap para determinar ingredientes escasos
-        return "Lista de ingredientes escasos: ...";
-    }
+    	StringBuilder resultado = new StringBuilder("Ingredientes escasos:\n");
 
-    // Pedir cantidad de ingredientes
+        for (String ingrediente : contabilidadIngredientes.keySet()) {
+            int cantidad = contabilidadIngredientes.get(ingrediente);
+            if (cantidad < 10) {
+                resultado.append(ingrediente).append(": ").append(cantidad).append("\n");
+            }
+        }
+
+        return resultado.toString();
+    }
+///////////////////////////////////////////////////////////////////////////////
     public void pedirCantidadIngredientes() {
         // Implementa la lógica para pedir cantidad de ingredientes
         // Puedes utilizar las listas y el HashMap para llevar un seguimiento de los ingredientes
@@ -50,11 +60,11 @@ public class Bodega implements Serializable {
 		this.identificador = identificador;
 	}
 
-	public HashMap<Producto, Integer> getProductos() {
+	public List<Producto> getProductos() {
 		return productos;
 	}
 
-	public void setProductos(HashMap<Producto, Integer> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
@@ -66,11 +76,11 @@ public class Bodega implements Serializable {
 		this.espacioAlmacenamiento = espacioAlmacenamiento;
 	}
 
-	public HashMap<Ingrediente, Integer> getIngredientes() {
+	public List<Ingrediente> getIngredientes() {
 		return ingredientes;
 	}
 
-	public void setIngredientes(HashMap<Ingrediente, Integer> ingredientes) {
+	public void setIngredientes(List<Ingrediente> ingredientes){
 		this.ingredientes = ingredientes;
 	}
 
@@ -81,22 +91,20 @@ public class Bodega implements Serializable {
 	public static void setCantidadProductosTotales(int cantidadProductosTotales) {
 		Bodega.cantidadProductosTotales = cantidadProductosTotales;
 	}
-
-	public List<String> getListaProductosAltaDemanda() {
-		return listaProductosAltaDemanda;
+	public HashMap<String, Integer> getContabilidadProductos() {
+		return contabilidadProductos;
+	}
+	public void setContabilidadProductos(HashMap<String, Integer> contabilidadProductos) {
+		this.contabilidadProductos = contabilidadProductos;
+	}
+	public HashMap<String, Integer> getContabilidadIngredientes() {
+		return contabilidadIngredientes;
+	}
+	public void setContabilidadIngredientes(HashMap<String, Integer> contabilidadIngredientes) {
+		this.contabilidadIngredientes = contabilidadIngredientes;
 	}
 
-	public void setListaProductosAltaDemanda(List<String> listaProductosAltaDemanda) {
-		this.listaProductosAltaDemanda = listaProductosAltaDemanda;
-	}
 
-	public List<String> getListaProductosBajaDemanda() {
-		return listaProductosBajaDemanda;
-	}
-
-	public void setListaProductosBajaDemanda(List<String> listaProductosBajaDemanda) {
-		this.listaProductosBajaDemanda = listaProductosBajaDemanda;
-	}
 
 }
 

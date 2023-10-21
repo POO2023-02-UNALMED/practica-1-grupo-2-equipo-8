@@ -7,6 +7,14 @@ public class PastelesFritos extends Producto {
     private boolean dulce;
     private String salsa;
 
+
+	public PastelesFritos(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+            String ID, int peso , boolean dulce, String salsa) {
+			super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso);
+			this.dulce = dulce;
+			this.salsa = salsa;
+	}
+
     @Override
     public String listaCaracteristicas() {
     	String str = this.toString();
@@ -32,10 +40,5 @@ public class PastelesFritos extends Producto {
 		this.salsa = salsa;
 	}
 
-	public PastelesFritos(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
-                          String ID, int peso, int diasEnBodega, int tiempoProduccion, boolean dulce, String salsa) {
-        super(nombre, espacioAlmacenamiento, ingredientesNecesarios, precioBase, ID, peso, diasEnBodega);
-        this.dulce = dulce;
-        this.salsa = salsa;
-    }
+
 }
