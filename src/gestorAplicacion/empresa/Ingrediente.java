@@ -40,6 +40,12 @@ public class Ingrediente implements IProductoIngrediente{
             Ingrediente.ingredientesDisponibles.add(this);
         }
     }
+//    Sobrecarga necesaria para hacer 
+    
+    
+    
+    
+    
     
     /*
      * Metodo que retorna un String con la lista de ingredientes disponibles
