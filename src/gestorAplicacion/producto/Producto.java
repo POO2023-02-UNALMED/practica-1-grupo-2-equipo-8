@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.concurrent.atomic.*;
 import gestorAplicacion.empresa.Ingrediente;
 
+
+
 public abstract class Producto implements Serializable, IProductoIngrediente {
     private String nombre;
     private int espacioAlmacenamiento;
@@ -16,10 +18,26 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     private int diasDeProduccion;
     private boolean asignadoAEnvio=false;
 
-    public Producto(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+    public Producto(String nombre, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
                     String ID, int peso) {
+    	
+    	//Se calcula el espacio acumulado según se especifico en el UML
+    	int espacioCalculado=0;
+    	for (HashMap.Entry<Ingrediente, Integer> entry : ingredientesNecesarios.entrySet()) {
+    		Ingrediente ingrediente = entry.getKey();
+    		int cantidad=entry.getValue();
+    		int pesoIngrediente=ingrediente.getEspacioAlmacenamiento();
+    		espacioCalculado= cantidad* pesoIngrediente;
+    		
+    	}
+    	double espacioCalculadoConAumento = espacioCalculado * 1.1;
+    	int espacioAproximado = (int) Math.round(espacioCalculadoConAumento);
+    	
+    	
+    	
+    	
         this.nombre = nombre;
-        this.espacioAlmacenamiento = espacioAlmacenamiento;
+        this.espacioAlmacenamiento = espacioAproximado;
         this.ingredientesNecesarios = ingredientesNecesarios;
         this.precio = this.calcularPrecio(precioBase);
         this.ID = ID;
