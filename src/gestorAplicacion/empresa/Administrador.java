@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Administrador implements Serializable {
 
-    private Bodega Bodega;
+    private static Bodega Bodega;
     private Caja Caja;
     private HashMap<String, Integer> Productos ;
     private List<Camion> Camiones = new ArrayList<Camion>();
@@ -13,7 +13,7 @@ public class Administrador implements Serializable {
 
     
     //Funcionalidad 5
-    public void asignacionDeCarroDeVenta() {
+    public static void asignacionDeCarroDeVenta() {
         // Mostrar los envíos sin camión asignado
         System.out.println("Envíos pendientes de asignación de camión:");
         System.out.println(Envio.enviosPorAsignar());
@@ -46,7 +46,7 @@ public class Administrador implements Serializable {
 
                 // Mostrar productos en bodega no asignados
                 System.out.println("Productos en bodega no asignados a envíos:");
-                System.out.println(this.getBodega().productosNoasignadosAEnvios());
+                System.out.println(Bodega.productosNoasignadosAEnvios());
 
                 // Preguntar al usuario si quiere enviar el camión
                 System.out.print("¿Desea enviar el camión? (1. Sí / 2. No): ");
@@ -230,7 +230,12 @@ public class Administrador implements Serializable {
             System.out.println("Por favor, escriba el nombre del producto que desea eliminar: ");
 
             System.exit(0);
-        };
+        }else if (opcionElegida == 6){ //Funcionalidad 5: 
+
+        	asignacionDeCarroDeVenta();
+
+            
+        }
 
         //Retorno a eliminarse cuando se corrija el codigo
         return null;
