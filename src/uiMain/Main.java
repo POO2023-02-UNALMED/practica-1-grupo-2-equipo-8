@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 package uiMain;
 
 import gestorAplicacion.empresa.Ingrediente;
@@ -21,6 +22,69 @@ public class Main {
 		System.out.println(torta.getNombre() + ": " + torta.getPrecio());
 		
 		System.out.print(torta.listaCaracteristicas());
+=======
+package baseDeDatos;
+
+import gestorAplicacion.empresa.Ingrediente;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class SerializadorIngredientes {
+
+	private static final String RUTA_ARCHIVO = "src/baseDeDatos/Archivos/ingredientes.txt";
+
+	public static List<Ingrediente>  leerIngredientes(){
+		List<Ingrediente> ingredientes = new ArrayList<>();
+		try(BufferedReader br = new BufferedReader(new FileReader(RUTA_ARCHIVO))){
+			String linea;
+			while ((linea = br.readLine())!= null){
+				String[] partes = linea.split(",");
+				if (partes.length == 4){
+					String nombre = partes[0];
+					int precioBase = Integer.parseInt(partes[1]);
+					long identificador = Long.parseLong(partes[2]);
+					int espacioAlmacenamiento = Integer.parseInt(partes[3]);
+
+					Ingrediente ingrediente = new Ingrediente(nombre, precioBase, identificador, espacioAlmacenamiento);
+					ingredientes.add(ingrediente);
+				}
+			}
+		}catch (IOException e){
+			System.err.println("Error al leer ingrediente"+ e.getMessage());
+		}
+
+		return ingredientes;
+	}
+
+	public static void agregarIngrediente(Ingrediente ingrediente) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(RUTA_ARCHIVO, true))) {
+			String ingredienteString = ingrediente.toString();
+			bw.write(ingredienteString);
+			bw.newLine(); // Agrega una nueva línea para separar los ingredientes en el archivo
+		} catch (IOException e) {
+			System.err.println("Error al agregar ingrediente: " + e.getMessage());
+		}
+>>>>>>> Stashed changes
+	}
+
+	public static boolean existeIngrediente(Ingrediente ingrediente) {
+		try (BufferedReader br = new BufferedReader(new FileReader(RUTA_ARCHIVO))) {
+			String linea;
+			while ((linea = br.readLine()) != null) {
+				String[] partes = linea.split(",");
+				if (partes.length == 4) {
+					if (Objects.equals(partes[0], ingrediente.getNombre())) {
+						return true;
+					}
+				}
+			}
+		} catch (IOException e) {
+			System.err.println("Error al leer ingrediente" + e.getMessage());
+		}
+		return false; // Solo después de revisar todas las líneas del archivo
 	}
 
 }
