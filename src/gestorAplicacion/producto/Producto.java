@@ -2,12 +2,24 @@ package gestorAplicacion.producto;
 
 import gestorAplicacion.empresa.Ingrediente;
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> Stashed changes
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+<<<<<<< Updated upstream
+=======
+>>>>>>> 38ca4908dc37f1dfe8cc178ce2a09c2083cc187b
+>>>>>>> Stashed changes
 
 public abstract class Producto implements Serializable, IProductoIngrediente {
+	
+	//Atributos
     private String nombre;
     private int espacioAlmacenamiento;
 	private HashMap<Ingrediente, Integer> ingredientesNecesarios;
@@ -15,14 +27,30 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     private int precio;
     private int peso;
     private int diasBodega;
-    private int tiempoProduccion;
-    private int diasDeProduccion;
     private boolean asignadoAEnvio=false;
 
-    public Producto(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+    
+    //Constructor
+    public Producto(String nombre, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
                     String ID, int peso) {
+    	
+    	//Se calcula el espacio acumulado según se especifico en el UML
+    	int espacioCalculado=0;
+    	for (HashMap.Entry<Ingrediente, Integer> entry : ingredientesNecesarios.entrySet()) {
+    		Ingrediente ingrediente = entry.getKey();
+    		int cantidad=entry.getValue();
+    		int pesoIngrediente=ingrediente.getEspacioAlmacenamiento();
+    		espacioCalculado= cantidad* pesoIngrediente;
+    		
+    	}
+    	double espacioCalculadoConAumento = espacioCalculado * 1.1;
+    	int espacioAproximado = (int) Math.round(espacioCalculadoConAumento);
+    	
+    	
+    	
+    	
         this.nombre = nombre;
-        this.espacioAlmacenamiento = espacioAlmacenamiento;
+        this.espacioAlmacenamiento = espacioAproximado;
         this.ingredientesNecesarios = ingredientesNecesarios;
         this.precio = this.calcularPrecio(precioBase);
         this.ID = ID;
@@ -30,7 +58,69 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
         this.setDiasBodega(0);
        
     }
+    
+    
+    
+	/*
+     * 	Metodo que retorna un String con los ingredientes y su correspondiente cantidad que 
+     *  necesita un Producto
+     */
+    public String listarIngredientesNecesarios(){
+    	StringBuilder str = new StringBuilder();
+    	this.ingredientesNecesarios.forEach((Ingrediente ingrediente, Integer cantidad)->{
+    		str.append("Necesita la cantidad de " + cantidad.toString() + " " + ingrediente.getNombre() + ".\n");
+    	});
+    	return str.toString();
+    };
+    /*
+     * 	Metodo que calcula el precio de un producto, recibiendo como parametro un precio base 
+     * 	y retorna la suma de este precio con el precio de todos sus ingredientes.
+     */
+    @Override
+    public int calcularPrecio(int precioBase) {
+    	AtomicInteger precio = new AtomicInteger((precioBase >= 0)? precioBase : 0);
+    	this.ingredientesNecesarios.forEach((Ingrediente ingrediente, Integer cantidad)->{
+    		precio.addAndGet(ingrediente.getPrecio()*cantidad);
+    	});
+    	return precio.get();
+    }
+    
+    //TOSTRING
+    public String toString() {
+    	String saltoLinea = "\n";
+    	StringBuilder str = new StringBuilder("-".repeat(50) + saltoLinea);
+    	str.append("Nombre: " + this.getNombre() + saltoLinea);
+    	str.append("Espacio almacenamiento: " + this.getEspacioAlmacenamiento() + saltoLinea);
+    	str.append("ID: " + this.getID() + saltoLinea);
+    	String[] ingredientesNecesarios = this.listarIngredientesNecesarios().split(saltoLinea);
+    	str.append("Ingredientes Necesarios: \n");
+    	for(String ingrediente: ingredientesNecesarios) {
+    		str.append("\t" + ingrediente + "\n");
+    	}
+    	str.append("Precio: " + this.getPrecio() + saltoLinea);
+    	str.append("Peso: " + this.getPeso() + saltoLinea);
+    	str.append("Dias en bodega: " + this.getDiasBodega() + saltoLinea);
 
+    	
+    	return str.toString();
+    }
+    
+    /*
+     * Metodo abstracto para que las clases hijas las implementen con sus respectivos
+     * atributos
+     */
+    public abstract String listaCaracteristicas();
+    
+	//Metodos de Clase: Obtener/Eliminar Productos
+
+
+    
+    
+    
+    
+    //Getters y setters
+    
+    
 	public int getEspacioAlmacenamiento() {
 		return espacioAlmacenamiento;
 	}
@@ -72,18 +162,6 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 	}
 
 
-	public int getTiempoProduccion() {
-		return tiempoProduccion;
-	}
-	
-	public int getDiasDeProduccion() {
-		return diasDeProduccion;
-	}
-
-	public void setDiasDeProduccion(int diasDeProduccion) {
-		this.diasDeProduccion = diasDeProduccion;
-	}
-
 	public int getDiasBodega() {
 		return diasBodega;
 	}
@@ -91,9 +169,7 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 	public void setDiasBodega(int diasBodega) {
 		this.diasBodega = diasBodega;
 	}
-	public void setTiempoProduccion(int tiempoProduccion) {
-		this.tiempoProduccion = tiempoProduccion;
-	}
+
 
     public String getNombre() {
         return nombre;
@@ -111,6 +187,8 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 	public void setAsignadoAEnvio(boolean asignadoAEnvio) {
 		this.asignadoAEnvio = asignadoAEnvio;
 	}
+<<<<<<< HEAD
+=======
 
 	/*
      * 	Metodo que retorna un String con los ingredientes y su correspondiente cantidad que 
@@ -171,5 +249,13 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 		return null;
 	}
 
+<<<<<<< Updated upstream
+=======
+>>>>>>> 38ca4908dc37f1dfe8cc178ce2a09c2083cc187b
+>>>>>>> Stashed changes
 }
+
+    
+
+
 

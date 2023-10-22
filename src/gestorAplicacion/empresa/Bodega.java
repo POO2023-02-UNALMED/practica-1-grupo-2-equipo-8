@@ -1,5 +1,6 @@
 package gestorAplicacion.empresa;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 import gestorAplicacion.producto.Producto;
 
@@ -13,6 +14,7 @@ public class Bodega implements Serializable {
 	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
+	private static int cantidadProductosTotales;
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
 	
@@ -93,6 +95,34 @@ public class Bodega implements Serializable {
         // Puedes utilizar el HashMap y las listas para realizar este cálculo
         //return 0; // Reemplaza con el cálculo real
 //}
+    
+  //se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
+	
+
+    public void descontarMateriaPrimaNecesaria(List<Ingrediente> ingredientesRequeridos, int cantidadProduccion) {
+        List<Ingrediente> inventarioIngredientes = this.getIngredientes();
+
+        for (Ingrediente ingredienteRequerido : ingredientesRequeridos) {
+            // Verificar si el ingrediente requerido está presente en el inventario
+            if (inventarioIngredientes.contains(ingredienteRequerido)) {
+                // Realizar las operaciones de descontar la cantidad de ingredientes necesaria
+                int index = inventarioIngredientes.indexOf(ingredienteRequerido);
+                Ingrediente ingredienteEnInventario = inventarioIngredientes.get(index);
+
+                // Realizar el descuento si hay suficiente cantidad en el inventario
+                if (ingredienteEnInventario.getCantidad() >= cantidadProduccion) {
+                    ingredienteEnInventario.setCantidad(ingredienteEnInventario.getCantidad() - cantidadProduccion);
+                } else {
+                    System.out.println("No hay suficiente cantidad de " + ingredienteRequerido.getNombre() + " en la bodega.");
+                }
+            } else {
+                System.out.println("El ingrediente " + ingredienteRequerido.getNombre() + " no está disponible en la bodega.");
+            }
+        }
+
+        // Actualizar la lista de ingredientes en la bodega después del descuento
+        this.setIngredientes(inventarioIngredientes);
+    }
 
     public String getIdentificador() {
 		return identificador;
@@ -119,13 +149,12 @@ public class Bodega implements Serializable {
 	}
 
 	public List<Ingrediente> getIngredientes() {
-		return ingredientes;
+		return this.ingredientes;
 	}
 
-	public void setIngredientes(List<Ingrediente> ingredientes){
-		this.ingredientes = ingredientes;
+	public void setIngredientes(List<Ingrediente> listaMateriaPrimaActual) {
+		this.ingredientes = listaMateriaPrimaActual;
 	}
-
 
 	public HashMap<String, Integer> getContabilidadProductos() {
 		return contabilidadProductos;

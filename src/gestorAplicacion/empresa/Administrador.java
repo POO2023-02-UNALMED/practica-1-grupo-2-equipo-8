@@ -77,17 +77,7 @@ public class Administrador implements Serializable {
         scanner.close();
     }
 
-    
-    
-	
-
-    
-    
-    
-    
-    
-    
-    
+ 
     public Administrador() {
         Bodega = new Bodega();
         Caja = new Caja();
@@ -208,12 +198,23 @@ public class Administrador implements Serializable {
         //Retorno a eliminarse cuando se corrija el codigo
         return null;
     }
+    
+    public void configurar() {
+        // Se obtiene la instancia de la fábrica
+        Fabrica fabrica = this.getFabrica();
+
+        // Se llama al método cambiarProduccion en la fábrica
+        String mensajeCambio = fabrica.cambiarProduccion();
+
+        // Se imprime el mensaje que indica el cambio en la producción diaria
+        System.out.println(mensajeCambio);
+    }
 
     //acabarSesion(): Metodo que se ejecuta cada vez que termine la interaccion del Administrador con el software
-    private String acabarSesion(){
-
-        //Mensaje de despedida
-        return "Muchas gracias por usar el software de DeliHorno. Que tenga un feliz dia.";
+    @SuppressWarnings("unused")
+	private void finalizarSesion() {
+        System.out.println("Muchas gracias por usar el software de DeliHorno. Que tenga un feliz día.");
+        System.exit(0);
     }
 
     //Metodo para verificar si un valor es de tipo String
