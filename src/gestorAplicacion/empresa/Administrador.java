@@ -181,10 +181,45 @@ public class Administrador implements Serializable {
                 } else { //Si el valor escrito no es String
                     System.out.println("Este nombre no es valido");
                 }
-            } while (!esString);
+            } while (!esString); //Se repite el ciclo hasta que esString = true
 
             System.out.println("El nombre del nuevo producto es " + nombreProductoNuevo);
 
+            System.out.println("Actualmente usamos los siguientes ingredientes para fabricar nuestro catalogo de productos: ");
+
+            //MostrarListaIngredientes() Funcion de SerializadorIngredientes
+
+            System.out.println("¿Cuales de los ingredientes de la lsta piensa usar para fabricar el nuevo producto?");
+
+            //Crear caso de excepcion en el que si se eligen menos de dos ingredientes se repita el loop hasta que se elijan dos o màs ingredientes (similar al do while del primer Scanner
+
+            System.out.println("¿El nuevo producto necesita uno o varios ingredientes nuevos?: ");
+
+            //
+            /*if (hayIngredienteNuevo){
+
+                System.out.println("Escriba el/los nuevos ingredientes (separados por coma) a continuacion: ");
+
+                if(noEscribeBien){
+                    System.out.println("Por favor, escriba cifras validas");
+                }
+            }*/
+
+            System.out.println("Por favor, inserte la cifra necesaria de cada ingrediente para la fabricacion del nuevo producto (separados por comas): ");
+            //Se muestra la lista de los ingredientes elegidos antes de que el usuario escriba los valores, para usarlos como guia de orden
+            //Si inserta valores invalidos, se repite la interaccion hasta que los valores sean validos
+
+            System.out.println("De acuerdo a los costes de los ingredientes, el valor del nuevo producto a producir serìa de CalcularCostoProductoNuevo() por unidad");
+
+            //Se añade el producto nuevo al Serializador de Productos junto con su respectiva informacion
+
+            System.out.println("Se ha añadido el producto UltimoProductoAñadido.getnombre() al catalogo de forma exitosa");
+
+            //Se imprime el nombre del producto, seguido por la cantidad y tipo de ingredientes que necesita para fabricarse, y el costo de cada unidad
+
+            //Se aplica la informacion nueva del Serializador de Productos a todas las clases que la necesiten
+
+            System.exit(0);
 
         } else if (opcionElegida == 5){ //Funcionalidad 4: Eliminar Producto
 
@@ -193,6 +228,8 @@ public class Administrador implements Serializable {
             System.out.println("Actualmente se ofrecen los siguientes productos: ");
             //Producto.MostrarProductos();
             System.out.println("Por favor, escriba el nombre del producto que desea eliminar: ");
+
+            System.exit(0);
         };
 
         //Retorno a eliminarse cuando se corrija el codigo
