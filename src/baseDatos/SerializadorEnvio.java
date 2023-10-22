@@ -1,4 +1,4 @@
-package baseDeDatos;
+package baseDatos;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

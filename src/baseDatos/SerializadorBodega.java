@@ -1,4 +1,4 @@
-package baseDeDatos;
+package baseDatos;
 
 import java.io.FileOutputStream;
 
