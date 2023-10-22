@@ -6,7 +6,8 @@ import gestorAplicacion.producto.IProductoIngrediente;
 import java.util.ArrayList;
 public class Ingrediente implements IProductoIngrediente{
 	
-    private String nombre; 
+    private int cantidad = 0;
+	private String nombre; 
     private int precio;
     private final long identificador;
     private int espacioAlmacenamiento;//espacio que ocupara el producto en bodega
@@ -159,5 +160,13 @@ public class Ingrediente implements IProductoIngrediente{
         return espacioAlmacenamiento;
     }
 
+	public int getCantidad() {
+		return this.cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+		
+	}
     
 }
