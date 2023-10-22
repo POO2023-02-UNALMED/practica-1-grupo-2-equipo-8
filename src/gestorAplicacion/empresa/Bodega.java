@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Bodega implements Serializable {
 	private String identificador;
@@ -123,6 +124,28 @@ public class Bodega implements Serializable {
         // Actualizar la lista de ingredientes en la bodega después del descuento
         this.setIngredientes(inventarioIngredientes);
     }
+    
+    public String calcularEstanciaProductosOrdenDiasEnBodega() {
+        // Clasificar los productos por mayor número de días en bodega
+        List<Producto> productosOrdenados = new ArrayList<>(productos);
+        productosOrdenados.sort(Comparator.comparing(Producto::getDiasBodega).reversed());
+
+        StringBuilder result = new StringBuilder("Estancia de Productos en Bodega (Orden por Días en Bodega):\n");
+
+        for (Producto producto : productosOrdenados) {
+            int tiempoEnBodega = producto.getDiasBodega();
+            String nombreProducto = producto.getNombre();
+            result.append("Producto: ").append(nombreProducto).append(", Tiempo en Bodega: ").append(tiempoEnBodega).append(" días\n");
+        }
+
+        return result.toString();
+    }
+
+    
+    
+    
+    
+    //Setters y getters
 
     public String getIdentificador() {
 		return identificador;
