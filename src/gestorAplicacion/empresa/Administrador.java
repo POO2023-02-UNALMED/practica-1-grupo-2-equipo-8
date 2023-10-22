@@ -1,12 +1,7 @@
 package gestorAplicacion.empresa;
-import java.util.List;
-import java.util.ArrayList;
-import gestorAplicacion.empresa.Envio;
-import gestorAplicacion.empresa.Camion;
-import gestorAplicacion.empresa.Bodega;
+
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Administrador implements Serializable {
 
@@ -157,8 +152,9 @@ public class Administrador implements Serializable {
         Scanner numero = new Scanner(System.in);
 
         //Mensaje inicial del Software, dando la bienvenida al Administrador y dandole las opciones disponibles a elegir mediante numeros (del 1 al 5)
-        System.out.println("Bienvenido a Alimentos Delihorno. ¿Que desearìa hacer el dìa de hoy?:" + "\n" + "1. Comprar Materia Prima" + "\n"
-        + "2. Venta Por Encargo" + "\n" + "3. Cambiar Lista de Produccion Diaria" + "\n" + "4. Agregar Producto" + "\n" + "5. Eliminar Producto");
+        System.out.println("Bienvenido a Alimentos Delihorno. ¿Que desearìa hacer el dìa de hoy?:" + "\n" +
+                "1. Comprar Materia Prima" + "\n" + "2. Venta Por Encargo" + "\n" + "3. Cambiar Lista de Produccion Diaria"
+                + "\n" + "4. Agregar Producto" + "\n" + "5. Eliminar Producto");
 
         //Se lee la respuesta del usuario al mensaje anterior
         int opcionElegida = numero.nextInt(); 
@@ -170,17 +166,43 @@ public class Administrador implements Serializable {
 
         } else if(opcionElegida == 3){
 
-        } else if (opcionElegida == 4){
+
+        } else if (opcionElegida == 4){ //Funcionalidad 4: Agregar Producto
 
             //Metodo de clase
+
+            System.out.println("Actualmente se ofrecen los siguientes productos: ");
             //Producto.MostrarProductos();
 
+            //Se crea un scanner para leer el nombre del nuevo producto que escribe el usuario
+            Scanner nombreProductoEscrito = new Scanner(System.in);
+            String nombreProductoNuevo;
+            boolean esString = false; // Variable para repetir el ciclo do while si es false, se usa el metodo "esString"
 
-        } else if (opcionElegida == 5){
+            //Ciclo donde se confirma si el valor tipeado por el usuario es de tipo String
+            do{
+                System.out.println("Por favor, escriba el nombre del producto que desea agregar: ");
+                nombreProductoNuevo = nombreProductoEscrito.next(); //Se guarda el valor escrito en "nombreProductoNuevo"
+
+                //Se verifica si el valor escrito es de tipo String
+                if (esString(nombreProductoNuevo)){
+
+                    esString = true;
+                } else { //Si el valor escrito no es String
+                    System.out.println("Este nombre no es valido");
+                }
+            } while (!esString);
+
+            System.out.println("El nombre del nuevo producto es " + nombreProductoNuevo);
+
+
+        } else if (opcionElegida == 5){ //Funcionalidad 4: Eliminar Producto
 
             //Metodo de clase
-            //Producto.MostrarProductos();
 
+            System.out.println("Actualmente se ofrecen los siguientes productos: ");
+            //Producto.MostrarProductos();
+            System.out.println("Por favor, escriba el nombre del producto que desea eliminar: ");
         };
 
         //Retorno a eliminarse cuando se corrija el codigo
@@ -194,6 +216,10 @@ public class Administrador implements Serializable {
         return "Muchas gracias por usar el software de DeliHorno. Que tenga un feliz dia.";
     }
 
+    //Metodo para verificar si un valor es de tipo String
+    public static boolean esString(String input) {
+
+        return input.matches("[a-zA-Z]+");
+    }
+
 }
-
-
