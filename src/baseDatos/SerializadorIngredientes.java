@@ -1,4 +1,4 @@
-package baseDeDatos;
+package baseDatos;
 
 import gestorAplicacion.empresa.Ingrediente;
 

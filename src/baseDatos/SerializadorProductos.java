@@ -1,9 +1,11 @@
-package baseDeDatos;
+package baseDatos;
 
 import java.io.FileOutputStream;
 
-public class SerializadorCaja {
-
+public class SerializadorProductos {
     private FileOutputStream fileOutputStream; //Se establece el atributo fileOutputStream
-    private final String DIR = "ficheroCaja.txt";
+    private final String DIR = "ficheroProductos.txt";
+
+
+
 }
