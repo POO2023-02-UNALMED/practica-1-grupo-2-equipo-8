@@ -1,8 +1,11 @@
 package gestorAplicacion.producto;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.atomic.*;
+
 import gestorAplicacion.empresa.Ingrediente;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Producto implements Serializable, IProductoIngrediente {
     private String nombre;
@@ -162,6 +165,11 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     public abstract String listaCaracteristicas();
     
 	//Metodos de Clase: Obtener/Eliminar Productos
+
+	public static List<String> MostrarProductos(){
+
+		return null;
+	}
 
 }
 
