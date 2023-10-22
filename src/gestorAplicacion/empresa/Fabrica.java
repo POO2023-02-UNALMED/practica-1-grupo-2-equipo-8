@@ -7,19 +7,23 @@ import java.util.HashMap;
 import gestorAplicacion.producto.*;
 
 public class Fabrica implements Serializable {
+	//Atributos
     private final String NIT;
     private String direccion;
     private HashMap<String, Integer> produccionDiaria;
     private Bodega bodega;
-
+    
+    //Constructor
     public Fabrica(String NIT, String direccion, Bodega bodega)  {
         this.NIT = NIT;
         this.direccion = direccion;
         this.produccionDiaria = new HashMap<String, Integer>();
         this.bodega = bodega;
     }
-
+    
+    //Muestra lo que se produce actualmente de cada producto, se elige que producto cambiarle la cantidad y se muestra el cambio.
     public String cambiarProduccion() {
+    	//Eleccion
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Producción diaria actual:");
@@ -43,6 +47,7 @@ public class Fabrica implements Serializable {
             }
             currentIndex++;
         }
+        //Ingreso de nuevo nivel de producción para el producto seleccionado
 
         if (productoSeleccionado != null) {
             int cantidadVieja = produccionDiaria.get(productoSeleccionado);
@@ -56,13 +61,14 @@ public class Fabrica implements Serializable {
             return "Número de producto no válido.";
         }
     }
-
+    //Funcion usada para la función anterior
     public String imprimirCambiosFabrica(int cantidadVieja, int cantidadNueva, String producto) {
         return "Ha cambiado su nivel de producción de: " + cantidadVieja + " a: " + cantidadNueva + " del producto: " + producto; 
     }
-
+    
+    //Creación de productos y envio a bodega segun la produccionDiaria
     public void finalizarProduccion(HashMap<String, Integer> produccionDiaria) {
-    	//Sumarle 1 día en bodega a todos los productos de bodega
+    	//Sumarle 1 día en bodega a todos los productos de bodega como se acuerda en el UML
     	for(Producto producto: this.bodega.getProductos()) {
     		producto.setDiasBodega(producto.getDiasBodega()+1);
     	}
@@ -107,7 +113,7 @@ public class Fabrica implements Serializable {
                     // Ingredientes para la galleta
                     HashMap<Ingrediente, Integer> ingredientesGalleta = new HashMap<>();
                     ingredientesGalleta.put(new Ingrediente("Harina", 5, 1234, 10), 1);
-                    ingredientesGalleta.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
+                    ingredientesGalleta.put(new Ingrediente("Azúcar", 3, 1234, 5), 3);
 
                     // Crear un nuevo producto "Galletas" y agregarlo a la bodega
                     Galletas nuevoProducto = new Galletas(producto, 5, ingredientesGalleta, 20, "dfg123", 3, false, "tomate");
@@ -121,8 +127,8 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("dona")) {
                     // Ingredientes para la dona
                     HashMap<Ingrediente, Integer> ingredientesDona = new HashMap<>();
-                    ingredientesDona.put(new Ingrediente("Harina", 5, 1234, 10), 1);
-                    ingredientesDona.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
+                    ingredientesDona.put(new Ingrediente("Harina", 5, 1234, 10), 3);
+                    ingredientesDona.put(new Ingrediente("Azúcar", 3, 1234, 5), 3);
 
                     // Crear un nuevo producto "Donas" y agregarlo a la bodega
                     Donas nuevoProducto = new Donas(producto, 5, ingredientesDona, 20, "dfg123", 3, false, "tomate");

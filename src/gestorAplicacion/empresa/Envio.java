@@ -9,20 +9,34 @@ import java.util.List;
 
 public class Envio implements Serializable {
 	
-	private int codigoDeEnvio;
+	private long codigoDeEnvio;
 	private Camion camionAsignado;
 	private List<Producto> productos=new ArrayList<Producto>();
 	private int pesoTotal;
 	private Caja caja;
-	private boolean asignadoAUnCamion;
+	private boolean asignadoAUnCamion=false;
 	private static List<Envio> listaEnvios = new ArrayList<Envio>();
-//	Constructor
-	
-	 public Envio(int codigoDeEnvio, List<Producto> productos, Caja caja) {
+	private Bodega bodega;
+
+	//	Constructor	
+	 public Envio(int codigoDeEnvio, List<Producto> productos, Caja caja,Bodega bodega) {
 		 	int pesoTotal = 0;
+		 	this.bodega=bodega;
 	        this.codigoDeEnvio = codigoDeEnvio;
 	        this.productos = productos;
 	        this.caja = caja;
+	        for (Producto producto:productos) {
+	        	producto.setAsignadoAEnvio(true);//Todos los prodctos aquí ya estara asignados
+	        	this.bodega.getProductos().remove(producto);//se eliminan estos productos de bodega
+	        	//Se le resta uno a la cantidad de este producto
+	        	int valorActual=this.bodega.getContabilidadProductos().get(producto.getNombre());
+	        	String clave=producto.getNombre();
+	        	this.bodega.getContabilidadProductos().put(clave, valorActual-1);
+	        	//Agregamos venta al historial de ventas
+	        	caja.agregarVenta(producto.getNombre(), 1);
+	        }
+	        //se suma el dinero del envio a caja
+	        
 	        for(Producto producto:productos) {
 	        	pesoTotal+=producto.getPeso();
 	        }
@@ -30,7 +44,7 @@ public class Envio implements Serializable {
 	        Envio.listaEnvios.add(this);
 	       
 	    }
-	 
+	 //Devuelve aquellos envios que no han sido asignados importates para la funcionalidad5
 	 public static String enviosPorAsignar() {
 		    StringBuilder result = new StringBuilder();
 		    int numeracion = 1;
@@ -46,26 +60,36 @@ public class Envio implements Serializable {
 		    return result.toString();
 		}
 
-	 
-//	 FuncionesDelUML
+	 //Añade un producto al envio con sus repercuciones en bodega y en caja
 	 public void anadirProducto(Producto producto) {
 		 this.productos.add(producto);
 		 this.pesoTotal+=producto.getPeso();
 		 this.getCaja().ingresarDinero(producto.getPrecio());
+		 this.bodega.getProductos().remove(producto);
+		 int valorActual=this.bodega.getContabilidadProductos().get(producto.getNombre());
+      	 String clave=producto.getNombre();
+     	 this.bodega.getContabilidadProductos().put(clave, valorActual-1);
+     	 this.caja.agregarVenta(producto.getNombre(), 1);
 	 }
-	 
+	//Elimina un producto al envio con sus repercuciones en bodega y en caja
 	 public void eliminarProducto(Producto producto) {
 		 if (this.productos.contains(producto)){
 			 this.productos.remove(producto);
 			 this.pesoTotal-=producto.getPeso();
 			 this.getCaja().restarDinero(producto.getPrecio());
+			 this.bodega.getProductos().add(producto);
+			 int valorActual=this.bodega.getContabilidadProductos().get(producto.getNombre());
+	      	 String clave=producto.getNombre();
+	     	 this.bodega.getContabilidadProductos().put(clave, valorActual+1);
+	     	 this.caja.eliminarVenta(producto.getNombre(), 1);
+			 
 			 
 		 }
 	 }
 	 
 //	 Getters y Setters
 	 
-	public int getCodigoDeEnvio() {
+	public long getCodigoDeEnvio() {
 		return codigoDeEnvio;
 	}
 	public Camion getCamionAsignado() {

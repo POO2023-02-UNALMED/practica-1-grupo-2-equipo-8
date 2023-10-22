@@ -13,9 +13,9 @@ public class Bodega implements Serializable {
 	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
-	private static int cantidadProductosTotales;
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
+	
 	
 //	¿Para qué hacer esto?, en bodega con el historial de ventas se puede sacar esta info
 //	private List<String> listaProductosAltaDemanda;
@@ -33,7 +33,34 @@ public class Bodega implements Serializable {
 
 	    return resultado.toString();
 	}
+	
+	public void pedirCantidadIngredientes() {
+	    Scanner scanner = new Scanner(System.in);
 
+	    // Solicitar al usuario que elija un ingrediente
+	    System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
+	    int opcion = scanner.nextInt();
+
+	    if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
+	        System.out.println("Opción no válida. Seleccione un número válido.");
+	        scanner.close();
+	        return;
+	    }
+
+	    // Obtener el ingrediente seleccionado
+	    Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
+
+	    // Solicitar la cantidad deseada
+	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
+	    int cantidadPedida = scanner.nextInt();
+
+	    // Crear la cantidad de ingredientes solicitados
+	    for (int i = 0; i < cantidadPedida; i++) {
+	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
+	        ingredientes.add(nuevoIngrediente);
+	        contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
+	    }
+}
 	
 	
 	
@@ -53,33 +80,7 @@ public class Bodega implements Serializable {
         return resultado.toString();
     }
 ///////////////////////////////////////////////////////////////////////////////
-    	public void pedirCantidadIngredientes() {
-    	    Scanner scanner = new Scanner(System.in);
-
-    	    // Solicitar al usuario que elija un ingrediente
-    	    System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
-    	    int opcion = scanner.nextInt();
-
-    	    if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
-    	        System.out.println("Opción no válida. Seleccione un número válido.");
-    	        scanner.close();
-    	        return;
-    	    }
-
-    	    // Obtener el ingrediente seleccionado
-    	    Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
-
-    	    // Solicitar la cantidad deseada
-    	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
-    	    int cantidadPedida = scanner.nextInt();
-
-    	    // Crear la cantidad de ingredientes solicitados
-    	    for (int i = 0; i < cantidadPedida; i++) {
-    	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
-    	        ingredientes.add(nuevoIngrediente);
-    	        contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
-    	    }
-    }
+    	
     // Confirmar disponibilidad de ingredientes
     //public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
         // Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
@@ -125,13 +126,7 @@ public class Bodega implements Serializable {
 		this.ingredientes = ingredientes;
 	}
 
-	public static int getCantidadProductosTotales() {
-		return cantidadProductosTotales;
-	}
 
-	public static void setCantidadProductosTotales(int cantidadProductosTotales) {
-		Bodega.cantidadProductosTotales = cantidadProductosTotales;
-	}
 	public HashMap<String, Integer> getContabilidadProductos() {
 		return contabilidadProductos;
 	}

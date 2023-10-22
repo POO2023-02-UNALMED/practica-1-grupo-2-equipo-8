@@ -16,6 +16,8 @@ public class Administrador implements Serializable {
     private List<Camion> Camiones = new ArrayList<Camion>();
     private Fabrica Fabrica;
 
+    
+    //Funcionalidad 5
     public void asignacionDeCarroDeVenta() {
         // Mostrar los envíos sin camión asignado
         System.out.println("Envíos pendientes de asignación de camión:");
@@ -40,6 +42,7 @@ public class Administrador implements Serializable {
                 Camion camionAsignado = Camion.getCamiones().get(eleccionCamion - 1);
 
                 // Asignar el camión al envío
+                camionAsignado.agregarEnvio(envioAsignar);
                 envioAsignar.setCamionAsignado(camionAsignado);
                 envioAsignar.setAsignadoAUnCamion(true);
                 camionAsignado.setCapacidad(camionAsignado.getCapacidad() - envioAsignar.getPesoTotal());
@@ -79,7 +82,8 @@ public class Administrador implements Serializable {
         scanner.close();
     }
 
-
+    
+    
 	
 
     

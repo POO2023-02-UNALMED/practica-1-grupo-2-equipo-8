@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Camion implements Serializable {
+	//Atributos
 	private String marca;
 	private String modelo;
 	private int capacidad;
@@ -13,7 +14,7 @@ public class Camion implements Serializable {
 	private static List<Camion> camiones =new ArrayList<Camion>();
 	private boolean disponibilidad= true;
 	
-	
+	//Constructor
 	public Camion(String marca, String modelo, int capacidad) {
 		this.marca=marca;
 		this.modelo=modelo;
@@ -62,7 +63,7 @@ public class Camion implements Serializable {
 	    return result.toString();
 	}
 
-
+//Getters y Setters
 
 	public String getMarca() {
 		return marca;
