@@ -348,25 +348,7 @@ public class Fabrica implements Serializable {
         }
     }
     
-    public void transferirProduccionOtraBodega(HashMap<Producto, Integer> tanda) {
-    	int suma=0;
-		for (Entry<Producto, Integer> entry : tanda.entrySet()) {
-            int cantidadNecesaria = entry.getValue();
-            suma+=cantidadNecesaria;
-		}
-        for (Bodega bodega : otrasBodegas) {
-            if (bodega.getEspacioAlmacenamiento() >= suma) {
-                // Realizar la transferencia de producción a la otra bodega
-                
-                // Actualizar el espacio disponible en la bodega actual y en la otra bodega
-                Fabrica.espacioDisponibleBodega += suma;
-                bodega.setEspacioAlmacenamiento(bodega.getEspacioAlmacenamiento() - suma);
-                bodega.guardarEnBodega(produccionDiaria);
-                
-            }
-        }
-        
-    }
+
 
     
 	public String getDireccion() {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Bodega implements Serializable {
 	private String identificador;
-	private HashMap<Producto, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
+	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
 	//public static int cantidadProductosTotales; No esta en uso*
@@ -54,21 +54,7 @@ public class Bodega implements Serializable {
 		}
 	}
 	
-	public void guardarEnBodega(HashMap<Producto, Integer> tanda) {
-        for (Map.Entry<Producto, Integer> entry : tanda.entrySet()) {
-            Producto producto = entry.getKey();
-            Integer cantidad = entry.getValue();
 
-            if (contabilidadProductos.containsKey(producto)) {
-                // Si el producto ya existe en la contabilidad, actualiza la cantidad
-                int cantidadActual = contabilidadProductos.get(producto);
-                contabilidadProductos.put(producto, cantidadActual + cantidad);
-            } else {
-                // Si el producto no existe en la contabilidad, agrégalo
-                contabilidadProductos.put(producto, cantidad);
-            }
-        }
-    }
 	
 	public boolean verificarTandaBodega(HashMap<Producto, Integer> tanda) {
 		int suma=0;
@@ -310,10 +296,10 @@ public class Bodega implements Serializable {
 		this.ingredientes = listaMateriaPrimaActual;
 	}
 
-	public HashMap<Producto, Integer> getContabilidadProductos() {
+	public HashMap<String, Integer> getContabilidadProductos() {
 		return contabilidadProductos;
 	}
-	public void setContabilidadProductos(HashMap<Producto, Integer> contabilidadProductos) {
+	public void setContabilidadProductos(HashMap<String, Integer> contabilidadProductos) {
 		this.contabilidadProductos = contabilidadProductos;
 	}
 	public HashMap<String, Integer> getContabilidadIngredientes() {

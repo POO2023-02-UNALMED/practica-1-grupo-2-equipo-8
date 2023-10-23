@@ -40,77 +40,7 @@ public class Administrador implements Serializable {
         } else if(opcionElegida == 2){
 
         } else if(opcionElegida == 3){
-        	Scanner sc = new Scanner(System.in);
-        	//Funcionalidad #2
         	
-        	//Se muestra la produccion diaria
-            System.out.println("Producción diaria actual:");
-            System.out.println(this.fabrica.ListarListaDeProduccion());
-            
-            //Se le pide al usuario que ingrese el numero del producto el cual quiere cambiar
-            System.out.println("Ingrese el número correspondiente al producto para cambiar la producción:");
-            Producto productoSeleccionado = this.getFabrica().ProductoParaCambiarEnLista(sc.nextInt());
-            
-            //Se le pide al usuario que ingrese la nueva cantidad de productos a realizar 
-            System.out.println("Ingrese la nueva cantidad de producción para el producto seleccionado:");
-            int nuevaCantidad = sc.nextInt();
-            
-            if (this.getBodega().disponibilidadBodega(this.getFabrica().getProduccionDiaria())){
-            	
-            	//Se cambia la lista de producción diaria
-                System.out.println(this.getFabrica().cambiarProduccion(productoSeleccionado, nuevaCantidad));
-          
-                //Se ajustan los costos de produccion
-                this.getCaja().actualizarCostosProduccion(productoSeleccionado,nuevaCantidad);
-                
-                //Se muestra la nueva lista de producción diaria incluidos costes
-                System.out.println("Listado de producción diaria actualizada:");
-                System.out.println(this.fabrica.ListarListaDeProduccion());
-                
-                
-                //Se fabrica la tanda
-                System.out.println("Fabricando tanda...");
-                this.fabrica.fabricarTanda();
-                
-              //Descontar materia prima para poder fabricar tanda
-                
-                this.getBodega().descontarMateriaPrimaNecesaria(productoSeleccionado.getIngredientesNecesarios(), nuevaCantidad);
-                
-              //Se descuenta el valor de la lista de la caja
-                
-                this.getCaja().descontarValorLista(this.getFabrica().getProduccionDiaria());
-                
-              //se establece tiempo de demora de producción
-                
-                this.fabrica.establecerTiempoDemoraProduccion(nuevaCantidad);
-                
-              //validar si hay espacio disponible en la bodega (IF)
-                
-                if (this.getBodega().verificarTandaBodega(this.getFabrica().getProduccionDiaria())) {
-                	// --iftrue reservar esapcio en bodega
-                    
-                    this.getFabrica().gestionarEspacioBodega(this.getFabrica().getProduccionDiaria());
-                    
-                  // se genera codigo de tanda
-                    
-                    int numeroTanda=this.getFabrica().getCodigoTandaActual();
-                    System.out.println("El codigo de la tanda es "+numeroTanda);
-                    
-                  // se guardan los productos generados
-                    
-                    this.getBodega().guardarEnBodega(this.getFabrica().getProduccionDiaria());
-                	
-                }else {
-                	// se manda la tanda a otra bodega
-                	this.getFabrica().transferirProduccionOtraBodega(this.getFabrica().getProduccionDiaria());
-                	System.out.println("Se ha transferido la producción de la tanda a otra bodega");
-               
-                }
-            }else {
-                	System.out.println("La nueva lista de Producción Diaria es demasiado grande para la capacidad de la Bodega. Por favor, elija valores menores y tenga en cuenta el espacio que ocupa cada tipo de producto.");
-                }
-
-          //Fin de la funcionalidad
 
         } else if (opcionElegida == 4){ //Funcionalidad 4: Agregar Producto
 
