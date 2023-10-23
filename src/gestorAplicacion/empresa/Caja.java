@@ -11,7 +11,12 @@ public class Caja implements Serializable {
 	static private int dinero;
 	static private HashMap<String, Integer> historialVentas = new HashMap<String, Integer>();
 	private HashMap<String, Integer> costosProduccion = new HashMap<>(); // Variable costosProduccion agregada ¿deberia ser estatico?
-
+	
+	
+	
+	public Caja(int dinero) {
+		this.dinero=dinero;
+	}
     /* Metodo que me retorna un string con el 
 	* historial de compras para mostrar en pantalla
     */

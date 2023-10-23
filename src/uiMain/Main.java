@@ -145,7 +145,7 @@ public class Main {
 		 	fabrica.finalizarProduccion(produccionDiaria);
 		 	fabrica.finalizarProduccion(produccionDiaria);
 		 	
-		 	System.out.println(bodega.calcularEstanciaProductosOrdenDiasEnBodega());
+		 	System.out.println(bodega.stringProductosOrdenadosPorDiasBodega());
 		 	
 		 	
 		 	//Creamos Caja

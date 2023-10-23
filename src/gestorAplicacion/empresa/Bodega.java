@@ -17,9 +17,24 @@ public class Bodega implements Serializable {
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
     
-	public Bodega(String identificador, int espacioAlmacenamiento) {
+	public Bodega(String identificador, HashMap<String, Integer> contabilidadProductos,int espacioAlmacenamiento,
+			HashMap<String, Integer>contabilidadIngredientes,List<Producto> productos,List<Ingrediente> ingredientes) {
 		this.identificador = identificador;
+		this.contabilidadIngredientes=contabilidadProductos;
+		this.contabilidadIngredientes=contabilidadIngredientes;
 		this.espacioAlmacenamiento = espacioAlmacenamiento;
+		this.productos=productos;
+		this.ingredientes=ingredientes;
+		
+		for (Producto producto:productos) {
+			this.espacioAlmacenamiento-=producto.getEspacioAlmacenamiento();
+		}
+		for (Ingrediente ingrediente:ingredientes) {
+			this.espacioAlmacenamiento-=ingrediente.getEspacioAlmacenamiento();
+		}
+		
+		
+		
 		//cantidadProductosTotales = this.productos.size();
 	}
 	
