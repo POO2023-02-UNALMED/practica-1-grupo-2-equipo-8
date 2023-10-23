@@ -10,51 +10,8 @@ public class Administrador implements Serializable {
 //    private HashMap<String, Integer> Productos ; PARA QUÉ ESTO EL ADMINISTRADOR TIENE PRODUCTOS?!
     private List<Camion> camiones = new ArrayList<Camion>();
     private Fabrica fabrica;
-//Constructor
-    public Administrador(Bodega bodega,Caja caja,List<Camion> Camiones, Fabrica Fabrica) {
-    	this.bodega=bodega;
-    	this.caja=caja;
-    	this.camiones=camiones;
-    	this.fabrica=fabrica;
-
-    }
-
-    //Getters y Setters
-    public Bodega getBodega() {
-        return bodega;
-    }
-
-    public void setBodega(Bodega bodega) {
-        bodega = bodega;
-    }
-
-    public Caja getCaja() {
-        return caja;
-    }
-
-    public void setCaja(Caja caja) {
-        caja = caja;
-    }
-
-
-
- 
-    public List<Camion> getCamiones() {
-		return camiones;
-	}
-
-	public void setCamiones(List<Camion> camiones) {
-		camiones = camiones;
-	}
-
-	public Fabrica getFabrica() {
-        return fabrica;
-    }
-
-    public void setFabrica(Fabrica fabrica) {
-        fabrica = fabrica;
-    }
-
+    
+    
 
     //Metodos de la clase Administrador
 
@@ -257,4 +214,50 @@ public class Administrador implements Serializable {
 
         scanner.close();
     }
+  //Constructor
+    public Administrador(Bodega bodega,Caja caja,List<Camion> Camiones, Fabrica Fabrica) {
+    	this.bodega=bodega;
+    	this.caja=caja;
+    	this.camiones=camiones;
+    	this.fabrica=fabrica;
+
+    }
+
+    //Getters y Setters
+    public Bodega getBodega() {
+        return bodega;
+    }
+
+    public void setBodega(Bodega bodega) {
+        bodega = bodega;
+    }
+
+    public Caja getCaja() {
+        return caja;
+    }
+
+    public void setCaja(Caja caja) {
+        caja = caja;
+    }
+
+
+
+ 
+    public List<Camion> getCamiones() {
+		return camiones;
+	}
+
+	public void setCamiones(List<Camion> camiones) {
+		camiones = camiones;
+	}
+
+	public Fabrica getFabrica() {
+        return fabrica;
+    }
+
+    public void setFabrica(Fabrica fabrica) {
+        fabrica = fabrica;
+    }
+
+
 }

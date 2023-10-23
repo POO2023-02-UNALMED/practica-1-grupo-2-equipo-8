@@ -148,8 +148,41 @@ public class Main {
 		 	System.out.println(bodega.calcularEstanciaProductosOrdenDiasEnBodega());
 		 	
 		 	
+		 	//Creamos Caja
 		 	Caja caja = new Caja(10000);
-		 	System.out.println(caja.getHistorialVentas());
+		 	
+		 	
+		 	//Creamos 10 camiones
+		 	
+		 	String[] marcas = {
+		 		    "CamionetaMax", "SuperTruck", "RapidCargo", "MegaHauler", "PowerMover",
+		 		    "CargoKing", "TurboTransit", "Speedster", "CargoMaster", "SwiftHaul"
+		 		};
+
+		 		String[] modelos = {
+		 		    "X1", "A2", "Pro100", "MegaTruck", "UltraCargo",
+		 		    "SpeedyXpress", "Transporter3000", "SuperLoad", "CargoBeast", "QuickHauler"
+		 		};
+
+		 		for (int i = 0; i < 10; i++) {
+		 		    String marca = marcas[i];
+		 		    String modelo = modelos[i];
+		 		    int capacidad = 1500; // Capacidad ficticia
+
+		 		    Camion camion = new Camion(marca, modelo, capacidad);
+		 		    
+		 		}
+		 		
+		 		
+		 		//Creamos administrador
+		 		
+		 		Administrador administrador=new Administrador(bodega,caja,Camion.getCamiones(),fabrica);
+		 		administrador.iniciarSesion();
+		 		
+		 		
+		 	
+		 	
+		 	
 		
 		
 		
