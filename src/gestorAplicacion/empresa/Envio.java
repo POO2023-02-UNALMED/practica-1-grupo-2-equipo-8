@@ -34,11 +34,7 @@ public class Envio implements Serializable {
 	        	this.bodega.getContabilidadProductos().put(clave, valorActual-1);
 	        	//Agregamos venta al historial de ventas
 	        	Caja.agregarVenta(producto.getNombre(), 1);
-<<<<<<< Updated upstream
-	        	Caja.ingresarDinero(producto.getPrecio());
-=======
 	        	caja.ingresarDinero(producto.getPrecio());
->>>>>>> Stashed changes
 	        }
 	        //se suma el dinero del envio a caja
 	        
