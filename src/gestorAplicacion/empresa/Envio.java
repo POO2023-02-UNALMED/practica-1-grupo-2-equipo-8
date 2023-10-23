@@ -42,6 +42,9 @@ public class Envio implements Serializable {
 	        }
 	        this.pesoTotal = pesoTotal;
 	        Envio.listaEnvios.add(this);
+	        //Los envios deben de efectuar cambios en bodega y caja
+	        
+	        
 	       
 	    }
 	 //Devuelve aquellos envios que no han sido asignados importates para la funcionalidad5

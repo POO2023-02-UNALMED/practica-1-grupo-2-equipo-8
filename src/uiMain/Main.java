@@ -172,6 +172,21 @@ public class Main {
 		 		    Camion camion = new Camion(marca, modelo, capacidad);
 		 		    
 		 		}
+		 		//Creamos Envios
+		 	    for (int i = 1; i <= 5; i++) {
+		 	        List<Producto> productosEnvio = new ArrayList<Producto>();
+		 	        productosEnvio.add(bodega.getProductos().get(0)); // Agregamos el primer producto de la bodega al envío
+		 	        Envio envio = new Envio(i, productosEnvio, caja, bodega);
+		 	    }
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
+		 		
 		 		
 		 		
 		 		//Creamos administrador
