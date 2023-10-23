@@ -154,15 +154,18 @@ public class Fabrica implements Serializable {
             }
         }
     }
-//Funcion para utilizar en la función anterior que me actualiza los ingredientes
+    
+    /*
+     * Metodo que actualiza la contabilidad de los ingredientes recibiendo como parametro un HashMap de ingredientes con sus cantidades a usar
+     * en la produccion de un producto.
+     */
     private void actualizarContabilidadIngredientes(HashMap<Ingrediente, Integer> ingredientes) {
-        for (Ingrediente ingrediente : ingredientes.keySet()) {
-            if (this.bodega.getContabilidadIngredientes().containsKey(ingrediente.getNombre())) {
-                int valorARestar = ingredientes.get(ingrediente);
+        ingredientes.forEach((Ingrediente ingrediente, Integer cantidad)->{
+        	if (this.bodega.getContabilidadIngredientes().containsKey(ingrediente.getNombre())) {
                 int valorActual = this.bodega.getContabilidadIngredientes().get(ingrediente.getNombre());
-                this.bodega.getContabilidadIngredientes().put(ingrediente.getNombre(), valorActual - valorARestar);
+                this.bodega.getContabilidadIngredientes().put(ingrediente.getNombre(), valorActual - cantidad);
             }
-        }
+        });
     }
     
     private HashMap<Ingrediente, Integer> obtenerIngredientesRequeridos(String nombreProducto) {
@@ -220,42 +223,41 @@ public class Fabrica implements Serializable {
     //se añade un nuevo metodo para la funcionalida #2 fabricar primera tanda
     
 
-    public void fabricarPrimeraTanda(HashMap<String, Integer> produccionDiaria, HashMap<Ingrediente, Integer> ingredientesRequeridos) {
+    /*
+     * Metodo que realiza la fabricacion de la primera tanda de produccion de los productos guardados en el sistema, reajustando 
+     * el inventario de los ingredientes y el espacio de la bodega. Recibe como parametros la produccion diaria de los productos y 
+     * la lista de los ingredientes requeridos para la produccion. Retorna un mensaje sobre el estado de la produccion de la tanda.
+     */
+    public String fabricarPrimeraTanda(HashMap<String, Integer> produccionDiaria, HashMap<Ingrediente, Integer> ingredientesRequeridos) {
     	int codigoTanda = generarCodigoTanda();
     	List<String> productosTanda = new ArrayList<>();
+    	String msg = "";
         for (Map.Entry<String, Integer> entry : produccionDiaria.entrySet()) {
             String producto = entry.getKey();
             int cantidadProduccion = entry.getValue();
-
+            
             int espacioDisponibleBodega = 0;
-			// Verificar si hay espacio disponible en la bodega
+			
             if (espacioDisponibleBodega >= cantidadProduccion) {
-                // Verificar si hay suficientes ingredientes
                 if (verificarDisponibilidadIngredientes(ingredientesRequeridos, cantidadProduccion)) {
-                    // Realizar la fabricación de la primera tanda
-                    System.out.println("Se ha fabricado la primera tanda de " + cantidadProduccion + " unidades de " + producto);
-                    // Ajustar la cantidad de ingredientes en la bodega después de la fabricación
+                    msg += "Se ha fabricado la primera tanda de " + cantidadProduccion + " unidades de " + producto + ".\n";
                     ajustarInventarioIngredientes(ingredientesRequeridos, cantidadProduccion);
-                    // Reservar espacio en la bodega
                     espacioDisponibleBodega -= cantidadProduccion;
                 } else {
-                    System.out.println("No hay suficientes ingredientes para fabricar la primera tanda de " + producto);
+                    msg += "No hay suficientes ingredientes para fabricar la primera tanda de " + producto + ".\n";
                 }
             } else {
-                System.out.println("No hay suficiente espacio en la bodega para fabricar la primera tanda de " + producto);
                 // Poner en pausa la producción hasta que haya suficiente espacio
-                ponerEnPausaProduccion();
-                return; // Salir del bucle y detener la fabricación
+                msg += ponerEnPausaProduccion(msg);
+                return msg + "No hay suficiente espacio en la bodega para fabricar la primera tanda de " + producto + "\n"; // Salir del bucle y detener la fabricación
             }
             productosTanda.add(producto);
         }
-     // Guardar los productos generados con su código de tanda
         productosGenerados.put(codigoTanda, productosTanda);
         
-        
-     // Registrar la tanda fabricada
         registroTandas.put(codigoTanda, "Tanda " + codigoTanda + " - " + produccionDiaria.toString());
         codigoTandaActual++;
+		return msg;
     }
     
     private int generarCodigoTanda() {
@@ -264,13 +266,13 @@ public class Fabrica implements Serializable {
         return codigoTanda;
     }
     
-    private void ponerEnPausaProduccion() {
+    private String ponerEnPausaProduccion(String msg) {
         this.setProduccionEnPausa(true);
         while (Fabrica.espacioDisponibleBodega < 1) {
             try {
                 // Espera 1 segundo antes de verificar nuevamente el espacio disponible en la bodega
                 Thread.sleep(1000); // Se espera 1 segundo (1000 milisegundos)
-                System.out.println("La producción está en pausa. Esperando espacio disponible en la bodega.");
+                msg += "La producción está en pausa. Esperando espacio disponible en la bodega.\n";
                 // Actualiza el valor de espacioDisponibleBodega desde la Bodega si es necesario
                 Fabrica.espacioDisponibleBodega = this.getBodega().getEspacioAlmacenamiento();
             } catch (InterruptedException e) {
@@ -279,7 +281,7 @@ public class Fabrica implements Serializable {
             }
         }
         this.setProduccionEnPausa(false);
-        System.out.println("Se ha reanudado la producción.");
+        return msg + "Se ha reanudado la producción.";
     }
     
     private boolean verificarDisponibilidadIngredientes(HashMap<Ingrediente, Integer> ingredientesRequeridos, int cantidadProduccion) {

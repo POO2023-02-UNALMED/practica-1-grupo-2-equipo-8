@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import baseDatos.Deserializador;
+import baseDatos.Serializador;
 import gestorAplicacion.producto.Donas;
 import gestorAplicacion.producto.Galletas;
 import gestorAplicacion.producto.PastelesFritos;
@@ -26,6 +27,14 @@ public class Administrador implements Serializable {
     	}
     }
 
+    public static void finalizarSesion(Administrador administrador) {
+    	Serializador.serializarAdministrador(administrador);
+		Serializador.serializarBodegas(administrador.getBodega());
+		Serializador.serializarEnvios(Envio.getListaEnvios());
+		Serializador.serializarIngredientes(Ingrediente.getIngredientesDisponibles());
+		Serializador.serializarCamiones(Camion.getCamiones());
+    }
+    
     //Metodos de la clase Administrador
 
     //iniciarSesion(): Metodo que se ejecuta cada vez que el Administrador inicie sesiòn en cada interacciòn que tenga con el software
@@ -37,6 +46,7 @@ public class Administrador implements Serializable {
     	}else {
     		Envio.setListaEnvios(Deserializador.deserializarEnvios());
     		Ingrediente.setIngredientesDisponibles(Deserializador.deserializarIngredientes());
+    		Camion.setCamiones(Deserializador.deserializarCamiones());
     	}
     	return administrador;
     }
@@ -46,8 +56,6 @@ public class Administrador implements Serializable {
 		//Creacion de listas iniciales
 		 HashMap<String, Integer> ingredientesInicialeBodega = new HashMap<String, Integer>();
 		 List<Ingrediente> ingredientesIniciales= new ArrayList<Ingrediente>();
-		 HashMap<String, Integer> productosInicialesBodega = new HashMap<String, Integer>();
-		 List<Ingrediente> productoIniciales= new ArrayList<Ingrediente>(); 
 		 HashMap<String, Integer> productosInicialesBodega1 = new HashMap<String, Integer>();
 		 List<Producto> productosIniciales = new ArrayList<Producto>();
 		
@@ -175,14 +183,13 @@ public class Administrador implements Serializable {
 	 	    return administrador;
     }
     
+    /*
+     * Metodo que realiza la configuracion de produccion de la fabrica asosiada al Administrador instanciado. 
+     * Retorna con el mensaje de cambio
+     */
     public String configurarProduccion() {
-        // Se obtiene la instancia de la fábrica
         Fabrica fabrica = this.getFabrica();
-
-        // Se llama al método cambiarProduccion en la fábrica
         String mensajeCambio = fabrica.cambiarProduccion();
-
-        // Se imprime el mensaje que indica el cambio en la producción diaria
         return mensajeCambio;
     }
 
@@ -226,7 +233,7 @@ public class Administrador implements Serializable {
 
                 // Mostrar productos en bodega no asignados
                 System.out.println("Productos en bodega no asignados a envíos:");
-                System.out.println(bodega.productosNoasignadosAEnvios());
+                System.out.println(bodega.productosNoAsignadosAEnvios());
 
                 // Preguntar al usuario si quiere enviar el camión
                 System.out.print("¿Desea enviar el camión? (1. Sí / 2. No): ");

@@ -11,7 +11,7 @@ public class Camion implements Serializable {
 	private int capacidad;
 	private String placa;
 	private List<Envio> envios = new ArrayList<Envio>();
-	private static List<Camion> camiones =new ArrayList<Camion>();
+	private static ArrayList<Camion> camiones =new ArrayList<Camion>();
 	private boolean disponibilidad= true;
 	
 	//Constructor
@@ -123,13 +123,13 @@ public class Camion implements Serializable {
 
 
 
-	public static List<Camion> getCamiones() {
+	public static ArrayList<Camion> getCamiones() {
 		return camiones;
 	}
 
 
 
-	public static void setCamiones(List<Camion> camiones) {
+	public static void setCamiones(ArrayList<Camion> camiones) {
 		Camion.camiones = camiones;
 	}
 

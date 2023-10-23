@@ -1,5 +1,4 @@
 package gestorAplicacion.empresa;
-import java.util.Scanner;
 
 import gestorAplicacion.producto.Producto;
 
@@ -13,7 +12,6 @@ public class Bodega implements Serializable {
 	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
-	//public static int cantidadProductosTotales; No esta en uso*
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
     
@@ -32,14 +30,10 @@ public class Bodega implements Serializable {
 		for (Ingrediente ingrediente:ingredientes) {
 			this.espacioAlmacenamiento-=ingrediente.getEspacioAlmacenamiento();
 		}
-		
-		
-		
-		//cantidadProductosTotales = this.productos.size();
 	}
 	
 	//Retorna los productos no asignados a un envio IMPORTANTE PARA FUNCIONALIDAD 5
-	public String productosNoasignadosAEnvios() {
+	public String productosNoAsignadosAEnvios() {
 	    StringBuilder resultado = new StringBuilder();
 
 	    for (Producto producto : productos) {
@@ -51,33 +45,39 @@ public class Bodega implements Serializable {
 	    return resultado.toString();
 	}
 	
-	public void pedirCantidadIngredientes() {
-	    Scanner scanner = new Scanner(System.in);
-
-	    // Solicitar al usuario que elija un ingrediente
-	    System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
-	    int opcion = scanner.nextInt();
-
-	    if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
-	        System.out.println("Opción no válida. Seleccione un número válido.");
-	        scanner.close();
-	        return;
+	
+	/*
+	 * Realiza la compra de un ingrediente y automaticamente la agrega a la contabilidad de los ingredientes. 
+	 * Retorna un String con un mensaje de confirmacion o en caso de error un mensaje de que ha fallado.
+	 */
+	public String pedirCantidadIngrediente(int opcion, int cantidadPedida) {
+	    try{
+	    	// Obtener el ingrediente seleccionado
+	    	Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
+	    	String nombreIngrediente = ingredienteSeleccionado.getNombre();
+	    	// Crear la cantidad de ingredientes solicitados
+	    	if(!contabilidadIngredientes.containsKey(nombreIngrediente)) {
+	    		contabilidadIngredientes.put(nombreIngrediente, 0);
+	    	}else if(contabilidadIngredientes.get(nombreIngrediente) == null) {
+	    		contabilidadIngredientes.put(nombreIngrediente, 1);
+	    	}
+	    	
+	    	//System.out.println(contabilidadIngredientes.get(nombreIngrediente).toString());
+	    	for (int i = 0; i < cantidadPedida; i++) {
+	    		Ingrediente nuevoIngrediente = new Ingrediente(nombreIngrediente);
+	    		ingredientes.add(nuevoIngrediente);
+	    		contabilidadIngredientes.put(nombreIngrediente, contabilidadIngredientes.get(nombreIngrediente) + 1);
+	    	}
+	    
+	    	String msg = "Se ha realizado el pedido con exito.\n";
+	    	msg += "Nueva cantidad de "+ nombreIngrediente + ": " + this.getContabilidadIngredientes().get(nombreIngrediente);
+	    	return msg;
+	    	
+	    	
+	    }catch(Exception e) {
+	    	return "Ha ocurrido un error, intentelo de nuevo mas tarde";
 	    }
-
-	    // Obtener el ingrediente seleccionado
-	    Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
-
-	    // Solicitar la cantidad deseada
-	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
-	    int cantidadPedida = scanner.nextInt();
-
-	    // Crear la cantidad de ingredientes solicitados
-	    for (int i = 0; i < cantidadPedida; i++) {
-	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
-	        ingredientes.add(nuevoIngrediente);
-	        contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
-	    }
-}
+	}
 	
 	/* Mostrar ingredientes escasos generara una lista con aquellos ingredientes 
 	*  menores de 10 en la variable contabilidad ingredientes
