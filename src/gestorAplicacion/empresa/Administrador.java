@@ -3,11 +3,12 @@ package gestorAplicacion.empresa;
 import java.io.Serializable;
 import java.util.*;
 
+import gestorAplicacion.producto.Producto;
+
 public class Administrador implements Serializable {
 //Atributos
     private static Bodega bodega;
     private Caja caja;
-//    private HashMap<String, Integer> Productos ; PARA QUÉ ESTO EL ADMINISTRADOR TIENE PRODUCTOS?!
     private List<Camion> camiones = new ArrayList<Camion>();
     private Fabrica fabrica;
     
@@ -16,7 +17,7 @@ public class Administrador implements Serializable {
     //Metodos de la clase Administrador
 
     //iniciarSesion(): Metodo que se ejecuta cada vez que el Administrador inicie sesiòn en cada interacciòn que tenga con el software
-    public static String iniciarSesion(){
+    public  String iniciarSesion(){
 
         //public static void iniciarSesion(String[] args){}
 
@@ -39,6 +40,40 @@ public class Administrador implements Serializable {
         } else if(opcionElegida == 2){
 
         } else if(opcionElegida == 3){
+        	Scanner sc = new Scanner(System.in);
+        	//Funcionalidad bella y hermosa de MQ
+        	
+            System.out.println("Producción diaria actual:");
+            System.out.println(this.fabrica.ListarListaDeProduccion());
+            
+            
+            System.out.println("Ingrese el número correspondiente al producto para cambiar la producción:");
+            int numeroProducto = sc.nextInt();
+            
+            Producto productoSeleccionado = this.getFabrica().ProductoParaCambiarEnLista(numeroProducto);
+            
+            System.out.println("Ingrese la nueva cantidad de producción para el producto seleccionado:");
+            int nuevaCantidad = sc.nextInt();
+            
+            //validación 1/5 de bodega
+            
+            System.out.println(this.getFabrica().cambiarProduccion(productoSeleccionado, nuevaCantidad));
+            
+            this.getCaja().actualizarCostosProduccion(productoSeleccionado,nuevaCantidad);
+            
+            System.out.println("Listado de producción diaria actualizada:");
+            System.out.println(this.fabrica.ListarListaDeProduccion());
+            
+            System.out.println("Fabricando tanda...");
+            this.fabrica.fabricarTanda();
+            
+            
+            
+            
+        	
+        	
+        	
+        	
 
 
         } else if (opcionElegida == 4){ //Funcionalidad 4: Agregar Producto
@@ -124,20 +159,9 @@ public class Administrador implements Serializable {
         //Retorno a eliminarse cuando se corrija el codigo
         return null;
     }
-    
-    public void configurar() {
-        // Se obtiene la instancia de la fábrica
-        Fabrica fabrica = this.getFabrica();
-
-        // Se llama al método cambiarProduccion en la fábrica
-        String mensajeCambio = fabrica.cambiarProduccion();
-
-        // Se imprime el mensaje que indica el cambio en la producción diaria
-        System.out.println(mensajeCambio);
-    }
 
     //acabarSesion(): Metodo que se ejecuta cada vez que termine la interaccion del Administrador con el software
-    @SuppressWarnings("unused")
+
 	private void finalizarSesion() {
         System.out.println("Muchas gracias por usar el software de DeliHorno. Que tenga un feliz día.");
         System.exit(0);
@@ -240,9 +264,6 @@ public class Administrador implements Serializable {
         caja = caja;
     }
 
-
-
- 
     public List<Camion> getCamiones() {
 		return camiones;
 	}

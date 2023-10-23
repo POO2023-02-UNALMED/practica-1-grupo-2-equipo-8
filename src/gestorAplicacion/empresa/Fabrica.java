@@ -16,68 +16,79 @@ public class Fabrica implements Serializable {
 	//Atributos
     private final String NIT;
     private String direccion;
-    private HashMap<String, Integer> produccionDiaria;
+    private HashMap<Producto, Integer> produccionDiaria;
     private Bodega bodega;
     private static int espacioDisponibleBodega = 0;
     private int tiempoDemoraProduccion;
 	private boolean produccionEnPausa;
 	private static int codigoTandaActual = 1;
 	private HashMap<Integer, String> registroTandas;
-	private HashMap<Integer, List<String>> productosGenerados;
+	private HashMap<Integer, List<Producto>> productosGenerados;
 	private List<Bodega> otrasBodegas; // Otras bodegas de la empresa
     
     //Constructor
     public Fabrica(String NIT, String direccion, Bodega bodega)  {
         this.NIT = NIT;
         this.direccion = direccion;
-        this.produccionDiaria = new HashMap<String, Integer>();
+        this.produccionDiaria = new HashMap<Producto, Integer>();
         this.bodega = bodega;
     }
     
     //Muestra lo que se produce actualmente de cada producto, se elige que producto cambiarle la cantidad y se muestra el cambio.
-    public String cambiarProduccion() {
-    	//Eleccion
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Producción diaria actual:");
+ 
+    public String ListarListaDeProduccion() {
         int index = 1;
-        for (String producto : produccionDiaria.keySet()) {
+        String cadena ="";
+        for (Producto producto : produccionDiaria.keySet()) {//se puede cambiar por for (String producto, int index = 1 : produccionDiaria.keySet())
             int cantidad = produccionDiaria.get(producto);
-            System.out.println(index + ". " + producto + ": " + cantidad);
+            cadena+=(index + ". " + producto.getNombre() + ": " + cantidad + "$"+ producto.getPrecio()*cantidad +"\n");
+            
+        	for(Ingrediente ingrediente: producto.getIngredientesNecesarios().keySet()) {
+        		cadena+=("\t" + ingrediente.getNombre() + " - " + ingrediente.getCantidad() +"\n");
+        	}
+        	
             index++;
         }
+        return cadena;
+    }
+    
+    
+    
 
-        System.out.println("Ingrese el número correspondiente al producto para cambiar la producción:");
-        int numeroProducto = scanner.nextInt();
+    public Producto ProductoParaCambiarEnLista(int numeroProducto) {
 
-        int currentIndex = 1;
-        String productoSeleccionado = null;
+        int index = 1;
+        Producto productoSeleccionado = null;
 
-        for (String producto : produccionDiaria.keySet()) {
-            if (currentIndex == numeroProducto) {
+        for (Producto producto : produccionDiaria.keySet()) {
+            if (index == numeroProducto) {
                 productoSeleccionado = producto;
                 break;
             }
-            currentIndex++;
+            index++;
         }
-        //Ingreso de nuevo nivel de producción para el producto seleccionado
+        return productoSeleccionado;
+    }
+    
+    public String cambiarProduccion(Producto productoSeleccionado, int nuevaCantidad) {
 
+        //Ingreso de nuevo nivel de producción para el producto seleccionado    	
+    	Scanner sc = new Scanner(System.in);
         if (productoSeleccionado != null) {
             int cantidadVieja = produccionDiaria.get(productoSeleccionado);
-            System.out.println("Ingrese la nueva cantidad de producción para " + productoSeleccionado + ":");
-            int nuevaCantidad = scanner.nextInt();
             produccionDiaria.put(productoSeleccionado, nuevaCantidad);
-            scanner.close();
-            return imprimirCambiosFabrica(cantidadVieja, nuevaCantidad, productoSeleccionado);
+            sc.close();
+            actualizarMateriaPrima(nuevaCantidad,productoSeleccionado);
+            actualizarProduccionDiaria(productoSeleccionado, nuevaCantidad);
+            
+            return "Ha cambiado su nivel de producción de: " + cantidadVieja + " a: " + nuevaCantidad + " del producto: " + productoSeleccionado; 
         } else {
-            scanner.close();
+        	sc.close();
             return "Número de producto no válido.";
         }
     }
     //Funcion usada para la función anterior
-    public String imprimirCambiosFabrica(int cantidadVieja, int cantidadNueva, String producto) {
-        return "Ha cambiado su nivel de producción de: " + cantidadVieja + " a: " + cantidadNueva + " del producto: " + producto; 
-    }
+
     
     //Creación de productos y envio a bodega segun la produccionDiaria
     public void finalizarProduccion(HashMap<String, Integer> produccionDiaria) {
@@ -94,8 +105,8 @@ public class Fabrica implements Serializable {
                 if (producto.equals("torta")) {
                     // Ingredientes para la torta
                     HashMap<Ingrediente, Integer> ingredientesTorta = new HashMap<>();
-                    ingredientesTorta.put(new Ingrediente("harina", 5, 1234, 10), 2);
-                    ingredientesTorta.put(new Ingrediente("azúcar", 3, 1234, 5), 1);
+                    ingredientesTorta.put(new Ingrediente("Harina", 5, 1234, 10), 2);
+                    ingredientesTorta.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
 
                     // Crear un nuevo producto "Torta" y agregarlo a la bodega
                     Tortas nuevoProducto = new Tortas(producto, 5, ingredientesTorta, 20, "abc123", 3, 6, "chocolate");
@@ -110,8 +121,8 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("pastelFrito")) {
                     // Ingredientes para el pastelFrito
                     HashMap<Ingrediente, Integer> ingredientesPastelFrito = new HashMap<>();
-                    ingredientesPastelFrito.put(new Ingrediente("harina", 5, 1234, 10), 1);
-                    ingredientesPastelFrito.put(new Ingrediente("azúcar", 3, 1234, 5), 1);
+                    ingredientesPastelFrito.put(new Ingrediente("Harina", 5, 1234, 10), 1);
+                    ingredientesPastelFrito.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
 
                     // Crear un nuevo producto "PastelesFritos" y agregarlo a la bodega
                     PastelesFritos nuevoProducto = new PastelesFritos(producto, 5, ingredientesPastelFrito, 20, "dfg123", 3, false, "tomate");
@@ -125,11 +136,11 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("galleta")) {
                     // Ingredientes para la galleta
                     HashMap<Ingrediente, Integer> ingredientesGalleta = new HashMap<>();
-                    ingredientesGalleta.put(new Ingrediente("harina", 5, 1234, 10), 1);
-                    ingredientesGalleta.put(new Ingrediente("azúcar", 3, 1234, 5), 3);
+                    ingredientesGalleta.put(new Ingrediente("Harina", 5, 1234, 10), 1);
+                    ingredientesGalleta.put(new Ingrediente("Azúcar", 3, 1234, 5), 3);
 
                     // Crear un nuevo producto "Galletas" y agregarlo a la bodega
-                    Galletas nuevoProducto = new Galletas(producto, 5, ingredientesGalleta, 20, "dfg123", 3, false, "vainilla");
+                    Galletas nuevoProducto = new Galletas(producto, 5, ingredientesGalleta, 20, "dfg123", 3, false, "tomate");
                     this.bodega.getProductos().add(nuevoProducto);
 
                     // Actualizar la contabilidad de productos y de ingredientes en la bodega
@@ -140,11 +151,11 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("dona")) {
                     // Ingredientes para la dona
                     HashMap<Ingrediente, Integer> ingredientesDona = new HashMap<>();
-                    ingredientesDona.put(new Ingrediente("harina", 5, 1234, 10), 3);
-                    ingredientesDona.put(new Ingrediente("azúcar", 3, 1234, 5), 3);
+                    ingredientesDona.put(new Ingrediente("Harina", 5, 1234, 10), 3);
+                    ingredientesDona.put(new Ingrediente("Azúcar", 3, 1234, 5), 3);
 
                     // Crear un nuevo producto "Donas" y agregarlo a la bodega
-                    Donas nuevoProducto = new Donas(producto, 5, ingredientesDona, 20, "dfg123", 3, false, "arquipe");
+                    Donas nuevoProducto = new Donas(producto, 5, ingredientesDona, 20, "dfg123", 3, false, "tomate");
                     this.bodega.getProductos().add(nuevoProducto);
 
                     // Actualizar la contabilidad de productos y de ingredientes en la bodega
@@ -154,6 +165,9 @@ public class Fabrica implements Serializable {
             }
         }
     }
+    
+    
+    
 //Funcion para utilizar en la función anterior que me actualiza los ingredientes
     private void actualizarContabilidadIngredientes(HashMap<Ingrediente, Integer> ingredientes) {
         for (Ingrediente ingrediente : ingredientes.keySet()) {
@@ -165,27 +179,15 @@ public class Fabrica implements Serializable {
         }
     }
     
-    private HashMap<Ingrediente, Integer> obtenerIngredientesRequeridos(String nombreProducto) {
+    private HashMap<Ingrediente, Integer> obtenerIngredientesRequeridos() {
         HashMap<Ingrediente, Integer> ingredientesRequeridos = new HashMap<>();
 
-        //realizar consultas a bases de datos o utilizar estructuras de datos predefinidas para mapear los ingredientes requeridos para cada producto
-
-        /** Ejemplo de lógica
-        if (nombreProducto.equals("Producto1")) {
-            ingredientesRequeridos.put(new Ingrediente("Ingrediente1"), 5);
-            ingredientesRequeridos.put(new Ingrediente("Ingrediente2"), 3);
-        } else if (nombreProducto.equals("Producto2")) {
-            ingredientesRequeridos.put(new Ingrediente("Ingrediente3"), 4);
-            ingredientesRequeridos.put(new Ingrediente("Ingrediente4"), 2);
-        }
-
-**/
         return ingredientesRequeridos;
     }
     
-    private void actualizarMateriaPrima(int nuevaCantidad, String productoSeleccionado) {
+    public void actualizarMateriaPrima(int nuevaCantidad, Producto productoSeleccionado) {
         List<Ingrediente> listaMateriaPrimaActual = this.getBodega().getIngredientes();
-        HashMap<Ingrediente, Integer> ingredientesRequeridos = obtenerIngredientesRequeridos(productoSeleccionado);
+        HashMap<Ingrediente, Integer> ingredientesRequeridos = obtenerIngredientesRequeridos();
 
         for (Map.Entry<Ingrediente, Integer> entry : ingredientesRequeridos.entrySet()) {
             Ingrediente ingrediente = entry.getKey();
@@ -206,9 +208,9 @@ public class Fabrica implements Serializable {
   //se añade un nuevo metodo para la funcionalida #2 para actualiizar la produccion diaria
     
 
-    public void actualizarProduccionDiaria(String productoSeleccionado, int nuevaCantidad) {
+    public void actualizarProduccionDiaria(Producto productoSeleccionado, int nuevaCantidad) {
         // Obtener la lista de producción diaria actual
-        HashMap<String, Integer> produccionDiariaActual = this.getProduccionDiaria();
+        HashMap<Producto, Integer> produccionDiariaActual = this.getProduccionDiaria();
 
         // Actualizar la lista de producción diaria con la nueva cantidad
         produccionDiariaActual.put(productoSeleccionado, nuevaCantidad);
@@ -220,22 +222,22 @@ public class Fabrica implements Serializable {
     //se añade un nuevo metodo para la funcionalida #2 fabricar primera tanda
     
 
-    public void fabricarPrimeraTanda(HashMap<String, Integer> produccionDiaria, HashMap<Ingrediente, Integer> ingredientesRequeridos) {
+    public void fabricarTanda() {
     	int codigoTanda = generarCodigoTanda();
-    	List<String> productosTanda = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : produccionDiaria.entrySet()) {
-            String producto = entry.getKey();
+    	List<Producto> productosTanda = new ArrayList<>();
+        for (Map.Entry<Producto, Integer> entry : this.produccionDiaria.entrySet()) {
+        	Producto producto = entry.getKey();
             int cantidadProduccion = entry.getValue();
 
             int espacioDisponibleBodega = 0;
 			// Verificar si hay espacio disponible en la bodega
             if (espacioDisponibleBodega >= cantidadProduccion) {
                 // Verificar si hay suficientes ingredientes
-                if (verificarDisponibilidadIngredientes(ingredientesRequeridos, cantidadProduccion)) {
+                if (verificarDisponibilidadIngredientes(producto.getIngredientesNecesarios(), cantidadProduccion)) {
                     // Realizar la fabricación de la primera tanda
                     System.out.println("Se ha fabricado la primera tanda de " + cantidadProduccion + " unidades de " + producto);
                     // Ajustar la cantidad de ingredientes en la bodega después de la fabricación
-                    ajustarInventarioIngredientes(ingredientesRequeridos, cantidadProduccion);
+                    ajustarInventarioIngredientes(producto.getIngredientesNecesarios(), cantidadProduccion);
                     // Reservar espacio en la bodega
                     espacioDisponibleBodega -= cantidadProduccion;
                 } else {
@@ -363,11 +365,11 @@ public class Fabrica implements Serializable {
 		this.direccion = direccion;
 	}
 
-	public HashMap<String, Integer> getProduccionDiaria() {
+	public HashMap<Producto, Integer> getProduccionDiaria() {
 		return produccionDiaria;
 	}
 
-	public void setProduccionDiaria(HashMap<String, Integer> produccionDiaria) {
+	public void setProduccionDiaria(HashMap<Producto, Integer> produccionDiaria) {
 		this.produccionDiaria = produccionDiaria;
 	}
 
@@ -419,11 +421,11 @@ public class Fabrica implements Serializable {
 		this.registroTandas = registroTandas;
 	}
 
-	public HashMap<Integer, List<String>> getProductosGenerados() {
+	public HashMap<Integer, List<Producto>> getProductosGenerados() {
 		return productosGenerados;
 	}
 
-	public void setProductosGenerados(HashMap<Integer, List<String>> productosGenerados) {
+	public void setProductosGenerados(HashMap<Integer, List<Producto>> productosGenerados) {
 		this.productosGenerados = productosGenerados;
 	}
 

@@ -61,7 +61,11 @@ public class Caja implements Serializable {
     
   //se añade un nuevo metodo para la funcionalida #2 para actualizarCostosProduccion
     
-    public String actualizarCostosProduccion(HashMap<String, Integer> produccionDiaria, HashMap<String, Integer> costosUnitarios, HashMap<String, Integer> materiaPrimaNecesaria) {
+    public void actualizarCostosProduccion(Producto producto,int nuevaCantidad) {
+    	
+    	int nuevoCosto = producto.getPrecio() * nuevaCantidad;
+    	
+    	
         // Obtener la lista de costos de producción actual
         HashMap<String, Integer> costosProduccionActual = new HashMap<>();
 
