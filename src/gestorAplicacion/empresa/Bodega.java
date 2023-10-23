@@ -1,6 +1,5 @@
 package gestorAplicacion.empresa;
 import java.util.Scanner;
-import java.util.Map.Entry;
 
 import gestorAplicacion.producto.Producto;
 
@@ -8,71 +7,66 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Bodega implements Serializable {
 	private String identificador;
 	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
-<<<<<<< HEAD
-=======
-	private static int cantidadProductosTotales;
->>>>>>> parent of be97ecc (funcionalidad 3.1)
+	//public static int cantidadProductosTotales; No esta en uso*
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
-	
-	
-<<<<<<< HEAD
-	public Bodega(String identificador, HashMap<String, Integer> contabilidadProductos,int espacioAlmacenamiento,
-			HashMap<String, Integer> contabilidadIngredientes,List<Producto> productos,List<Ingrediente> ingredientes) {
-		this.identificador=identificador;
-		this.contabilidadProductos=contabilidadProductos;
-		this.espacioAlmacenamiento=espacioAlmacenamiento;
-		this.contabilidadIngredientes=contabilidadIngredientes;
-		this.productos=productos;
-		this.ingredientes=ingredientes;
-		
-		for (Ingrediente ingrediente:ingredientes) {
-			this.espacioAlmacenamiento-=ingrediente.getEspacioAlmacenamiento();
-		}
-		for (Producto producto:productos) {
-			this.espacioAlmacenamiento-=producto.getEspacioAlmacenamiento();
-		}
-		
-		
-	}
-			
-	
-	
-	
-	
-=======
->>>>>>> parent of be97ecc (funcionalidad 3.1)
-//	¿Para qué hacer esto?, en bodega con el historial de ventas se puede sacar esta info
-//	private List<String> listaProductosAltaDemanda;
-//    private List<String> listaProductosBajaDemanda;
     
+	public Bodega(String identificador, int espacioAlmacenamiento) {
+		this.identificador = identificador;
+		this.espacioAlmacenamiento = espacioAlmacenamiento;
+		//cantidadProductosTotales = this.productos.size();
+	}
+	
 	//Retorna los productos no asignados a un envio IMPORTANTE PARA FUNCIONALIDAD 5
 	public String productosNoasignadosAEnvios() {
 	    StringBuilder resultado = new StringBuilder();
 
 	    for (Producto producto : productos) {
 	        if (!producto.isAsignadoAEnvio()) {
-	            resultado.append(producto.getNombre()).append("\n");
+	            resultado.append(producto.toString()).append("\n");
 	        }
 	    }
 
 	    return resultado.toString();
 	}
 	
+	public void pedirCantidadIngredientes() {
+	    Scanner scanner = new Scanner(System.in);
 
-	
-	
-	
-	
- // Mostrar ingredientes escasos generara una lista con aquellos ingredientes menores de 10 en la variable contabilidad ingredientes
+	    // Solicitar al usuario que elija un ingrediente
+	    System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
+	    int opcion = scanner.nextInt();
 
+	    if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
+	        System.out.println("Opción no válida. Seleccione un número válido.");
+	        scanner.close();
+	        return;
+	    }
+
+	    // Obtener el ingrediente seleccionado
+	    Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
+
+	    // Solicitar la cantidad deseada
+	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
+	    int cantidadPedida = scanner.nextInt();
+
+	    // Crear la cantidad de ingredientes solicitados
+	    for (int i = 0; i < cantidadPedida; i++) {
+	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
+	        ingredientes.add(nuevoIngrediente);
+	        contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
+	    }
+}
+	
+	/* Mostrar ingredientes escasos generara una lista con aquellos ingredientes 
+	*  menores de 10 en la variable contabilidad ingredientes
+	*/
     public String mostrarIngredientesEscasos() {
     	StringBuilder resultado = new StringBuilder("Ingredientes escasos:\n");
 
@@ -85,28 +79,112 @@ public class Bodega implements Serializable {
 
         return resultado.toString();
     }
-<<<<<<< HEAD
-
-=======
-///////////////////////////////////////////////////////////////////////////////
+   
+    /*
+     *   Metodo que retorna un String con los productos ordenados de manera descendente por el atributo
+     *   diasBodega
+     */
+    public String stringProductosOrdenadosPorDiasBodega() {
+    	List<Producto> productosOrdenados = this.productosOrdenadosPorDiasBodega();
+    	StringBuilder result = new StringBuilder("Estancia de Productos en Bodega (Orden por Días en Bodega):\n");
+    	for (Producto producto : productosOrdenados) {
+            int tiempoEnBodega = producto.getDiasBodega();
+            String nombreProducto = producto.getNombre();
+            result.append("Producto: ").append(nombreProducto).append(", Tiempo en Bodega: ").append(tiempoEnBodega).append(" días\n");
+        }
+    	return result.toString();
+    }
+    
+    /*
+     * Metodo que retorna una lista de productos ordenados por dias en bodega
+     */
+    public List<Producto> productosOrdenadosPorDiasBodega() {
+    	List<Producto> productosOrdenados = new ArrayList<Producto>(this.productos);
+    	productosOrdenados.sort((Producto p1, Producto p2) -> Integer.compare(p2.getDiasBodega(), p1.getDiasBodega()));
     	
-    // Confirmar disponibilidad de ingredientes
-    //public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
-        // Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
-        // Puedes utilizar el HashMap y las listas para verificar la disponibilidad
-    
+    	return productosOrdenados;
+    }
 
-    // Calcular productos veces no disponibles
-    //public int calcularProductosVecesNoDisponibles() {
-        // Implementa la lógica para calcular la cantidad de veces que los productos no estuvieron disponibles
-        // Puedes utilizar el HashMap y las listas para realizar este cálculo
-        //return 0; // Reemplaza con el cálculo real
-//}
+    /*
+     * Metodo para actualizar la produccion y los precios en base a 
+     * sus ventas y dias en bodega respectivamente. Se sobrecarga el
+     * metodo para cuando solo desea actualizar su precio no se necesario
+     * recibir la fabrica como parametro
+     */
+    public String actualizarProduccionPrecio(boolean actualizarProduccion, boolean actualizarPrecio) {
+    	try {
+    		String msg = "";
+	    	if(actualizarPrecio) {
+	    		msg += this.actualizarPrecioBaseDiasBodega() + "\n";
+	    	}
+	    	return msg;
+    	}catch(Exception e) {
+    		return "Ha ocurrido un error.";
+    	}
+    }
     
-  //se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
->>>>>>> parent of be97ecc (funcionalidad 3.1)
-	
-
+    public String actualizarProduccionPrecio(boolean actualizarProduccion, boolean actualizarPrecio, 
+    		Fabrica fabrica) {
+    	try {
+    		String msg = "";
+	    	if(actualizarProduccion) {
+	    		msg += this.actualizarProduccionBaseVentas(fabrica) + "\n";
+	    	}
+	    	if(actualizarPrecio) {
+	    		msg += this.actualizarPrecioBaseDiasBodega() + "\n";
+	    	}
+	    	return msg;
+    	}catch(Exception e) {
+    		return "Ha ocurrido un error.";
+    	}
+    }
+    
+    /*
+     * Metodo que actualiza la produccion de los productos en base a sus ventas 
+     * con respecto al mas vendido. 
+     */
+    public String actualizarProduccionBaseVentas(Fabrica fabrica) {
+    	try {
+	    	List<String> productos = Caja.historialVentasOrganizado();
+	    	HashMap<String,Integer> produccion = fabrica.getProduccionDiaria();
+	    	String productoMayorVendido = productos.get(0);
+	    	
+	    	for(int i = 0; i < productos.size(); i++) {
+	    		String producto = productos.get(i);
+	    		
+	    		if(i != 0) {
+	    			if(produccion.get(productoMayorVendido) > produccion.get(producto)) {
+	    				produccion.put(producto, (int) (produccion.get(producto) * 0.85));
+	    			}else {
+	    				produccion.put(producto, (int) (produccion.get(producto) * 0.70));
+	    			}
+	    		}
+	    	}
+	    	fabrica.setProduccionDiaria(produccion);
+	    	return "Produccion actualizada en base a las ventas de los productos.";
+    	}catch(Exception e) {
+	    	return "Ocurrió un error al actualizar la producción.";
+	    }
+    }
+    
+    /*
+     * Metodo que actualiza el precio de los productos en base a sus dias en bodega. 
+     */
+    public String actualizarPrecioBaseDiasBodega() {
+    	try {
+    		List<Producto> productos = this.productosOrdenadosPorDiasBodega();
+    		for(Producto producto: productos) {
+    			if(producto.getDiasBodega() >= 5) {
+    				producto.setPrecio((int) (producto.getPrecio() * 0.50));
+    			}
+    		}
+    		return "Se ha actualizado correctamente los precios con respecto a sus dias en bodega.";
+    	}catch(Exception e) {
+    		return "Ha ocurrido un error.";
+    	}
+    }
+    
+    // se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
     public void descontarMateriaPrimaNecesaria(List<Ingrediente> ingredientesRequeridos, int cantidadProduccion) {
         List<Ingrediente> inventarioIngredientes = this.getIngredientes();
 
@@ -131,28 +209,6 @@ public class Bodega implements Serializable {
         // Actualizar la lista de ingredientes en la bodega después del descuento
         this.setIngredientes(inventarioIngredientes);
     }
-    
-    public String calcularEstanciaProductosOrdenDiasEnBodega() {
-        // Clasificar los productos por mayor número de días en bodega
-        List<Producto> productosOrdenados = new ArrayList<>(productos);
-        productosOrdenados.sort(Comparator.comparing(Producto::getDiasBodega).reversed());
-
-        StringBuilder result = new StringBuilder("Estancia de Productos en Bodega (Orden por Días en Bodega):\n");
-
-        for (Producto producto : productosOrdenados) {
-            int tiempoEnBodega = producto.getDiasBodega();
-            String nombreProducto = producto.getNombre();
-            result.append("Producto: ").append(nombreProducto).append(", Tiempo en Bodega: ").append(tiempoEnBodega).append(" días\n");
-        }
-
-        return result.toString();
-    }
-
-    
-    
-    
-    
-    //Setters y getters
 
     public String getIdentificador() {
 		return identificador;
@@ -168,6 +224,7 @@ public class Bodega implements Serializable {
 
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
+		//cantidadProductosTotales = this.productos.size();
 	}
 
 	public int getEspacioAlmacenamiento() {
@@ -198,53 +255,6 @@ public class Bodega implements Serializable {
 	public void setContabilidadIngredientes(HashMap<String, Integer> contabilidadIngredientes) {
 		this.contabilidadIngredientes = contabilidadIngredientes;
 	}
-
-
-
 }
-
-//public void pedirCantidadIngredientes() {
-//Scanner scanner = new Scanner(System.in);
-//
-//// Solicitar al usuario que elija un ingrediente
-//System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
-//int opcion = scanner.nextInt();
-//
-//if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
-//    System.out.println("Opción no válida. Seleccione un número válido.");
-//    scanner.close();
-//    return;
-//}
-//
-//// Obtener el ingrediente seleccionado
-//Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
-//
-//// Solicitar la cantidad deseada
-//System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
-//int cantidadPedida = scanner.nextInt();
-//
-//// Crear la cantidad de ingredientes solicitados
-//for (int i = 0; i < cantidadPedida; i++) {
-//    Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
-//    ingredientes.add(nuevoIngrediente);
-//    contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
-//}
-//}
-///////////////////////////////////////////////////////////////////////////////
-
-// Confirmar disponibilidad de ingredientes
-//public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
-// Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
-// Puedes utilizar el HashMap y las listas para verificar la disponibilidad
-
-
-// Calcular productos veces no disponibles
-//public int calcularProductosVecesNoDisponibles() {
-// Implementa la lógica para calcular la cantidad de veces que los productos no estuvieron disponibles
-// Puedes utilizar el HashMap y las listas para realizar este cálculo
-//return 0; // Reemplaza con el cálculo real
-//}
-
-//se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
 
 
