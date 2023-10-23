@@ -4,7 +4,9 @@ import java.util.List;
 import gestorAplicacion.producto.IProductoIngrediente;
 
 import java.util.ArrayList;
-public class Ingrediente implements IProductoIngrediente{
+import java.io.Serializable;
+
+public class Ingrediente implements IProductoIngrediente, Serializable{
 	
     private int cantidad = 0;
 	private String nombre; 

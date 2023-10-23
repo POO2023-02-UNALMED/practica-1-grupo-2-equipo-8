@@ -15,7 +15,7 @@ public class Main {
 		HashMap<Ingrediente, Integer> ingredientesTorta = new HashMap<Ingrediente, Integer>();
 		ingredientesTorta.put(leche, 2);
 		ingredientesTorta.put(huevo, 5);
-		Producto torta = new Tortas("Torta de Calabaza", 3, ingredientesTorta, 0, "TOR-CA", 10, 0, 1, 12, "Crema");
+		Producto torta = new Tortas("Torta de Calabaza", 3, ingredientesTorta, 0, "TOR-CA", 10, 0, "Crema");
 		
 		//System.out.println(leche.getNombre() + ": " + leche.getPrecio());
 		//System.out.println(huevo.getNombre() + ": " + huevo.getPrecio());
