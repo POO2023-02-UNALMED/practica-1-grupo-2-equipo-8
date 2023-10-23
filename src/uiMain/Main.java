@@ -192,8 +192,9 @@ public class Main {
 		 		//Creamos administrador
 		 		
 		 		Administrador administrador=new Administrador(bodega,caja,Camion.getCamiones(),fabrica);
-		 		administrador.iniciarSesion();
-		 		
+//		 		administrador.iniciarSesion();
+//		 		System.out.println(bodega.getProductos());
+		 		System.out.println(caja.getHistorialVentas());
 		 		
 		 	
 		 	

@@ -33,7 +33,8 @@ public class Envio implements Serializable {
 	        	String clave=producto.getNombre();
 	        	this.bodega.getContabilidadProductos().put(clave, valorActual-1);
 	        	//Agregamos venta al historial de ventas
-	        	caja.agregarVenta(producto.getNombre(), 1);
+	        	Caja.agregarVenta(producto.getNombre(), 1);
+	        	Caja.ingresarDinero(producto.getPrecio());
 	        }
 	        //se suma el dinero del envio a caja
 	        
