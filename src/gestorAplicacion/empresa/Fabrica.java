@@ -202,6 +202,23 @@ public class Fabrica implements Serializable {
 
         this.getBodega().setIngredientes(listaMateriaPrimaActual);
     }
+    
+  //se añade un nuevo metodo para la funcionalida #2
+    public String ListarListaDeProduccion() {
+        int index = 1;
+        String cadena ="";
+        for (Producto producto : produccionDiaria.keySet()) {//se puede cambiar por for (String producto, int index = 1 : produccionDiaria.keySet())
+            int cantidad = produccionDiaria.get(producto);
+            cadena+=(index + ". " + producto.getNombre() + ": " + cantidad + "$"+ producto.getPrecio()*cantidad +"\n");
+            
+        	for(Ingrediente ingrediente: producto.getIngredientesNecesarios().keySet()) {
+        		cadena+=("\t" + ingrediente.getNombre() + " - " + ingrediente.getCantidad() +"\n");
+        	}
+        	
+            index++;
+        }
+        return cadena;
+    }
 
   //se añade un nuevo metodo para la funcionalida #2 para actualiizar la produccion diaria
     
