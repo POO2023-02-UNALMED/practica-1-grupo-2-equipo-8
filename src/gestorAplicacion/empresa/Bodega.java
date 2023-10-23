@@ -15,9 +15,31 @@ public class Bodega implements Serializable {
 	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
-	private static int cantidadProductosTotales;
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
+	
+	
+	public Bodega(String identificador, HashMap<String, Integer> contabilidadProductos,int espacioAlmacenamiento,
+			HashMap<String, Integer> contabilidadIngredientes,List<Producto> productos,List<Ingrediente> ingredientes) {
+		this.identificador=identificador;
+		this.contabilidadProductos=contabilidadProductos;
+		this.espacioAlmacenamiento=espacioAlmacenamiento;
+		this.contabilidadIngredientes=contabilidadIngredientes;
+		this.productos=productos;
+		this.ingredientes=ingredientes;
+		
+		for (Ingrediente ingrediente:ingredientes) {
+			this.espacioAlmacenamiento-=ingrediente.getEspacioAlmacenamiento();
+		}
+		for (Producto producto:productos) {
+			this.espacioAlmacenamiento-=producto.getEspacioAlmacenamiento();
+		}
+		
+		
+	}
+			
+	
+	
 	
 	
 //	¿Para qué hacer esto?, en bodega con el historial de ventas se puede sacar esta info
@@ -30,40 +52,14 @@ public class Bodega implements Serializable {
 
 	    for (Producto producto : productos) {
 	        if (!producto.isAsignadoAEnvio()) {
-	            resultado.append(producto.toString()).append("\n");
+	            resultado.append(producto.getNombre()).append("\n");
 	        }
 	    }
 
 	    return resultado.toString();
 	}
 	
-	public void pedirCantidadIngredientes() {
-	    Scanner scanner = new Scanner(System.in);
 
-	    // Solicitar al usuario que elija un ingrediente
-	    System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
-	    int opcion = scanner.nextInt();
-
-	    if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
-	        System.out.println("Opción no válida. Seleccione un número válido.");
-	        scanner.close();
-	        return;
-	    }
-
-	    // Obtener el ingrediente seleccionado
-	    Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
-
-	    // Solicitar la cantidad deseada
-	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
-	    int cantidadPedida = scanner.nextInt();
-
-	    // Crear la cantidad de ingredientes solicitados
-	    for (int i = 0; i < cantidadPedida; i++) {
-	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
-	        ingredientes.add(nuevoIngrediente);
-	        contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
-	    }
-}
 	
 	
 	
@@ -82,22 +78,7 @@ public class Bodega implements Serializable {
 
         return resultado.toString();
     }
-///////////////////////////////////////////////////////////////////////////////
-    	
-    // Confirmar disponibilidad de ingredientes
-    //public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
-        // Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
-        // Puedes utilizar el HashMap y las listas para verificar la disponibilidad
-    
 
-    // Calcular productos veces no disponibles
-    //public int calcularProductosVecesNoDisponibles() {
-        // Implementa la lógica para calcular la cantidad de veces que los productos no estuvieron disponibles
-        // Puedes utilizar el HashMap y las listas para realizar este cálculo
-        //return 0; // Reemplaza con el cálculo real
-//}
-    
-  //se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
 	
 
     public void descontarMateriaPrimaNecesaria(List<Ingrediente> ingredientesRequeridos, int cantidadProduccion) {
@@ -195,5 +176,49 @@ public class Bodega implements Serializable {
 
 
 }
+
+//public void pedirCantidadIngredientes() {
+//Scanner scanner = new Scanner(System.in);
+//
+//// Solicitar al usuario que elija un ingrediente
+//System.out.print("Seleccione el número correspondiente al ingrediente que desea pedir: ");
+//int opcion = scanner.nextInt();
+//
+//if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
+//    System.out.println("Opción no válida. Seleccione un número válido.");
+//    scanner.close();
+//    return;
+//}
+//
+//// Obtener el ingrediente seleccionado
+//Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
+//
+//// Solicitar la cantidad deseada
+//System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
+//int cantidadPedida = scanner.nextInt();
+//
+//// Crear la cantidad de ingredientes solicitados
+//for (int i = 0; i < cantidadPedida; i++) {
+//    Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
+//    ingredientes.add(nuevoIngrediente);
+//    contabilidadIngredientes.merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
+//}
+//}
+///////////////////////////////////////////////////////////////////////////////
+
+// Confirmar disponibilidad de ingredientes
+//public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
+// Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
+// Puedes utilizar el HashMap y las listas para verificar la disponibilidad
+
+
+// Calcular productos veces no disponibles
+//public int calcularProductosVecesNoDisponibles() {
+// Implementa la lógica para calcular la cantidad de veces que los productos no estuvieron disponibles
+// Puedes utilizar el HashMap y las listas para realizar este cálculo
+//return 0; // Reemplaza con el cálculo real
+//}
+
+//se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
 
 

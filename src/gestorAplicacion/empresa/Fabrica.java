@@ -94,8 +94,8 @@ public class Fabrica implements Serializable {
                 if (producto.equals("torta")) {
                     // Ingredientes para la torta
                     HashMap<Ingrediente, Integer> ingredientesTorta = new HashMap<>();
-                    ingredientesTorta.put(new Ingrediente("Harina", 5, 1234, 10), 2);
-                    ingredientesTorta.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
+                    ingredientesTorta.put(new Ingrediente("harina", 5, 1234, 10), 2);
+                    ingredientesTorta.put(new Ingrediente("azúcar", 3, 1234, 5), 1);
 
                     // Crear un nuevo producto "Torta" y agregarlo a la bodega
                     Tortas nuevoProducto = new Tortas(producto, 5, ingredientesTorta, 20, "abc123", 3, 6, "chocolate");
@@ -110,8 +110,8 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("pastelFrito")) {
                     // Ingredientes para el pastelFrito
                     HashMap<Ingrediente, Integer> ingredientesPastelFrito = new HashMap<>();
-                    ingredientesPastelFrito.put(new Ingrediente("Harina", 5, 1234, 10), 1);
-                    ingredientesPastelFrito.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
+                    ingredientesPastelFrito.put(new Ingrediente("harina", 5, 1234, 10), 1);
+                    ingredientesPastelFrito.put(new Ingrediente("azúcar", 3, 1234, 5), 1);
 
                     // Crear un nuevo producto "PastelesFritos" y agregarlo a la bodega
                     PastelesFritos nuevoProducto = new PastelesFritos(producto, 5, ingredientesPastelFrito, 20, "dfg123", 3, false, "tomate");
@@ -125,11 +125,11 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("galleta")) {
                     // Ingredientes para la galleta
                     HashMap<Ingrediente, Integer> ingredientesGalleta = new HashMap<>();
-                    ingredientesGalleta.put(new Ingrediente("Harina", 5, 1234, 10), 1);
-                    ingredientesGalleta.put(new Ingrediente("Azúcar", 3, 1234, 5), 3);
+                    ingredientesGalleta.put(new Ingrediente("harina", 5, 1234, 10), 1);
+                    ingredientesGalleta.put(new Ingrediente("azúcar", 3, 1234, 5), 3);
 
                     // Crear un nuevo producto "Galletas" y agregarlo a la bodega
-                    Galletas nuevoProducto = new Galletas(producto, 5, ingredientesGalleta, 20, "dfg123", 3, false, "tomate");
+                    Galletas nuevoProducto = new Galletas(producto, 5, ingredientesGalleta, 20, "dfg123", 3, false, "vainilla");
                     this.bodega.getProductos().add(nuevoProducto);
 
                     // Actualizar la contabilidad de productos y de ingredientes en la bodega
@@ -140,11 +140,11 @@ public class Fabrica implements Serializable {
                 else if (producto.equals("dona")) {
                     // Ingredientes para la dona
                     HashMap<Ingrediente, Integer> ingredientesDona = new HashMap<>();
-                    ingredientesDona.put(new Ingrediente("Harina", 5, 1234, 10), 3);
-                    ingredientesDona.put(new Ingrediente("Azúcar", 3, 1234, 5), 3);
+                    ingredientesDona.put(new Ingrediente("harina", 5, 1234, 10), 3);
+                    ingredientesDona.put(new Ingrediente("azúcar", 3, 1234, 5), 3);
 
                     // Crear un nuevo producto "Donas" y agregarlo a la bodega
-                    Donas nuevoProducto = new Donas(producto, 5, ingredientesDona, 20, "dfg123", 3, false, "tomate");
+                    Donas nuevoProducto = new Donas(producto, 5, ingredientesDona, 20, "dfg123", 3, false, "arquipe");
                     this.bodega.getProductos().add(nuevoProducto);
 
                     // Actualizar la contabilidad de productos y de ingredientes en la bodega
