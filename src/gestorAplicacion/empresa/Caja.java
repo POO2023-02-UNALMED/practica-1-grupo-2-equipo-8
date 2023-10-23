@@ -8,11 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Caja implements Serializable {
-	static private int dinero;
+	private int dinero;
 	static private HashMap<String, Integer> historialVentas = new HashMap<String, Integer>();
 	private HashMap<String, Integer> costosProduccion = new HashMap<>(); // Variable costosProduccion agregada ¿deberia ser estatico?
-	
-	
 	
 	public Caja(int dinero) {
 		this.dinero=dinero;
@@ -35,12 +33,12 @@ public class Caja implements Serializable {
     }
     
     // Declaración del método para ingresar dinero en la caja
-    public static void ingresarDinero(int cantidad) {
-    	Caja.dinero+=cantidad;
+    public void ingresarDinero(int cantidad) {
+    	this.dinero+=cantidad;
     }
 
-    public static void restarDinero(int cantidad) {
-    	Caja.dinero -= cantidad;
+    public void restarDinero(int cantidad) {
+    	this.dinero -= cantidad;
     }
     
     // Metodo para agregar una venta
@@ -133,7 +131,7 @@ public class Caja implements Serializable {
 	}
 
 	public void setDinero(int dinero) {
-		Caja.dinero = dinero;
+		this.dinero = dinero;
 	}
 
 	public HashMap<String, Integer> getHistorialVentas() {

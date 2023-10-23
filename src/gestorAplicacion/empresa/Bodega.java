@@ -126,7 +126,7 @@ public class Bodega implements Serializable {
      * metodo para cuando solo desea actualizar su precio no se necesario
      * recibir la fabrica como parametro
      */
-    public String actualizarProduccionPrecio(boolean actualizarProduccion, boolean actualizarPrecio) {
+    public String actualizarProduccionPrecio(boolean actualizarPrecio) {
     	try {
     		String msg = "";
 	    	if(actualizarPrecio) {
@@ -189,8 +189,8 @@ public class Bodega implements Serializable {
     	try {
     		List<Producto> productos = this.productosOrdenadosPorDiasBodega();
     		for(Producto producto: productos) {
-    			if(producto.getDiasBodega() >= 5) {
-    				producto.setPrecio((int) (producto.getPrecio() * 0.50));
+    			if(producto.getDiasBodega() >= 5 && producto.getPrecio() > 1) {
+    				producto.setPrecio((int) (Math.round(producto.getPrecio() * 0.50)));
     			}
     		}
     		return "Se ha actualizado correctamente los precios con respecto a sus dias en bodega.";

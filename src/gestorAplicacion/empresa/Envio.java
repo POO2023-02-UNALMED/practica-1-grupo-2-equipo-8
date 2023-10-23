@@ -15,7 +15,7 @@ public class Envio implements Serializable {
 	private int pesoTotal;
 	private Caja caja;
 	private boolean asignadoAUnCamion=false;
-	private static List<Envio> listaEnvios = new ArrayList<Envio>();
+	private static ArrayList<Envio> listaEnvios = new ArrayList<Envio>();
 	private Bodega bodega;
 
 	//	Constructor	
@@ -34,7 +34,11 @@ public class Envio implements Serializable {
 	        	this.bodega.getContabilidadProductos().put(clave, valorActual-1);
 	        	//Agregamos venta al historial de ventas
 	        	Caja.agregarVenta(producto.getNombre(), 1);
+<<<<<<< Updated upstream
 	        	Caja.ingresarDinero(producto.getPrecio());
+=======
+	        	caja.ingresarDinero(producto.getPrecio());
+>>>>>>> Stashed changes
 	        }
 	        //se suma el dinero del envio a caja
 	        
@@ -132,11 +136,11 @@ public class Envio implements Serializable {
 		this.asignadoAUnCamion = asignadoAUnCamion;
 	}
 
-	public static List<Envio> getListaEnvios() {
+	public static ArrayList<Envio> getListaEnvios() {
 		return listaEnvios;
 	}
 
-	public static void setListaEnvios(List<Envio> listaEnvios) {
+	public static void setListaEnvios(ArrayList<Envio> listaEnvios) {
 		Envio.listaEnvios = listaEnvios;
 	}
 	 

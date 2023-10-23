@@ -21,10 +21,12 @@ public class Camion implements Serializable {
 		this.capacidad=capacidad;
 		Camion.camiones.add(this);
 		this.placa=placa;
+<<<<<<< Updated upstream
 		//No se agregan envios dado que esto se hará desde la funcionalidad 5 de administrador
 		
+=======
+>>>>>>> Stashed changes
 	}
-	
 	
 	
 	public void agregarEnvio(Envio envio) {

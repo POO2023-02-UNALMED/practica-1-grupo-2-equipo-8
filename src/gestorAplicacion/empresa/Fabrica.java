@@ -105,8 +105,13 @@ public class Fabrica implements Serializable {
                 if (producto.equals("torta")) {
                     // Ingredientes para la torta
                     HashMap<Ingrediente, Integer> ingredientesTorta = new HashMap<>();
+<<<<<<< Updated upstream
                     ingredientesTorta.put(new Ingrediente("Harina", 5, 1234, 10), 2);
                     ingredientesTorta.put(new Ingrediente("Azúcar", 3, 1234, 5), 1);
+=======
+                    ingredientesTorta.put(new Ingrediente("harina", 5, 1234, 10), 1);
+                    ingredientesTorta.put(new Ingrediente("azúcar", 3, 1234, 5), 1);
+>>>>>>> Stashed changes
 
                     // Crear un nuevo producto "Torta" y agregarlo a la bodega
                     Tortas nuevoProducto = new Tortas(producto, 5, ingredientesTorta, 20, "abc123", 3, 6, "chocolate");

@@ -46,7 +46,9 @@ public class Serializador {
         return serializar(lista, "administrador.txt");
     }
     
-    public static String serializarBodegas(ArrayList<Bodega> lista) {
+    public static String serializarBodegas(Bodega bodega) {
+    	ArrayList<Bodega> lista = new ArrayList<Bodega>();
+    	lista.add(bodega);
         return serializar(lista, "bodegas.txt");
     }
     
