@@ -21,44 +21,38 @@ public class Administrador implements Serializable {
 
     //Getters y Setters
     public Bodega getBodega() {
-        return Bodega;
+        return bodega;
     }
 
     public void setBodega(Bodega bodega) {
-        Bodega = bodega;
+        bodega = bodega;
     }
 
     public Caja getCaja() {
-        return Caja;
+        return caja;
     }
 
     public void setCaja(Caja caja) {
-        Caja = caja;
+        caja = caja;
     }
 
-    public HashMap<String, Integer> getProductos() {
-        return Productos;
-    }
 
-    public void setProductos(HashMap<String, Integer> productos) {
-        Productos = productos;
-    }
 
  
     public List<Camion> getCamiones() {
-		return Camiones;
+		return camiones;
 	}
 
 	public void setCamiones(List<Camion> camiones) {
-		Camiones = camiones;
+		camiones = camiones;
 	}
 
 	public Fabrica getFabrica() {
-        return Fabrica;
+        return fabrica;
     }
 
     public void setFabrica(Fabrica fabrica) {
-        Fabrica = fabrica;
+        fabrica = fabrica;
     }
 
 
@@ -233,7 +227,7 @@ public class Administrador implements Serializable {
 
                 // Mostrar productos en bodega no asignados
                 System.out.println("Productos en bodega no asignados a envíos:");
-                System.out.println(Bodega.productosNoasignadosAEnvios());
+                System.out.println(bodega.productosNoasignadosAEnvios());
 
                 // Preguntar al usuario si quiere enviar el camión
                 System.out.print("¿Desea enviar el camión? (1. Sí / 2. No): ");
