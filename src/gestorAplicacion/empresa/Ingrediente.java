@@ -109,6 +109,8 @@ public class Ingrediente implements IProductoIngrediente, Serializable{
     /*
      * Metodo que retorna un String con la lista de ingredientes disponibles
      */
+    
+    //Muestra la lista de ingredientes disponibles importante para funcionalidad 1
     public static String obtenerListaIngredientes() {
         StringBuilder resultado = new StringBuilder();
         resultado.append("Lista de ingredientes disponibles:\n\n");

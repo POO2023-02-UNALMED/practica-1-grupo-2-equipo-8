@@ -41,6 +41,11 @@ public class Administrador implements Serializable {
     	return administrador;
     }
     
+    
+
+    
+    
+    
     private static Administrador crearTodo() {
 		//CreaciónDeBodega
 		//Creacion de listas iniciales

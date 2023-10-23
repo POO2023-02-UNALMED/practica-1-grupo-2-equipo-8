@@ -37,6 +37,21 @@ public class Bodega implements Serializable {
 		
 		//cantidadProductosTotales = this.productos.size();
 	}
+	//Muestra las claves y los valores del hashmap lo cual es necesario en la funcionalidad 1
+	public String mostrarContabilidadIngredientes() {
+	    StringBuilder resultado = new StringBuilder();
+	    resultado.append("Contabilidad de Ingredientes:\n");
+	    
+	    int numeracion = 1;
+	    for (String ingrediente : contabilidadIngredientes.keySet()) {
+	        int cantidad = contabilidadIngredientes.get(ingrediente);
+	        resultado.append(numeracion).append(". ").append(ingrediente).append(" : ").append(cantidad).append("\n");
+	        numeracion++;
+	    }
+	    
+	    return resultado.toString();
+	}
+
 	
 	//Retorna los productos no asignados a un envio IMPORTANTE PARA FUNCIONALIDAD 5
 	public String productosNoasignadosAEnvios() {
