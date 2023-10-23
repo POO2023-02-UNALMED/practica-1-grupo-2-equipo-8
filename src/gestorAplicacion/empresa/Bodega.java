@@ -15,10 +15,15 @@ public class Bodega implements Serializable {
 	private HashMap<String, Integer> contabilidadProductos = new HashMap<>();//se crearon estas dos variablea aparte para darle contabilidad a los productos en bodega dado que facilita la creacion de ingredientes y/o productos
 	private int espacioAlmacenamiento;
 	private HashMap<String, Integer> contabilidadIngredientes = new HashMap<>();
+<<<<<<< HEAD
+=======
+	private static int cantidadProductosTotales;
+>>>>>>> parent of be97ecc (funcionalidad 3.1)
 	private List<Producto> productos =new ArrayList<Producto>();	
 	private List<Ingrediente> ingredientes= new ArrayList<Ingrediente>();
 	
 	
+<<<<<<< HEAD
 	public Bodega(String identificador, HashMap<String, Integer> contabilidadProductos,int espacioAlmacenamiento,
 			HashMap<String, Integer> contabilidadIngredientes,List<Producto> productos,List<Ingrediente> ingredientes) {
 		this.identificador=identificador;
@@ -42,6 +47,8 @@ public class Bodega implements Serializable {
 	
 	
 	
+=======
+>>>>>>> parent of be97ecc (funcionalidad 3.1)
 //	¿Para qué hacer esto?, en bodega con el historial de ventas se puede sacar esta info
 //	private List<String> listaProductosAltaDemanda;
 //    private List<String> listaProductosBajaDemanda;
@@ -78,7 +85,26 @@ public class Bodega implements Serializable {
 
         return resultado.toString();
     }
+<<<<<<< HEAD
 
+=======
+///////////////////////////////////////////////////////////////////////////////
+    	
+    // Confirmar disponibilidad de ingredientes
+    //public void confirmarDisponibilidadIngredientes(List<String> listaIngredientes) {
+        // Implementa la lógica para confirmar la disponibilidad de ingredientes en base a la lista
+        // Puedes utilizar el HashMap y las listas para verificar la disponibilidad
+    
+
+    // Calcular productos veces no disponibles
+    //public int calcularProductosVecesNoDisponibles() {
+        // Implementa la lógica para calcular la cantidad de veces que los productos no estuvieron disponibles
+        // Puedes utilizar el HashMap y las listas para realizar este cálculo
+        //return 0; // Reemplaza con el cálculo real
+//}
+    
+  //se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
+>>>>>>> parent of be97ecc (funcionalidad 3.1)
 	
 
     public void descontarMateriaPrimaNecesaria(List<Ingrediente> ingredientesRequeridos, int cantidadProduccion) {
