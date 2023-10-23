@@ -331,10 +331,16 @@ public class Fabrica implements Serializable {
         System.out.println("El tiempo de demora de la producción se ha establecido en " + tiempoDemora + " minutos.");
     }
     
-    public void gestionarEspacioBodega(int espacioNecesario) {
-        if (this.getBodega().getEspacioAlmacenamiento() >= espacioNecesario) {
+    public void gestionarEspacioBodega(HashMap<Producto, Integer> tanda) {
+    	int suma=0;
+		for (Entry<Producto, Integer> entry : tanda.entrySet()) {
+            Producto producto = entry.getKey();
+            int cantidadNecesaria = entry.getValue();
+            suma+=cantidadNecesaria;
+		}
+        if (this.getBodega().getEspacioAlmacenamiento() >= suma) {
             // Si hay suficiente espacio en la bodega, reservar el espacio necesario
-            this.getBodega().setEspacioAlmacenamiento(this.getBodega().getEspacioAlmacenamiento() - espacioNecesario);
+            this.getBodega().setEspacioAlmacenamiento(this.getBodega().getEspacioAlmacenamiento() - suma);
             System.out.println("Se ha reservado el espacio necesario en la bodega para los productos.");
         } else {
             // Si no hay suficiente espacio, poner en pausa la producción en la fábrica
@@ -342,18 +348,24 @@ public class Fabrica implements Serializable {
         }
     }
     
-    private void transferirProduccionOtraBodega(String producto, int cantidad) {
+    public void transferirProduccionOtraBodega(HashMap<Producto, Integer> tanda) {
+    	int suma=0;
+		for (Entry<Producto, Integer> entry : tanda.entrySet()) {
+            int cantidadNecesaria = entry.getValue();
+            suma+=cantidadNecesaria;
+		}
         for (Bodega bodega : otrasBodegas) {
-            if (bodega.getEspacioAlmacenamiento() >= cantidad) {
+            if (bodega.getEspacioAlmacenamiento() >= suma) {
                 // Realizar la transferencia de producción a la otra bodega
-                System.out.println("Se ha transferido la producción de " + cantidad + " unidades de " + producto + " a la bodega " + bodega.getIdentificador());
+                
                 // Actualizar el espacio disponible en la bodega actual y en la otra bodega
-                Fabrica.espacioDisponibleBodega += cantidad;
-                bodega.setEspacioAlmacenamiento(bodega.getEspacioAlmacenamiento() - cantidad);
-                return;
+                Fabrica.espacioDisponibleBodega += suma;
+                bodega.setEspacioAlmacenamiento(bodega.getEspacioAlmacenamiento() - suma);
+                bodega.guardarEnBodega(produccionDiaria);
+                
             }
         }
-        System.out.println("No hay suficiente espacio en ninguna de las otras bodegas para transferir la producción de " + producto);
+        
     }
 
     
