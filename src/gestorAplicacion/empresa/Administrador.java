@@ -5,17 +5,17 @@ import java.util.*;
 
 public class Administrador implements Serializable {
 //Atributos
-    private static Bodega Bodega;
-    private Caja Caja;
-    private HashMap<String, Integer> Productos ;
-    private List<Camion> Camiones = new ArrayList<Camion>();
-    private Fabrica Fabrica;
+    private static Bodega bodega;
+    private Caja caja;
+//    private HashMap<String, Integer> Productos ; PARA QUÉ ESTO EL ADMINISTRADOR TIENE PRODUCTOS?!
+    private List<Camion> camiones = new ArrayList<Camion>();
+    private Fabrica fabrica;
 //Constructor
-    public Administrador() {
-//        Bodega = new Bodega();
-//        Caja = new Caja();
-        //Productos = Producto.  Implementar metodo de clase ObtenerProductos
-        //Fabrica = new Fabrica(); Implementar dependiendo de Decision de Fabrica
+    public Administrador(Bodega bodega,Caja caja,List<Camion> Camiones, Fabrica Fabrica) {
+    	this.bodega=bodega;
+    	this.caja=caja;
+    	this.camiones=camiones;
+    	this.fabrica=fabrica;
 
     }
 

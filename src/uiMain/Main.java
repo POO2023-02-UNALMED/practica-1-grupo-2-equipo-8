@@ -148,7 +148,8 @@ public class Main {
 		 	System.out.println(bodega.calcularEstanciaProductosOrdenDiasEnBodega());
 		 	
 		 	
-		 	
+		 	Caja caja = new Caja(10000);
+		 	System.out.println(caja.getHistorialVentas());
 		
 		
 		
