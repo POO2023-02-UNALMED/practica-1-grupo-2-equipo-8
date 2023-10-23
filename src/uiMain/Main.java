@@ -164,14 +164,27 @@ public class Main {
 		 		    "SpeedyXpress", "Transporter3000", "SuperLoad", "CargoBeast", "QuickHauler"
 		 		};
 
-		 		for (int i = 0; i < 10; i++) {
-		 		    String marca = marcas[i];
-		 		    String modelo = modelos[i];
-		 		    int capacidad = 1500; // Capacidad ficticia
+		 		String[] placas = {
+		 			    "ABC-123",
+		 			    "DEF-456",
+		 			    "GHI-789",
+		 			    "JKL-012",
+		 			    "MNO-345",
+		 			    "PQR-678",
+		 			    "STU-901",
+		 			    "VWX-234",
+		 			    "YZA-567",
+		 			    "BCD-890"
+		 			};
 
-		 		    Camion camion = new Camion(marca, modelo, capacidad);
-		 		    
-		 		}
+		 			for (int i = 0; i < 10; i++) {
+		 			    String marca = marcas[i];
+		 			    String modelo = modelos[i];
+		 			    int capacidad = 1500; // Capacidad ficticia
+		 			    String placa = placas[i];
+
+		 			    Camion camion = new Camion(marca, modelo, capacidad, placa);
+		 			}
 		 		//Creamos Envios
 		 	    for (int i = 1; i <= 5; i++) {
 		 	        List<Producto> productosEnvio = new ArrayList<Producto>();
@@ -192,8 +205,8 @@ public class Main {
 		 		//Creamos administrador
 		 		
 		 		Administrador administrador=new Administrador(bodega,caja,Camion.getCamiones(),fabrica);
-//		 		administrador.iniciarSesion();
-//		 		System.out.println(bodega.getProductos());
+		 		administrador.iniciarSesion();
+		 		System.out.println(bodega.getProductos());
 		 		System.out.println(caja.getHistorialVentas());
 		 		
 		 	
