@@ -15,15 +15,13 @@ public class Camion implements Serializable {
 	private boolean disponibilidad= true;
 	
 	//Constructor
-	public Camion(String marca, String modelo, int capacidad) {
+	public Camion(String marca, String modelo, int capacidad, String placa) {
 		this.marca=marca;
 		this.modelo=modelo;
 		this.capacidad=capacidad;
-		this.camiones.add(this);
-		//No se agregan envios dado que esto se hará desde la funcionalidad 5 de administrador
-		
+		Camion.camiones.add(this);
+		this.placa=placa;
 	}
-	
 	
 	
 	public void agregarEnvio(Envio envio) {

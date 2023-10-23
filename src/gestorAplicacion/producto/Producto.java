@@ -17,7 +17,6 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     private int peso;
     private int diasBodega;
     private boolean asignadoAEnvio=false;
-    private int costos;
 
     
     //Constructor
@@ -176,18 +175,6 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 
 	public void setAsignadoAEnvio(boolean asignadoAEnvio) {
 		this.asignadoAEnvio = asignadoAEnvio;
-	}
-
-
-
-	public int getCostos() {
-		return costos;
-	}
-
-
-
-	public void setCostos(int costos) {
-		this.costos = costos;
 	}
 }
 

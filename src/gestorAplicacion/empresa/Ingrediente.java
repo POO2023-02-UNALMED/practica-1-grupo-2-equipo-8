@@ -3,15 +3,16 @@ import java.util.List;
 
 import gestorAplicacion.producto.IProductoIngrediente;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-public class Ingrediente implements IProductoIngrediente{
+public class Ingrediente implements IProductoIngrediente, Serializable{
 	
     private int cantidad = 0;
 	private String nombre; 
     private int precio;
     private final long identificador;
     private int espacioAlmacenamiento;//espacio que ocupara el producto en bodega
-    static private List<Ingrediente> ingredientesDisponibles;//Estatico debido a que cuando se crea un ingrediente con un nombre diferente a los ya existentes a la lista se agrega uno nuevo
+    static private ArrayList<Ingrediente> ingredientesDisponibles = new ArrayList<Ingrediente>();//Estatico debido a que cuando se crea un ingrediente con un nombre diferente a los ya existentes a la lista se agrega uno nuevo
     
     
     //Constructor
@@ -128,16 +129,17 @@ public class Ingrediente implements IProductoIngrediente{
      */
     @Override
     public int calcularPrecio(int precioBase) {
-    	return (int) (precioBase * 1.19);
+    	Double p = precioBase * 1.19;
+    	return (int) Math.round(p);
     }
     
 
     //Setters y getters
-    public static List<Ingrediente> getIngredientesDisponibles() {
+    public static ArrayList<Ingrediente> getIngredientesDisponibles() {
 		return ingredientesDisponibles;
 	}
 
-	public static void setIngredientesDisponibles(List<Ingrediente> ingredientesDisponibles) {
+	public static void setIngredientesDisponibles(ArrayList<Ingrediente> ingredientesDisponibles) {
 		Ingrediente.ingredientesDisponibles = ingredientesDisponibles;
 	}
 
