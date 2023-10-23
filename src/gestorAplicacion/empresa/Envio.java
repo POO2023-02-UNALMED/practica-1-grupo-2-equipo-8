@@ -15,7 +15,8 @@ public class Envio implements Serializable {
 	private int pesoTotal;
 	private Caja caja;
 	private boolean asignadoAUnCamion=false;
-	private static ArrayList<Envio> listaEnvios = new ArrayList<Envio>();
+	private static ArrayList<Envio> listaEnviosNoAsignados = new ArrayList<Envio>();
+	private static ArrayList<Envio> listaEnviosAsignados = new ArrayList<Envio>();
 	private Bodega bodega;
 
 	//	Constructor	
@@ -42,7 +43,7 @@ public class Envio implements Serializable {
 	        	pesoTotal+=producto.getPeso();
 	        }
 	        this.pesoTotal = pesoTotal;
-	        Envio.listaEnvios.add(this);
+	        Envio.listaEnviosNoAsignados.add(this);
 	        //Los envios deben de efectuar cambios en bodega y caja
 	        
 	        
@@ -53,7 +54,7 @@ public class Envio implements Serializable {
 		    StringBuilder result = new StringBuilder();
 		    int numeracion = 1;
 
-		    for (Envio envio : listaEnvios) {
+		    for (Envio envio : listaEnviosNoAsignados) {
 		        if (!envio.isAsignadoAUnCamion()) {
 		            result.append(numeracion).append(". Envío con código ").append(envio.getCodigoDeEnvio())
 		                  .append(", con un peso de ").append(envio.getPesoTotal()).append("\n");
@@ -133,11 +134,32 @@ public class Envio implements Serializable {
 	}
 
 	public static ArrayList<Envio> getListaEnvios() {
-		return listaEnvios;
+		return listaEnviosNoAsignados;
 	}
 
 	public static void setListaEnvios(ArrayList<Envio> listaEnvios) {
-		Envio.listaEnvios = listaEnvios;
+		Envio.listaEnviosNoAsignados = listaEnvios;
+	}
+	public static ArrayList<Envio> getListaEnviosNoAsignados() {
+		return listaEnviosNoAsignados;
+	}
+	public static void setListaEnviosNoAsignados(ArrayList<Envio> listaEnviosNoAsignados) {
+		Envio.listaEnviosNoAsignados = listaEnviosNoAsignados;
+	}
+	public static ArrayList<Envio> getListaEnviosAsignados() {
+		return listaEnviosAsignados;
+	}
+	public static void setListaEnviosAsignados(ArrayList<Envio> listaEnviosAsignados) {
+		Envio.listaEnviosAsignados = listaEnviosAsignados;
+	}
+	public Bodega getBodega() {
+		return bodega;
+	}
+	public void setBodega(Bodega bodega) {
+		this.bodega = bodega;
+	}
+	public void setCodigoDeEnvio(long codigoDeEnvio) {
+		this.codigoDeEnvio = codigoDeEnvio;
 	}
 	 
 	 

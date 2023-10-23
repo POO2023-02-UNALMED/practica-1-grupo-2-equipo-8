@@ -11,7 +11,8 @@ public class Camion implements Serializable {
 	private int capacidad;
 	private String placa;
 	private List<Envio> envios = new ArrayList<Envio>();
-	private static List<Camion> camiones =new ArrayList<Camion>();
+	private static List<Camion> camionesNoasignados =new ArrayList<Camion>();
+	private static List<Camion> camionesAsignados =new ArrayList<Camion>();
 	private boolean disponibilidad= true;
 	
 	//Constructor
@@ -19,7 +20,7 @@ public class Camion implements Serializable {
 		this.marca=marca;
 		this.modelo=modelo;
 		this.capacidad=capacidad;
-		Camion.camiones.add(this);
+		Camion.camionesNoasignados.add(this);
 		this.placa=placa;
 	}
 	
@@ -49,7 +50,7 @@ public class Camion implements Serializable {
 		StringBuilder result = new StringBuilder();
 	    int numeracion = 1;
 
-	    for (Camion camion : camiones) {
+	    for (Camion camion : camionesNoasignados) {
 	        if (camion.getCapacidad() > pesoEnvio&& camion.isDisponibilidad()) {
 	            result.append(numeracion).append(". ").append(camion.getMarca()).append(", ")
 	                  .append(camion.getModelo()).append(", ").append(camion.getPlaca()).append(", ")
@@ -124,13 +125,13 @@ public class Camion implements Serializable {
 
 
 	public static List<Camion> getCamiones() {
-		return camiones;
+		return camionesNoasignados;
 	}
 
 
 
 	public static void setCamiones(List<Camion> camiones) {
-		Camion.camiones = camiones;
+		Camion.camionesNoasignados = camiones;
 	}
 
 
@@ -143,6 +144,26 @@ public class Camion implements Serializable {
 
 	public void setDisponibilidad(boolean disponibilidad) {
 		this.disponibilidad = disponibilidad;
+	}
+
+
+	public static List<Camion> getCamionesNoasignados() {
+		return camionesNoasignados;
+	}
+
+
+	public static void setCamionesNoasignados(List<Camion> camionesNoasignados) {
+		Camion.camionesNoasignados = camionesNoasignados;
+	}
+
+
+	public static List<Camion> getCamionesAsignados() {
+		return camionesAsignados;
+	}
+
+
+	public static void setCamionesAsignados(List<Camion> camionesAsignados) {
+		Camion.camionesAsignados = camionesAsignados;
 	}
 	
 	

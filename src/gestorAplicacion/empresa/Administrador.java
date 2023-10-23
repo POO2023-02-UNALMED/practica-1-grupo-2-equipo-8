@@ -223,9 +223,11 @@ public class Administrador implements Serializable {
                     envioAsignar.setCamionAsignado(camionAsignado);
                     envioAsignar.setAsignadoAUnCamion(true);
                     camionAsignado.setCapacidad(camionAsignado.getCapacidad() - envioAsignar.getPesoTotal());
-                    camionAsignado.setDisponibilidad(false);
+                   
                     Envio.getListaEnvios().remove(envioAsignar);
-                    Camion.getCamiones().remove(camionAsignado);
+                    
+                    Envio.getListaEnviosAsignados().add(envioAsignar);
+                    
 
                     System.out.println("Envío asignado exitosamente al camión " + camionAsignado.getMarca() + " " + camionAsignado.getModelo() + " con placa " + camionAsignado.getPlaca());
 
@@ -239,6 +241,9 @@ public class Administrador implements Serializable {
 
                     if (opcionEnvio == 1) {
                         // Cambiar estado de disponibilidad del camión
+                        camionAsignado.setDisponibilidad(false);
+                        Camion.getCamionesAsignados().add(camionAsignado);
+                        Camion.getCamiones().remove(camionAsignado);
                         camionAsignado.setDisponibilidad(false);
                         System.out.println("El camión ha sido enviado.");
                     } else {
