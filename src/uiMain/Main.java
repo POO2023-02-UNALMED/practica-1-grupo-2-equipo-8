@@ -67,69 +67,97 @@ public class Main {
 							case 3:
 								 
 								 break;
-				        	case 4: //Funcionalidad 4: Agregar Producto
+				        	case 4: 
+				        	
+				        		System.out.println("Lista de ingredientes disponibles:\n");
+				        		String listaIngredientes = Ingrediente.obtenerListaIngredientes();
+				        		System.out.println(listaIngredientes);
 
-					            //Metodo de clase
-	
-					            System.out.println("Actualmente se ofrecen los siguientes productos: ");
-					            //Producto.MostrarProductos();
-	
-					            //Se crea un scanner para leer el nombre del nuevo producto que escribe el usuario
-					            Scanner nombreProductoEscrito = new Scanner(System.in);
-					            String nombreProductoNuevo;
-					            boolean esString = false; // Variable para repetir el ciclo do while si es false, se usa el metodo "esString"
-	
-					            //Ciclo donde se confirma si el valor tipeado por el usuario es de tipo String
-					            do{
-					                System.out.println("Por favor, escriba el nombre del producto que desea agregar: ");
-					                nombreProductoNuevo = nombreProductoEscrito.next(); //Se guarda el valor escrito en "nombreProductoNuevo"
-	
-					                //Se verifica si el valor escrito es de tipo String
-					                if (Administrador.esString(nombreProductoNuevo)){
-					                    esString = true;
-					                } else { //Si el valor escrito no es String
-					                    System.out.println("Este nombre no es valido");
-					                }
-					            } while (!esString); //Se repite el ciclo hasta que esString = true
-	
-					            System.out.println("El nombre del nuevo producto es " + nombreProductoNuevo);
-	
-					            System.out.println("Actualmente usamos los siguientes ingredientes para fabricar nuestro catalogo de productos: ");
-	
-					            //MostrarListaIngredientes() Funcion de SerializadorIngredientes
-	
-					            System.out.println("¿Cuales de los ingredientes de la lsta piensa usar para fabricar el nuevo producto?");
-	
-					            //Crear caso de excepcion en el que si se eligen menos de dos ingredientes se repita el loop hasta que se elijan dos o màs ingredientes (similar al do while del primer Scanner
-	
-					            System.out.println("¿El nuevo producto necesita uno o varios ingredientes nuevos?: ");
-	
-					            //
-					            /*if (hayIngredienteNuevo){
-	
-					                System.out.println("Escriba el/los nuevos ingredientes (separados por coma) a continuacion: ");
-	
-					                if(noEscribeBien){
-					                    System.out.println("Por favor, escriba cifras validas");
-					                }
-					            }*/
-	
-					            System.out.println("Por favor, inserte la cifra necesaria de cada ingrediente para la fabricacion del nuevo producto (separados por comas): ");
-					            //Se muestra la lista de los ingredientes elegidos antes de que el usuario escriba los valores, para usarlos como guia de orden
-					            //Si inserta valores invalidos, se repite la interaccion hasta que los valores sean validos
-	
-					            System.out.println("De acuerdo a los costes de los ingredientes, el valor del nuevo producto a producir serìa de CalcularCostoProductoNuevo() por unidad");
-	
-					            //Se añade el producto nuevo al Serializador de Productos junto con su respectiva informacion
-	
-					            System.out.println("Se ha añadido el producto UltimoProductoAñadido.getnombre() al catalogo de forma exitosa");
-	
-					            //Se imprime el nombre del producto, seguido por la cantidad y tipo de ingredientes que necesita para fabricarse, y el costo de cada unidad
-	
-					            //Se aplica la informacion nueva del Serializador de Productos a todas las clases que la necesiten
-	
-					            
-					            break;
+				        		HashMap<Ingrediente, Integer> ingredientesYCantidad = new HashMap<>();
+
+				        		boolean seleccionarOtroIngrediente = true;
+
+				        		while (seleccionarOtroIngrediente) {
+				        		    // Pedir al usuario que elija un ingrediente
+				        		    System.out.print("Seleccione el número correspondiente al ingrediente que necesita para su producto: ");
+				        		    int opcionIngrediente = scan.nextInt();
+				        		    scan.nextLine(); // Consumir el salto de línea
+
+				        		    // Validar si la opción elegida es válida
+				        		    if (opcionIngrediente >= 1 && opcionIngrediente <= Ingrediente.getIngredientesDisponibles().size()) {
+				        		        Ingrediente ingredienteElegido = Ingrediente.getIngredientesDisponibles().get(opcionIngrediente - 1);
+
+				        		        // Pedir al usuario la cantidad de ese ingrediente
+				        		        System.out.print("Ingrese la cantidad de " + ingredienteElegido.getNombre() + " que necesita: ");
+				        		        int cantidadIngrediente = scan.nextInt();
+				        		        scan.nextLine(); // Consumir el salto de línea
+
+				        		        ingredientesYCantidad.put(ingredienteElegido, cantidadIngrediente);
+
+				        		        // Preguntar si desea seleccionar otro ingrediente
+				        		        System.out.print("¿Desea seleccionar otro ingrediente? (1.Sí / 2.No): ");
+				        		        int respuesta = scan.nextInt();
+				        		        scan.nextLine(); // Consumir el salto de línea
+
+				        		        seleccionarOtroIngrediente = (respuesta == 1);
+				        		    } else {
+				        		        System.out.println("Opción no válida. Seleccione un número válido.");
+				        		    }
+				        		}
+
+				        		// Pregunta al usuario si desea crear un producto
+				        		System.out.print("¿Desea crear un producto? (1.Sí / 2.No): ");
+				        		int respuestaCrearProducto = scan.nextInt();
+				        		scan.nextLine(); // Consumir el salto de línea
+
+				        		if (respuestaCrearProducto == 1) {
+				        		    System.out.println("Seleccione el tipo de producto que desea crear:");
+				        		    System.out.println("1. Torta");
+				        		    System.out.println("2. Dona");
+				        		    System.out.println("3. Pasteles Fritos");
+				        		    System.out.println("4. Galleta");
+
+				        		    int tipoProducto = scan.nextInt();
+				        		    scan.nextLine(); // Consumir el salto de línea
+
+				        		    // Creamos un objeto de tipo Producto para guardar el producto creado
+				        		    Producto productoCreado = null;
+
+				        		    // Dependiendo del tipo de producto seleccionado, creamos la instancia correspondiente
+				        		    switch (tipoProducto) {
+				        		        case 1:
+				        		            // Crear Torta
+				        		            productoCreado = new Tortas("torta", 5, ingredientesYCantidad, 0, "abc123", 3, 6, "chocolate");
+				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
+				        		            break;
+				        		        case 2:
+				        		            // Crear Dona
+				        		            productoCreado = new Donas("dona", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "arquipe");
+				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
+				        		            break;
+				        		        case 3:
+				        		            // Crear Pasteles Fritos
+				        		            productoCreado = new PastelesFritos("pastelFrito", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "tomate");
+				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
+				        		            break;
+				        		        case 4:
+				        		            // Crear Galleta
+				        		            productoCreado = new Galletas("galleta", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "vainilla");
+				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
+				        		            break;
+				        		        default:
+				        		            System.out.println("Opción no válida.");
+				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
+				        		            break;
+				        		    }}
+
+
+				        	
+
+				        		
+				        		
+				        		
+					          
 				        	case 5: //Funcionalidad 4: Eliminar Producto
 	
 					            //Metodo de clase
