@@ -194,67 +194,75 @@ public class Administrador implements Serializable {
     
   //Funcionalidad 5
     public static void asignacionDeCarroDeVenta(Bodega bodega) {
-        // Mostrar los envíos sin camión asignado
-        System.out.println("Envíos pendientes de asignación de camión:");
-        System.out.println(Envio.enviosPorAsignar());
+        try {
+            // Mostrar los envíos sin camión asignado
+            System.out.println("Envíos pendientes de asignación de camión:");
+            System.out.println(Envio.enviosPorAsignar());
 
-        // Preguntar al usuario cuál envío desea asignar
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Seleccione el número del envío que desea asignar a un camión: ");
-        int eleccion = scanner.nextInt();
+            // Preguntar al usuario cuál envío desea asignar
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Seleccione el número del envío que desea asignar a un camión: ");
+            int eleccion = scanner.nextInt();
 
-        if (eleccion >= 1 && eleccion <= Envio.getListaEnvios().size()) {
-            // El usuario ha seleccionado un envío válido
-            Envio envioAsignar = Envio.getListaEnvios().get(eleccion - 1);
-            System.out.println(Camion.camionesYCapacidad(envioAsignar.getPesoTotal()));
-
-            // Preguntar al usuario cuál camión desea usar
-            System.out.print("Seleccione el número del camión que desea asignar: ");
-            int eleccionCamion = scanner.nextInt();
-
-            if (eleccionCamion >= 1 && eleccionCamion <= Camion.getCamiones().size()) {
-                // El usuario ha seleccionado un camión válido
-                Camion camionAsignado = Camion.getCamiones().get(eleccionCamion - 1);
-
-                // Asignar el camión al envío
-                camionAsignado.agregarEnvio(envioAsignar);
-                envioAsignar.setCamionAsignado(camionAsignado);
+            if (eleccion >= 1 && eleccion <= Envio.getListaEnvios().size()) {
+                // El usuario ha seleccionado un envío válido
+                Envio envioAsignar = Envio.getListaEnvios().get(eleccion - 1);
                 envioAsignar.setAsignadoAUnCamion(true);
-                camionAsignado.setCapacidad(camionAsignado.getCapacidad() - envioAsignar.getPesoTotal());
+                System.out.println(Camion.camionesYCapacidad(envioAsignar.getPesoTotal()));
 
-                System.out.println("Envío asignado exitosamente al camión " + camionAsignado.getMarca() + " " + camionAsignado.getModelo() + " con placa " + camionAsignado.getPlaca());
+                // Preguntar al usuario cuál camión desea usar
+                System.out.print("Seleccione el número del camión que desea asignar: ");
+                int eleccionCamion = scanner.nextInt();
 
-                // Mostrar productos en bodega no asignados
-                System.out.println("Productos en bodega no asignados a envíos:");
-                System.out.println(bodega.productosNoasignadosAEnvios());
+                if (eleccionCamion >= 1 && eleccionCamion <= Camion.getCamiones().size()) {
+                    // El usuario ha seleccionado un camión válido
+                    Camion camionAsignado = Camion.getCamiones().get(eleccionCamion - 1);
 
-                // Preguntar al usuario si quiere enviar el camión
-                System.out.print("¿Desea enviar el camión? (1. Sí / 2. No): ");
-                int opcionEnvio = scanner.nextInt();
-
-                if (opcionEnvio == 1) {
-                    // Cambiar estado de disponibilidad del camión
+                    // Asignar el camión al envío
+                    camionAsignado.agregarEnvio(envioAsignar);
+                    envioAsignar.setCamionAsignado(camionAsignado);
+                    envioAsignar.setAsignadoAUnCamion(true);
+                    camionAsignado.setCapacidad(camionAsignado.getCapacidad() - envioAsignar.getPesoTotal());
                     camionAsignado.setDisponibilidad(false);
-                    System.out.println("El camión ha sido enviado.");
-                } else {
-                    // Preguntar si quiere realizar otro envío
-                    System.out.print("¿Desea realizar otro envío? (1. Sí / 2. No): ");
-                    int opcionOtroEnvio = scanner.nextInt();
+                    Envio.getListaEnvios().remove(envioAsignar);
+                    Camion.getCamiones().remove(camionAsignado);
 
-                    if (opcionOtroEnvio == 1) {
-                        asignacionDeCarroDeVenta(bodega); // Volver a ejecutar la función
+                    System.out.println("Envío asignado exitosamente al camión " + camionAsignado.getMarca() + " " + camionAsignado.getModelo() + " con placa " + camionAsignado.getPlaca());
+
+                    // Mostrar productos en bodega no asignados
+                    System.out.println("Productos en bodega no asignados a envíos:");
+                    System.out.println(bodega.productosNoasignadosAEnvios());
+
+                    // Preguntar al usuario si quiere enviar el camión
+                    System.out.print("¿Desea enviar el camión? (1. Sí / 2. No): ");
+                    int opcionEnvio = scanner.nextInt();
+
+                    if (opcionEnvio == 1) {
+                        // Cambiar estado de disponibilidad del camión
+                        camionAsignado.setDisponibilidad(false);
+                        System.out.println("El camión ha sido enviado.");
                     } else {
-                        System.out.println("Hasta luego.");
+                        // Preguntar si quiere realizar otro envío
+                        System.out.print("¿Desea realizar otro envío? (1. Sí / 2. No): ");
+                        int opcionOtroEnvio = scanner.nextInt();
+
+                        if (opcionOtroEnvio == 1) {
+                            asignacionDeCarroDeVenta(bodega); // Volver a ejecutar la función
+                        } else {
+                            System.out.println("Hasta luego.");
+                        }
                     }
+                } else {
+                    System.out.println("Selección no válida. Por favor, elija un número de camión válido.");
                 }
             } else {
-                System.out.println("Selección no válida. Por favor, elija un número de camión válido.");
+                System.out.println("Selección no válida. Por favor, elija un número de envío válido.");
             }
-        } else {
-            System.out.println("Selección no válida. Por favor, elija un número de envío válido.");
-        }
 
-        scanner.close();
+            
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada no válida. Ingrese un número entero válido.");
+        }
     }
   //Constructores, si no desea establecer una contraseña por defecto se le asigna la contraseña "root"
     public Administrador(Bodega bodega,Caja caja,List<Camion> camiones, Fabrica fabrica) {

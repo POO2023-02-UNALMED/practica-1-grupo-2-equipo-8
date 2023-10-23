@@ -140,6 +140,8 @@ public class Main {
 	
 					            break;
 					        case 6: //Funcionalidad 5: 
+					        	Administrador.asignacionDeCarroDeVenta(administrador.getBodega());
+					        	
 					        	break;
 					        case 7:
 					        	System.out.println("Descripcion: Cambia automaticamente el nivel de produccion en base a las ventas de un producto y/o el precio de un producto en base a los dias que lleva en bodega");
@@ -171,10 +173,10 @@ public class Main {
 				
 				
 				
-				Serializador.serializarAdministrador(administrador);
-				Serializador.serializarBodegas(administrador.getBodega());
-				Serializador.serializarEnvios(Envio.getListaEnvios());
-				Serializador.serializarIngredientes(Ingrediente.getIngredientesDisponibles());
+//				Serializador.serializarAdministrador(administrador);
+//				Serializador.serializarBodegas(administrador.getBodega());
+//				Serializador.serializarEnvios(Envio.getListaEnvios());
+//				Serializador.serializarIngredientes(Ingrediente.getIngredientesDisponibles());
 				System.out.println("Muchas gracias por usar el software de DeliHorno. Que tenga un feliz día.");
 				System.exit(0);
 }}
