@@ -595,7 +595,7 @@ public class Main {
 				                "\t4. Agregar Producto" + "\n" + 
 				                "\t5. Eliminar Producto"+ "\n" + 
 				                "\t6. Asignar Envio Y camion" + "\n" +
-				                "\t7. Cambiar Produccion y/o ventas de un producto" + "\n" +
+				                "\t7. Cambiar Produccion y/o precio de un producto" + "\n" +
 				                "\t0. Para salir");
 
 				        opcionElegida = scan.nextInt(); 
