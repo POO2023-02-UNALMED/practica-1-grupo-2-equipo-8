@@ -104,7 +104,7 @@ public class Administrador implements Serializable {
 		    ingredientesIniciales.add(ingrediente5);
 		}
 		for (Ingrediente ingrediente : ingredientesIniciales) {
-			ingredientesInicialeBodega.put(ingrediente.getNombre(), 10);
+			ingredientesInicialeBodega.put(ingrediente.getNombre(), 25);
 		}
 
 		//Bodega y pruebas de funciones de bodega
