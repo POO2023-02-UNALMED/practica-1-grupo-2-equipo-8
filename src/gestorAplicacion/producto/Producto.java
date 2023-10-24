@@ -20,7 +20,7 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 
     
     //Constructor
-    public Producto(String nombre, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+    protected Producto(String nombre, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
                     String ID, int peso) {
     	
     	//Se calcula el espacio acumulado según se especifico en el UML
