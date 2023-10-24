@@ -1,15 +1,9 @@
 package uiMain;
-import gestorAplicacion.producto.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
-
-import baseDatos.*;
 import gestorAplicacion.empresa.*;
 import gestorAplicacion.producto.*;
+
+import java.util.*;
 public class Main {
 	public static Scanner scan = new Scanner(System.in);
 	private static Administrador administrador = Administrador.inicializar();
@@ -219,6 +213,51 @@ public class Main {
 		String listaIngredientes = Ingrediente.obtenerListaIngredientes();
 		System.out.println(listaIngredientes);
 
+		imprimirSeparador();
+		System.out.print("Tu producto va a necesitar un ingrediente que no este en la lista? (1.Si / 2.No): ");
+		int respuesta = scan.nextInt();
+
+		while (respuesta == 1) {
+			System.out.print("Ingresa el nombre del nuevo Ingrediente: ");
+			String nombre = scan.next();
+			System.out.print("Ingresa el precio del nuevo Ingrediente: ");
+			int precio = scan.nextInt();
+			System.out.print("Ingresa el identificador del nuevo Ingrediente: ");
+			long identificador = scan.nextLong();
+			System.out.print("Ingresa el espacio de almacenamiento del nuevo Ingrediente: ");
+			int espacio = scan.nextInt();
+
+			//Se crea el nuevo ingrediente
+			Ingrediente nuevo = new Ingrediente(nombre, precio, identificador, espacio);
+
+			// Se obtiene la lista de ingredientes y se asigna a una variable temporal
+			List<Ingrediente> temporal = administrador.getBodega().getIngredientes();
+
+			//A dicha variable temporal se le agrega el nuevo ingrediente
+			temporal.add(nuevo);
+
+			//Se obtiene la bodega almacenada en el administrador, y se almacena como una bodega temporal
+			Bodega bodega_temporal = administrador.getBodega();
+			//A dicha bodega temporal se le asigna la lista de ingrendientes temporal
+			bodega_temporal.setIngredientes(temporal);
+
+			//Se asigna la bodega temporal como el atributo bodega del objeto administrador
+			administrador.setBodega(bodega_temporal);
+
+			//Se pregunta si desea crear otro ingrediente adiciconal
+			System.out.print("Quieres crear otro ingrediente? (1.Si / 2.No): ");
+			respuesta = scan.nextInt();
+		}
+
+		//Mensaje de creaccion existosa
+		imprimirSeparador();
+		System.out.println("Se han agregado los nuevos ingredientes");
+		imprimirSeparador();
+
+		//Se vuelve a mostrar la lista con los ingredientes
+		listaIngredientes = Ingrediente.obtenerListaIngredientes();
+		System.out.println(listaIngredientes);
+
 		HashMap<Ingrediente, Integer> ingredientesYCantidad = new HashMap<>();
 
 		boolean seleccionarOtroIngrediente = true;
@@ -228,6 +267,7 @@ public class Main {
 			System.out.print("Seleccione el número correspondiente al ingrediente que necesita para su producto: ");
 			int opcionIngrediente = scan.nextInt();
 			scan.nextLine(); // Consumir el salto de línea
+			imprimirSeparador();
 
 			// Validar si la opción elegida es válida
 			if (opcionIngrediente >= 1 && opcionIngrediente <= Ingrediente.getIngredientesDisponibles().size()) {
@@ -242,10 +282,10 @@ public class Main {
 
 				// Preguntar si desea seleccionar otro ingrediente
 				System.out.print("¿Desea seleccionar otro ingrediente? (1.Sí / 2.No): ");
-				int respuesta = scan.nextInt();
+				int respuesta1 = scan.nextInt();
 				scan.nextLine(); // Consumir el salto de línea
 
-				if (respuesta != 1) {
+				if (respuesta1 != 1) {
 					if (2 > ingredientesYCantidad.size()) {
 						imprimirSeparador();
 						System.out.println("Se requieren minimo dos ingredientes para la creaccion de un producto");
@@ -278,27 +318,92 @@ public class Main {
 				productoCreado = new Tortas("torta", 5, ingredientesYCantidad, 0, "abc123", 3, 6, "chocolate");
 
 				System.out.println("Producto exitosamente creado: " + productoCreado);
+
+				//Obtenemos la lista de productos actual y la declaramos como una variable temporal
+				List<Producto> temp1 = administrador.getBodega().getProductos();
+
+				//A dicha variable temporal, le agregamos el nuevo objeto
+				temp1.add(productoCreado);
+
+				//Obtenemos la bodega relacionada al objeto administrador y la declaramos como una variable temporal
+				Bodega bodegatemporal1 = administrador.getBodega();
+
+				//A dicha bodega tempora, le re asignamos su lista de productos
+				bodegatemporal1.setProductos(temp1);
+
+				//Al objeto administrador le reasignamos el atributo bodega, con el unico cambio de agregar su lista de productos el nuevo producto
+				administrador.setBodega(bodegatemporal1);
 				break;
 			case 2:
 				// Crear Dona
 				productoCreado = new Donas("dona", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "arquipe");
 				System.out.println("Producto exitosamente creado: " + productoCreado);
+
+				//Obtenemos la lista de productos actual y la declaramos como una variable temporal
+				List<Producto> temp2 = administrador.getBodega().getProductos();
+
+				//A dicha variable temporal, le agregamos el nuevo objeto
+				temp2.add(productoCreado);
+
+				//Obtenemos la bodega relacionada al objeto administrador y la declaramos como una variable temporal
+				Bodega bodegatemporal2 = administrador.getBodega();
+
+				//A dicha bodega tempora, le re asignamos su lista de productos
+				bodegatemporal2.setProductos(temp2);
+
+				//Al objeto administrador le reasignamos el atributo bodega, con el unico cambio de agregar su lista de productos el nuevo producto
+				administrador.setBodega(bodegatemporal2);
+
 				break;
 			case 3:
 				// Crear Pasteles Fritos
 				productoCreado = new PastelesFritos("pastelFrito", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "tomate");
 				System.out.println("Producto exitosamente creado: " + productoCreado);
+
+				//Obtenemos la lista de productos actual y la declaramos como una variable temporal
+				List<Producto> temp3 = administrador.getBodega().getProductos();
+
+				//A dicha variable temporal, le agregamos el nuevo objeto
+				temp3.add(productoCreado);
+
+				//Obtenemos la bodega relacionada al objeto administrador y la declaramos como una variable temporal
+				Bodega bodegatemporal3 = administrador.getBodega();
+
+				//A dicha bodega tempora, le re asignamos su lista de productos
+				bodegatemporal3.setProductos(temp3);
+
+				//Al objeto administrador le reasignamos el atributo bodega, con el unico cambio de agregar su lista de productos el nuevo producto
+				administrador.setBodega(bodegatemporal3);
+
 				break;
 			case 4:
 				// Crear Galleta
 				productoCreado = new Galletas("galleta", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "vainilla");
 				System.out.println("Producto exitosamente creado: " + productoCreado);
+
+				//Obtenemos la lista de productos actual y la declaramos como una variable temporal
+				List<Producto> temp4 = administrador.getBodega().getProductos();
+
+				//A dicha variable temporal, le agregamos el nuevo objeto
+				temp4.add(productoCreado);
+
+				//Obtenemos la bodega relacionada al objeto administrador y la declaramos como una variable temporal
+				Bodega bodegatemporal4 = administrador.getBodega();
+
+				//A dicha bodega tempora, le re asignamos su lista de productos
+				bodegatemporal4.setProductos(temp4);
+
+				//Al objeto administrador le reasignamos el atributo bodega, con el unico cambio de agregar su lista de productos el nuevo producto
+				administrador.setBodega(bodegatemporal4);
+
 				break;
 			default:
 				System.out.println("Opción no válida.");
 				System.out.println("Producto exitosamente creado: " + productoCreado);
 				break;
 		}
+
+
 	}
 	
 	/*
