@@ -23,7 +23,7 @@ public class Fabrica implements Serializable {
 	private boolean produccionEnPausa;
 	private static int codigoTandaActual = 1;
 	private HashMap<Integer, String> registroTandas;
-	private HashMap<Integer, List<String>> productosGenerados;
+	private HashMap<Integer, List<Producto>> productosGenerados;
 	private List<Bodega> otrasBodegas; // Otras bodegas de la empresa
     
     //Constructor
@@ -483,11 +483,11 @@ public class Fabrica implements Serializable {
 		this.registroTandas = registroTandas;
 	}
 
-	public HashMap<Integer, List<String>> getProductosGenerados() {
+	public HashMap<Integer, List<Producto>> getProductosGenerados() {
 		return productosGenerados;
 	}
 
-	public void setProductosGenerados(HashMap<Integer, List<String>> productosGenerados) {
+	public void setProductosGenerados(HashMap<Integer, List<Producto>> productosGenerados) {
 		this.productosGenerados = productosGenerados;
 	}
 

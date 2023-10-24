@@ -34,7 +34,7 @@ public class Envio implements Serializable {
 	        	String clave=producto.getNombre();
 	        	this.bodega.getContabilidadProductos().put(clave, valorActual-1);
 	        	//Agregamos venta al historial de ventas
-	        	Caja.agregarVenta(producto.getNombre(), 1);
+	        	Caja.agregarVenta(producto, 1);
 	        	caja.ingresarDinero(producto.getPrecio());
 	        }
 	        //se suma el dinero del envio a caja
@@ -74,7 +74,7 @@ public class Envio implements Serializable {
 		 int valorActual=this.bodega.getContabilidadProductos().get(producto.getNombre());
       	 String clave=producto.getNombre();
      	 this.bodega.getContabilidadProductos().put(clave, valorActual-1);
-     	 this.caja.agregarVenta(producto.getNombre(), 1);
+     	 Caja.agregarVenta(producto, 1);
 	 }
 	//Elimina un producto al envio con sus repercuciones en bodega y en caja
 	 public void eliminarProducto(Producto producto) {
@@ -86,7 +86,7 @@ public class Envio implements Serializable {
 			 int valorActual=this.bodega.getContabilidadProductos().get(producto.getNombre());
 	      	 String clave=producto.getNombre();
 	     	 this.bodega.getContabilidadProductos().put(clave, valorActual+1);
-	     	 this.caja.eliminarVenta(producto.getNombre(), 1);
+	     	 Caja.eliminarVenta(producto, 1);
 			 
 			 
 		 }

@@ -225,10 +225,10 @@ public class Bodega implements Serializable {
             if (contabilidadProductos.containsKey(producto)) {
                 // Si el producto ya existe en la contabilidad, actualiza la cantidad
                 int cantidadActual = contabilidadProductos.get(producto);
-                contabilidadProductos.put(producto, cantidadActual + cantidad);
+                contabilidadProductos.put(producto.getNombre(), cantidadActual + cantidad);
             } else {
                 // Si el producto no existe en la contabilidad, agrégalo
-                contabilidadProductos.put(producto, cantidad);
+                contabilidadProductos.put(producto.getNombre(), cantidad);
             }
         }
     }
