@@ -54,7 +54,7 @@ public class Administrador implements Serializable {
 		// Crear una torta
 		 HashMap<Ingrediente, Integer> ingredientesTorta = new HashMap<Ingrediente, Integer>();
 		 Ingrediente harina = new Ingrediente("harina", 5, 1234, 10);
-		 Ingrediente azucar = new Ingrediente("azúcar", 3, 1234, 5);
+		 Ingrediente azucar = new Ingrediente("azucar", 3, 1234, 5);
 		 ingredientesTorta.put(harina, 1);
 		 ingredientesTorta.put(azucar, 1);
 		 Tortas torta = new Tortas("torta", 5, ingredientesTorta, 0, "abc123", 3, 6, "chocolate");
@@ -87,7 +87,7 @@ public class Administrador implements Serializable {
 		 Ingrediente azucar4 = new Ingrediente("azucar", 3, 1234, 5);
 		 ingredientesDonas.put(harina4, 2);
 		 ingredientesDonas.put(azucar4, 1);
-		 Donas dona = new Donas("dona", 5, ingredientesDonas, 20, "ald245", 3, false, "arquipe");
+		 Donas dona = new Donas("dona", 5, ingredientesDonas, 20, "ald245", 3, false, "arequipe");
 		 productosIniciales.add(dona);
 		 productosInicialesBodega1.put(dona.getNombre(), 1);	
 	 
@@ -104,7 +104,7 @@ public class Administrador implements Serializable {
 		    ingredientesIniciales.add(ingrediente5);
 		}
 		for (Ingrediente ingrediente : ingredientesIniciales) {
-			ingredientesInicialeBodega.put(ingrediente.getNombre(), 10);
+			ingredientesInicialeBodega.put(ingrediente.getNombre(), 30);
 		}
 
 		//Bodega y pruebas de funciones de bodega
