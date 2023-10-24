@@ -61,11 +61,66 @@ public class Main {
 				        switch(opcionElegida) {
 							//De acuerdo al valor Integer de opcionElegida, se elige ejecutar uno de los metodos a continuacion
 							case 1:
-								break;
+								 System.out.println("Cantidad de ingredientes en bodega:");
+								    String contabilidadIngredientes = administrador.getBodega().mostrarContabilidadIngredientes();
+								    System.out.println(contabilidadIngredientes);
+
+								    System.out.print("¿Cree necesario comprar ingredientes? (1.Sí / 2.No): ");
+								    int respuestaComprarIngredientes = scan.nextInt();
+								    scan.nextLine(); // Consumir el salto de línea
+
+								    if (respuestaComprarIngredientes == 1) {
+								        // Mostrar los ingredientes escasos y preguntar si están seguros de que no necesitan comprar.
+								        System.out.println("Ingredientes escasos:");
+								        String ingredientesEscasos = administrador.getBodega().mostrarIngredientesEscasos();
+								        System.out.println(ingredientesEscasos);
+
+								        System.out.print("Aquí puede ver los ingredientes escazos,¿Está seguro de que necesita comprar ingredientes? (1.Sí / 2.No): ");
+								        int respuestaIngredientesEscasos = scan.nextInt();
+								        scan.nextLine(); // Consumir el salto de línea
+
+								        if (respuestaIngredientesEscasos == 1) {
+								        	Scanner scanner = new Scanner(System.in);
+								        	System.out.print("Seleccione el ingrediente que desea pedir ");
+								        	System.out.println(Ingrediente.obtenerListaIngredientes());
+								        	int opcion = scanner.nextInt();
+
+								    	    if (opcion < 1 || opcion > Ingrediente.getIngredientesDisponibles().size()) {
+								    	        System.out.println("Opción no válida. Seleccione un número válido.");
+								    	        scanner.close();
+								    	        return;
+								    	    }
+
+								    	    // Obtener el ingrediente seleccionado
+								    	    Ingrediente ingredienteSeleccionado = Ingrediente.getIngredientesDisponibles().get(opcion - 1);
+
+								    	    // Solicitar la cantidad deseada
+								    	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
+								    	    int cantidadPedida = scanner.nextInt();
+
+								    	    // Crear la cantidad de ingredientes solicitados
+								    	    for (int i = 0; i < cantidadPedida; i++) {
+								    	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
+								    	        administrador.getBodega().getIngredientes().add(nuevoIngrediente);
+								    	        administrador.getBodega().getContabilidadIngredientes().merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
+								    	        
+								    	    }
+								    	    administrador.getCaja().restarDinero(ingredienteSeleccionado.getPrecio()*cantidadPedida);
+								    	    System.out.println("Su compra ha sido realizada con exito");
+								        	
+								        } else {
+								        	System.out.println("Por ahora no se compra nada.");
+								        }
+								    } else if (respuestaComprarIngredientes == 2) {
+								        System.out.println("Por ahora no se compra nada.");
+								    } else {
+								        System.out.println("Opción no válida.");
+								    }
+								    break;
 							case 2:
 								 break;
 							case 3:
-								
+								 
 								 break;
 				        	case 4: 
 				        	
@@ -128,10 +183,11 @@ public class Main {
 				        		        case 1:
 				        		            // Crear Torta
 				        		            productoCreado = new Tortas("torta", 5, ingredientesYCantidad, 0, "abc123", 3, 6, "chocolate");
+				        		            
 				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
 				        		            break;
 				        		        case 2:
-				        		            // Crear Dona
+				        		            // Crear Dona 	
 				        		            productoCreado = new Donas("dona", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "arquipe");
 				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
 				        		            break;
