@@ -64,30 +64,30 @@ public class Administrador implements Serializable {
 		 // Crear un pastel frito
 		 HashMap<Ingrediente, Integer> ingredientesPastelesFritos = new HashMap<Ingrediente, Integer>();
 		 Ingrediente harina2 = new Ingrediente("harina", 5, 1234, 10);
-		 Ingrediente azucar2 = new Ingrediente("azúcar", 3, 1234, 5);
+		 Ingrediente azucar2 = new Ingrediente("azucar", 3, 1234, 5);
 		 ingredientesPastelesFritos.put(harina2, 2);
 		 ingredientesPastelesFritos.put(azucar2, 1);
-		 PastelesFritos pastelFrito = new PastelesFritos("pastelFrito",5, ingredientesPastelesFritos, 20, "dfg123", 3, false, "tomate");
+		 PastelesFritos pastelFrito = new PastelesFritos("pastelFrito",5, ingredientesPastelesFritos, 20, "abc213", 3, false, "tomate");
 		 productosIniciales.add(pastelFrito);
 		 productosInicialesBodega1.put(pastelFrito.getNombre(), 1);
 		
 		// Crear unas galletas
 		 HashMap<Ingrediente, Integer> ingredientesGalletas = new HashMap<Ingrediente, Integer>();
 		 Ingrediente harina3 = new Ingrediente("harina", 5, 1234, 10);
-		 Ingrediente azucar3 = new Ingrediente("azúcar", 3, 1234, 5);
+		 Ingrediente azucar3 = new Ingrediente("azucar", 3, 1234, 5);
 		 ingredientesGalletas.put(harina3, 2);
 		 ingredientesGalletas.put(azucar3, 1);
-		 Galletas galletas = new Galletas("galleta", 5, ingredientesGalletas, 20, "dfg123", 3, false, "vainilla");
+		 Galletas galletas = new Galletas("galleta", 5, ingredientesGalletas, 20, "rtx213", 3, false, "vainilla");
 		 productosIniciales.add(galletas);
 		 productosInicialesBodega1.put(galletas.getNombre(), 1);
 		
 		// Crear una dona
 		 HashMap<Ingrediente, Integer> ingredientesDonas = new HashMap<>();
 		 Ingrediente harina4 = new Ingrediente("harina", 5, 1234, 10);
-		 Ingrediente azucar4 = new Ingrediente("azúcar", 3, 1234, 5);
+		 Ingrediente azucar4 = new Ingrediente("azucar", 3, 1234, 5);
 		 ingredientesDonas.put(harina4, 2);
 		 ingredientesDonas.put(azucar4, 1);
-		 Donas dona = new Donas("dona", 5, ingredientesDonas, 20, "dfg123", 3, false, "arquipe");
+		 Donas dona = new Donas("dona", 5, ingredientesDonas, 20, "ald245", 3, false, "arquipe");
 		 productosIniciales.add(dona);
 		 productosInicialesBodega1.put(dona.getNombre(), 1);	
 	 

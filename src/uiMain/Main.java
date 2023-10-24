@@ -97,26 +97,29 @@ public class Main {
 								    	    // Solicitar la cantidad deseada
 								    	    System.out.print("¿Cuántos " + ingredienteSeleccionado.getNombre() + " desea pedir? ");
 								    	    int cantidadPedida = scanner.nextInt();
-
+								    	    //Costo total a pedir
+								    	    int costoTotal = ingredienteSeleccionado.getPrecio() * cantidadPedida;
+								    	    
 								    	    // Crear la cantidad de ingredientes solicitados
-								    	    for (int i = 0; i < cantidadPedida; i++) {
-								    	        Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
-								    	        administrador.getBodega().getIngredientes().add(nuevoIngrediente);
-								    	        administrador.getBodega().getContabilidadIngredientes().merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
-								    	        
-								    	    }
-								    	    administrador.getCaja().restarDinero(ingredienteSeleccionado.getPrecio()*cantidadPedida);
+								    	    if (administrador.getCaja().getDinero() >= costoTotal) {
+								    	        // Crear la cantidad de ingredientes solicitados
+								    	        for (int i = 0; i < cantidadPedida; i++) {
+								    	            Ingrediente nuevoIngrediente = new Ingrediente(ingredienteSeleccionado.getNombre());
+								    	            administrador.getBodega().getIngredientes().add(nuevoIngrediente);
+								    	            administrador.getBodega().getContabilidadIngredientes().merge(ingredienteSeleccionado.getNombre(), 1, Integer::sum);
+								    	        }
+								    	    administrador.getCaja().restarDinero(costoTotal);
 								    	    System.out.println("Su compra ha sido realizada con exito");
 								        	
 								        } else {
-								        	System.out.println("Por ahora no se compra nada.");
+								            System.out.println("No hay suficiente dinero en la caja para comprar estos ingredientes.");
 								        }
 								    } else if (respuestaComprarIngredientes == 2) {
 								        System.out.println("Por ahora no se compra nada.");
 								    } else {
 								        System.out.println("Opción no válida.");
 								    }
-								    break;
+								    break;}
 							case 2:
 								// Pedir al usuario que ingrese un código de envío
 								System.out.print("Ingrese un código de envío (número entero): ");
