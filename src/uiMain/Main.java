@@ -1,14 +1,14 @@
 package uiMain;
+
+import gestorAplicacion.empresa.Administrador;
+import gestorAplicacion.empresa.Envio;
+import gestorAplicacion.empresa.Ingrediente;
 import gestorAplicacion.producto.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-
-import baseDatos.*;
-import gestorAplicacion.empresa.*;
-import gestorAplicacion.producto.*;
 public class Main {
 	public static Scanner scan = new Scanner(System.in);
 	private static Administrador administrador = Administrador.inicializar();
@@ -40,7 +40,12 @@ public class Main {
 	public static void main(String[] args) {
 				imprimirListaProductos();
 				System.out.println("Bienvenido a Alimentos Delihorno.");
-				
+
+				imprimirSeparador();  //Separador estetico de productos
+				System.out.println("Nuestros Productos: ");
+				imprimirListaProductos();
+				imprimirSeparador();  //Separador estetico de productos
+
 				int opcionElegida = -1;
 				
 				do {
@@ -176,98 +181,94 @@ public class Main {
 							case 3:
 								 
 								 break;
-				        	case 4: 
-				        	
-				        		System.out.println("Lista de ingredientes disponibles:\n");
-				        		String listaIngredientes = Ingrediente.obtenerListaIngredientes();
-				        		System.out.println(listaIngredientes);
+				        	case 4:
 
-				        		HashMap<Ingrediente, Integer> ingredientesYCantidad = new HashMap<>();
+								String listaIngredientes = Ingrediente.obtenerListaIngredientes();
+								System.out.println(listaIngredientes);
 
-				        		boolean seleccionarOtroIngrediente = true;
+								HashMap<Ingrediente, Integer> ingredientesYCantidad = new HashMap<>();
 
-				        		while (seleccionarOtroIngrediente) {
-				        		    // Pedir al usuario que elija un ingrediente
-				        		    System.out.print("Seleccione el número correspondiente al ingrediente que necesita para su producto: ");
-				        		    int opcionIngrediente = scan.nextInt();
-				        		    scan.nextLine(); // Consumir el salto de línea
+								boolean seleccionarOtroIngrediente = true;
 
-				        		    // Validar si la opción elegida es válida
-				        		    if (opcionIngrediente >= 1 && opcionIngrediente <= Ingrediente.getIngredientesDisponibles().size()) {
-				        		        Ingrediente ingredienteElegido = Ingrediente.getIngredientesDisponibles().get(opcionIngrediente - 1);
+								while (seleccionarOtroIngrediente) {
+									// Pedir al usuario que elija un ingrediente
+									System.out.print("Seleccione el número correspondiente al ingrediente que necesita para su producto: ");
+									int opcionIngrediente = scan.nextInt();
+									scan.nextLine(); // Consumir el salto de línea
 
-				        		        // Pedir al usuario la cantidad de ese ingrediente
-				        		        System.out.print("Ingrese la cantidad de " + ingredienteElegido.getNombre() + " que necesita: ");
-				        		        int cantidadIngrediente = scan.nextInt();
-				        		        scan.nextLine(); // Consumir el salto de línea
+									// Validar si la opción elegida es válida
+									if (opcionIngrediente >= 1 && opcionIngrediente <= Ingrediente.getIngredientesDisponibles().size()) {
+										Ingrediente ingredienteElegido = Ingrediente.getIngredientesDisponibles().get(opcionIngrediente - 1);
 
-				        		        ingredientesYCantidad.put(ingredienteElegido, cantidadIngrediente);
+										// Pedir al usuario la cantidad de ese ingrediente
+										System.out.print("Ingrese la cantidad de " + ingredienteElegido.getNombre() + " que necesita: ");
+										int cantidadIngrediente = scan.nextInt();
+										scan.nextLine(); // Consumir el salto de línea
 
-				        		        // Preguntar si desea seleccionar otro ingrediente
-				        		        System.out.print("¿Desea seleccionar otro ingrediente? (1.Sí / 2.No): ");
-				        		        int respuesta = scan.nextInt();
-				        		        scan.nextLine(); // Consumir el salto de línea
+										ingredientesYCantidad.put(ingredienteElegido, cantidadIngrediente);
 
-				        		        seleccionarOtroIngrediente = (respuesta == 1);
-				        		    } else {
-				        		        System.out.println("Opción no válida. Seleccione un número válido.");
-				        		    }
-				        		}
+										// Preguntar si desea seleccionar otro ingrediente
+										System.out.print("¿Desea seleccionar otro ingrediente? (1.Sí / 2.No): ");
+										int respuesta = scan.nextInt();
+										scan.nextLine(); // Consumir el salto de línea
 
-				        		// Pregunta al usuario si desea crear un producto
-				        		System.out.print("¿Desea crear un producto? (1.Sí / 2.No): ");
-				        		int respuestaCrearProducto = scan.nextInt();
-				        		scan.nextLine(); // Consumir el salto de línea
+										if (respuesta != 1) {
+											if (2 > ingredientesYCantidad.size()) {
+												imprimirSeparador();
+												System.out.println("Se requieren minimo dos ingredientes para la creaccion de un producto");
+												imprimirSeparador();
+											} else {
+												seleccionarOtroIngrediente = false;
+											}
+										}
+									} else {
+										System.out.println("Opción no válida. Seleccione un número válido.");
+									}
+								}
 
-				        		if (respuestaCrearProducto == 1) {
-				        		    System.out.println("Seleccione el tipo de producto que desea crear:");
-				        		    System.out.println("1. Torta");
-				        		    System.out.println("2. Dona");
-				        		    System.out.println("3. Pasteles Fritos");
-				        		    System.out.println("4. Galleta");
+								System.out.println("Seleccione el tipo de producto que desea crear:");
+								System.out.println("1. Torta");
+								System.out.println("2. Dona");
+								System.out.println("3. Pasteles Fritos");
+								System.out.println("4. Galleta");
 
-				        		    int tipoProducto = scan.nextInt();
-				        		    scan.nextLine(); // Consumir el salto de línea
+								int tipoProducto = scan.nextInt();
+								scan.nextLine(); // Consumir el salto de línea
 
-				        		    // Creamos un objeto de tipo Producto para guardar el producto creado
-				        		    Producto productoCreado = null;
+								// Creamos un objeto de tipo Producto para guardar el producto creado
+								Producto productoCreado = null;
 
-				        		    // Dependiendo del tipo de producto seleccionado, creamos la instancia correspondiente
-				        		    switch (tipoProducto) {
-				        		        case 1:
-				        		            // Crear Torta
-				        		            productoCreado = new Tortas("torta", 5, ingredientesYCantidad, 0, "abc123", 3, 6, "chocolate");
-				        		            
-				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
-				        		            break;
-				        		        case 2:
-				        		            // Crear Dona 	
-				        		            productoCreado = new Donas("dona", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "arquipe");
-				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
-				        		            break;
-				        		        case 3:
-				        		            // Crear Pasteles Fritos
-				        		            productoCreado = new PastelesFritos("pastelFrito", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "tomate");
-				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
-				        		            break;
-				        		        case 4:
-				        		            // Crear Galleta
-				        		            productoCreado = new Galletas("galleta", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "vainilla");
-				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
-				        		            break;
-				        		        default:
-				        		            System.out.println("Opción no válida.");
-				        		            System.out.println("Producto exitosamente creado: " + productoCreado);
-				        		            break;
-				        		    }}
+								// Dependiendo del tipo de producto seleccionado, creamos la instancia correspondiente
+								switch (tipoProducto) {
+									case 1:
+										// Crear Torta
+										productoCreado = new Tortas("torta", 5, ingredientesYCantidad, 0, "abc123", 3, 6, "chocolate");
+
+										System.out.println("Producto exitosamente creado: " + productoCreado);
+										break;
+									case 2:
+										// Crear Dona
+										productoCreado = new Donas("dona", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "arquipe");
+										System.out.println("Producto exitosamente creado: " + productoCreado);
+										break;
+									case 3:
+										// Crear Pasteles Fritos
+										productoCreado = new PastelesFritos("pastelFrito", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "tomate");
+										System.out.println("Producto exitosamente creado: " + productoCreado);
+										break;
+									case 4:
+										// Crear Galleta
+										productoCreado = new Galletas("galleta", 5, ingredientesYCantidad, 20, "dfg123", 3, false, "vainilla");
+										System.out.println("Producto exitosamente creado: " + productoCreado);
+										break;
+									default:
+										System.out.println("Opción no válida.");
+										System.out.println("Producto exitosamente creado: " + productoCreado);
+										break;
+								}
+								break;
 
 
-				        	
-
-				        		
-				        		
-				        		
-					          
 				        	case 5: //Funcionalidad 4: Eliminar Producto
 	
 					            //Metodo de clase
