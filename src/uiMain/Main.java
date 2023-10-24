@@ -139,7 +139,7 @@ public class Main {
 
 								while (seleccionarOtroProducto) {
 								    // Mostrar la lista de productos disponibles
-								    administrador.getBodega().mostrarProductos();
+								    System.out.println(administrador.getBodega().mostrarProductos()); ;
 
 								    // Pedir al cliente que elija un producto
 								    System.out.print("Elija un producto ingresando el número correspondiente: ");

@@ -87,7 +87,7 @@ public class Administrador implements Serializable {
 		 Ingrediente azucar4 = new Ingrediente("azucar", 3, 1234, 5);
 		 ingredientesDonas.put(harina4, 2);
 		 ingredientesDonas.put(azucar4, 1);
-		 Donas dona = new Donas("dona", 5, ingredientesDonas, 20, "ald245", 3, false, "arquipe");
+		 Donas dona = new Donas("dona", 5, ingredientesDonas, 20, "ald245", 3, false, "arequipe");
 		 productosIniciales.add(dona);
 		 productosInicialesBodega1.put(dona.getNombre(), 1);	
 	 

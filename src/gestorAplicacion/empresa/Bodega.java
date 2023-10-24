@@ -42,12 +42,14 @@ public class Bodega implements Serializable {
 	
 	
 	//Importante para hacer funcionalidad 1.2
-	public void mostrarProductos() {
+	public String mostrarProductos() {
+	    StringBuilder sb = new StringBuilder();
 	    int indice = 1;
 	    for (Producto producto : productos) {
-	        System.out.println(indice + ". " + producto.getNombre() + " - Precio: $" + producto.getPrecio());
+	        sb.append(indice).append(". ").append(producto.getNombre()).append(" - Precio: $").append(producto.getPrecio()).append("\n");
 	        indice++;
 	    }
+	    return sb.toString();
 	}
 	
 	
