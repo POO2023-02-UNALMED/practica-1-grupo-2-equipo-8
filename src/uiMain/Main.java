@@ -410,9 +410,50 @@ public class Main {
 	 * Interfaz de Usuario para la funcionalidad 5: Eliminar un producto ---------- No implementado correctamente
 	 */
 	public static void eliminarProductoUI() {
-        System.out.println("Actualmente se ofrecen los siguientes productos: ");
-        //Producto.MostrarProductos();
-        System.out.println("Por favor, escriba el nombre del producto que desea eliminar: ");
+		System.out.println("Actualmente se ofrecen los siguientes productos: ");
+		imprimirListaProductos();
+		System.out.println("Por favor, escriba el nombre del producto que desea eliminar: ");
+		String nombreProductoAEliminar = scan.nextLine();
+
+		// Obtener la lista de productos actual
+		List<Producto> productos = administrador.getBodega().getProductos();
+
+		// Buscar el producto por nombre
+		Producto productoAEliminar = null;
+		int indiceAEliminar = -1;
+
+		for (int i = 0; i < productos.size(); i++) {
+			if (productos.get(i).getNombre().equalsIgnoreCase(nombreProductoAEliminar)) {
+				productoAEliminar = productos.get(i);
+				indiceAEliminar = i;
+				break;
+			}
+		}
+
+		if (productoAEliminar != null) {
+			System.out.println("¿Seguro que desea eliminar el producto '" + productoAEliminar.getNombre() + "'? (1.Sí / 2.No): ");
+			int confirmacion = scan.nextInt();
+			scan.nextLine(); // Consumir el salto de línea
+
+			if (confirmacion == 1) {
+				// Eliminar el producto de la lista
+				productos.remove(indiceAEliminar);
+				System.out.println("El producto ha sido eliminado con éxito.");
+
+				// Actualizar la lista de productos en la bodega
+
+				Bodega bodega_temporal2 = administrador.getBodega();
+
+				bodega_temporal2.setProductos(productos);
+
+				administrador.setBodega(bodega_temporal2);
+			} else {
+				System.out.println("No se ha eliminado ningún producto.");
+			}
+		} else {
+			System.out.println("El producto ingresado no se encontró en la lista de productos.");
+		}
+
 	}
 	
 	/*
