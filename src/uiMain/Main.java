@@ -118,6 +118,60 @@ public class Main {
 								    }
 								    break;
 							case 2:
+								// Pedir al usuario que ingrese un código de envío
+								System.out.print("Ingrese un código de envío (número entero): ");
+								int codigoEnvio = scan.nextInt();
+								scan.nextLine();
+
+								// Crear una lista para almacenar los productos seleccionados
+								List<Producto> productosSeleccionados = new ArrayList<>();
+
+								// Variable para controlar si el cliente quiere seleccionar más productos
+								boolean seleccionarOtroProducto = true;
+
+								while (seleccionarOtroProducto) {
+								    // Mostrar la lista de productos disponibles
+								    administrador.getBodega().mostrarProductos();
+
+								    // Pedir al cliente que elija un producto
+								    System.out.print("Elija un producto ingresando el número correspondiente: ");
+								    int opcionProducto = scan.nextInt();
+								    scan.nextLine();
+
+								    // Validar si la opción elegida es válida
+								    if (opcionProducto >= 1 && opcionProducto <= administrador.getBodega().getProductos().size()) {
+								        Producto productoElegido = administrador.getBodega().getProductos().get(opcionProducto - 1);
+
+								        // Verificar si el producto ya fue seleccionado previamente
+								        if (productosSeleccionados.contains(productoElegido)) {
+								            System.out.println("Ya ha seleccionado ese producto. Por favor, elija otro.");
+								        } else {
+								            // Agregar el producto a la lista de productos seleccionados
+								            productosSeleccionados.add(productoElegido);
+								            System.out.println("Has elegido el producto: " + productoElegido.getNombre());
+								        }
+
+								        // Preguntar si desea seleccionar otro producto
+								        System.out.print("¿Desea elegir otro producto? (1.Sí / 2.No): ");
+								        int respuesta = scan.nextInt();
+								        scan.nextLine();
+
+								        seleccionarOtroProducto = (respuesta == 1);
+								    } else {
+								        System.out.println("Opción no válida. Seleccione un número válido.");
+								    }
+								}
+
+								// Crear un envío con el código ingresado, la lista de productos seleccionados, la caja y la bodega
+								Envio nuevoEnvio = new Envio(codigoEnvio, productosSeleccionados, administrador.getCaja(), administrador.getBodega());
+
+								
+
+								// Mensaje de confirmación
+								System.out.println("Se ha creado un nuevo envío con código " + nuevoEnvio.getCodigoDeEnvio() + " y los productos seleccionados.");
+
+								// Ahora, los productos se han asignado al envío, se han eliminado de la bodega y se ha registrado la venta en la caja.
+
 								 break;
 							case 3:
 								 

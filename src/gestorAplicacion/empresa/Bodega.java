@@ -39,6 +39,19 @@ public class Bodega implements Serializable {
 		
 		//cantidadProductosTotales = this.productos.size();
 	}
+	
+	
+	//Importante para hacer funcionalidad 1.2
+	public void mostrarProductos() {
+	    int indice = 1;
+	    for (Producto producto : productos) {
+	        System.out.println(indice + ". " + producto.getNombre() + " - Precio: $" + producto.getPrecio());
+	        indice++;
+	    }
+	}
+	
+	
+	
 	//Muestra las claves y los valores del hashmap lo cual es necesario en la funcionalidad 1
 	public String mostrarContabilidadIngredientes() {
 	    StringBuilder resultado = new StringBuilder();
