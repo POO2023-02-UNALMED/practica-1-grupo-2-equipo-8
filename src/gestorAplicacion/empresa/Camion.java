@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class Camion implements Serializable {
 	//Atributos
-	private String marca;
-	private String modelo;
+	private  final String marca;
+	private  final String modelo;
 	private int capacidad;
-	private String placa;
+	private  final String placa;
 	private List<Envio> envios = new ArrayList<Envio>();
 	private static ArrayList<Camion> camiones =new ArrayList<Camion>();
 	private boolean disponibilidad= true;
@@ -69,10 +69,6 @@ public class Camion implements Serializable {
 
 
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
 
 
 	public String getModelo() {
@@ -81,9 +77,6 @@ public class Camion implements Serializable {
 
 
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
 
 
 
@@ -101,12 +94,6 @@ public class Camion implements Serializable {
 
 	public String getPlaca() {
 		return placa;
-	}
-
-
-
-	public void setPlaca(String placa) {
-		this.placa = placa;
 	}
 
 
