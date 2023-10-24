@@ -193,8 +193,7 @@ public class Bodega implements Serializable {
 	    	
 	    	for(int i = 0; i < productos.size(); i++) {
 	    		Producto producto = productos.get(i);
-	    		
-	    		if(i != 0) {
+	    		if(i != 0 && produccion.get(producto) != null) {
 	    			if(produccion.get(productoMayorVendido) > produccion.get(producto)) {
 	    				produccion.put(producto, (int) (produccion.get(producto) * 0.85));
 	    			}else {
