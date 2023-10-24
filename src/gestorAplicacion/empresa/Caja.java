@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class Caja implements Serializable {
 	private int dinero;
-	static private HashMap<String, Integer> historialVentas = new HashMap<String, Integer>();
-	private HashMap<String, Integer> costosProduccion = new HashMap<>(); // Variable costosProduccion agregada ¿deberia ser estatico?
+	static private HashMap<Producto, Integer> historialVentas = new HashMap<Producto, Integer>();
+	private HashMap<Producto, Integer> costosProduccion = new HashMap<>(); // Variable costosProduccion agregada ¿deberia ser estatico?
 	
 	public Caja(int dinero) {
 		this.dinero=dinero;
@@ -20,15 +20,15 @@ public class Caja implements Serializable {
     */
 	public static String verHistorialCompras() {
     	StringBuilder str = new StringBuilder();
-        Caja.historialVentas.forEach((String producto, Integer venta) -> {
+        Caja.historialVentas.forEach((Producto producto, Integer venta) -> {
             str.append("El producto " + producto + " ha sido comprado " + venta + (venta == 1 ? " vez." : " veces."));
         });
         return str.toString();
     }
 
-    public static List<String> historialVentasOrganizado() {
-    	List<String> productosOrdenados = new ArrayList<String>(historialVentas.keySet());
-    	productosOrdenados.sort((String p1, String p2) -> Integer.compare(historialVentas.get(p2), historialVentas.get(p1)));
+    public static List<Producto> historialVentasOrganizado() {
+    	List<Producto> productosOrdenados = new ArrayList<Producto>(historialVentas.keySet());
+    	productosOrdenados.sort((Producto p1, Producto p2) -> Integer.compare(historialVentas.get(p2), historialVentas.get(p1)));
     	return productosOrdenados;
     }
     
@@ -42,7 +42,7 @@ public class Caja implements Serializable {
     }
     
     // Metodo para agregar una venta
-    public static void agregarVenta(String producto, Integer cantidadVenta){
+    public static void agregarVenta(Producto producto, Integer cantidadVenta){
         if(Caja.historialVentas.containsKey(producto)){
             Caja.historialVentas.put(producto, Caja.historialVentas.get(producto) + cantidadVenta);
         }else{
@@ -51,7 +51,7 @@ public class Caja implements Serializable {
     }
     
     // Metodo para agregar una venta
-    public static void eliminarVenta(String producto, Integer cantidadVenta){
+    public static void eliminarVenta(Producto producto, Integer cantidadVenta){
         if(Caja.historialVentas.containsKey(producto)){
             Caja.historialVentas.put(producto, Caja.historialVentas.get(producto) - cantidadVenta);
         }
@@ -59,60 +59,48 @@ public class Caja implements Serializable {
     
   //se añade un nuevo metodo para la funcionalida #2 para actualizarCostosProduccion
     
-    public String actualizarCostosProduccion(HashMap<String, Integer> produccionDiaria, HashMap<String, Integer> costosUnitarios, HashMap<String, Integer> materiaPrimaNecesaria) {
-        // Obtener la lista de costos de producción actual
-        HashMap<String, Integer> costosProduccionActual = new HashMap<>();
+	public void actualizarCostosProduccion(Producto producto,int nuevaCantidad) {
+	    	
+	    	int nuevoCosto = producto.getPrecio() * nuevaCantidad;
+	    	
+	    	for(Producto nombreproducto : costosProduccion.keySet()) {
+	    		
+	    		int valorActual = costosProduccion.get(nombreproducto);
+	    		costosProduccion.put(nombreproducto, nuevoCosto);
+	    	}
+	    }
 
-        // Calcular los costos de producción en función de la lista de producción diaria y los costos unitarios de producción
-        for (Map.Entry<String, Integer> entry : produccionDiaria.entrySet()) {
-            String producto = entry.getKey();
-            int cantidadProduccion = entry.getValue();
-
-            // Verificar si el producto tiene un costo unitario asociado
-            if (costosUnitarios.containsKey(producto)) {
-                int costoUnitario = costosUnitarios.get(producto);
-                int costoProduccion = cantidadProduccion * costoUnitario;
-                // Agregar el costo de producción calculado a la lista de costos de producción actualizada
-                costosProduccionActual.put(producto, costoProduccion);
-            }
-        }
-        
-        // Establecer la lista de costos de producción actualizada en la caja
-        this.setCostosProduccion(costosProduccionActual);
-    
-        // Mostrar la lista de costos de producción actualizada
-        StringBuilder str = new StringBuilder("Lista de costos de producción actualizada:");
-        for (Map.Entry<String, Integer> entry : costosProduccionActual.entrySet()) {
-            str.append("\tProducto: " + entry.getKey() + ", Costo de producción: " + entry.getValue() + ".\n");
-        }
-        
-        return str.toString();
-    }
-
-	private void setCostosProduccion(HashMap<String, Integer> costosProduccionActual) {
+	private void setCostosProduccion(HashMap<Producto, Integer> costosProduccionActual) {
 		this.costosProduccion = costosProduccionActual;
 	}
 	//se añade un nuevo metodo para la funcionalida #2 para descontar el valor
 
 
-    public String descontarValorLista(HashMap<String, Integer> costosProduccion) {
-        // Obtener el dinero actual en la caja
-        int dineroActual = this.getDinero();
-        StringBuilder str = new StringBuilder();
-        
-        // Descontar el valor de la lista de costos de producción de la caja
-        for (Map.Entry<String, Integer> entry : costosProduccion.entrySet()) {
-            String producto = entry.getKey();
-            int costoProduccion = entry.getValue();
+	public String descontarValorLista(HashMap<Producto, Integer> costosProduccion) {
+	    // Obtener el dinero actual en la caja
+	    int dineroActual = this.getDinero();
+	    StringBuilder str = new StringBuilder();
 
-            if (dineroActual >= costoProduccion) {
-                // Descontar el costo de producción de la caja
-                dineroActual -= costoProduccion;
-                str.append("Se ha descontado " + costoProduccion + " para el producto "+ producto +".\n");
-            } else {
-                str.append("No hay suficiente dinero en la caja para descontar el costo de producción de " + producto + ".\n");
-            }
-        }
+	    // Descontar el valor de la lista de costos de producción de la caja
+	    for (Map.Entry<Producto, Integer> entry : costosProduccion.entrySet()) {
+	        Producto producto = entry.getKey();
+	        int costoProduccion = entry.getValue();
+
+	        if (dineroActual >= producto.getCostos()*costoProduccion) {
+	            // Descontar el costo de producción de la caja
+	            dineroActual -= producto.getCostos()*costoProduccion;
+	            str.append("Se ha descontado " + producto.getCostos()*costoProduccion + " para el producto " + producto.getNombre() + ".\n");
+	        } else {
+	            str.append("No hay suficiente dinero en la caja para descontar el costo de producción de " + producto.getNombre() + ".\n");
+	        }
+	    
+
+	    // Actualizar el valor de dinero en la caja después del descuento
+	    this.setDinero(dineroActual);
+	    str.append("Actualmente cuenta con " + this.getDinero() + " en la caja.\n");
+	    return str.toString();
+	}
+
 
         // Actualizar el valor de dinero en la caja después del descuento
         this.setDinero(dineroActual);
@@ -130,11 +118,11 @@ public class Caja implements Serializable {
 		this.dinero = dinero;
 	}
 
-	public HashMap<String, Integer> getHistorialVentas() {
+	public HashMap<Producto, Integer> getHistorialVentas() {
 		return historialVentas;
 	}
 
-	public void setHistorialVentas(HashMap<String, Integer> historialVentas) {
+	public void setHistorialVentas(HashMap<Producto, Integer> historialVentas) {
 		Caja.historialVentas = historialVentas;
 	}
 

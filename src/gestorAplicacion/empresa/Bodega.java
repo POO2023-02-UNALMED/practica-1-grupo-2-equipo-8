@@ -1,11 +1,13 @@
 package gestorAplicacion.empresa;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 import gestorAplicacion.producto.Producto;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
 
 public class Bodega implements Serializable {
@@ -175,12 +177,12 @@ public class Bodega implements Serializable {
      */
     public String actualizarProduccionBaseVentas(Fabrica fabrica) {
     	try {
-	    	List<String> productos = Caja.historialVentasOrganizado();
-	    	HashMap<String,Integer> produccion = fabrica.getProduccionDiaria();
-	    	String productoMayorVendido = productos.get(0);
+	    	List<Producto> productos = Caja.historialVentasOrganizado();
+	    	HashMap<Producto, Integer> produccion = fabrica.getProduccionDiaria();
+	    	Producto productoMayorVendido = productos.get(0);
 	    	
 	    	for(int i = 0; i < productos.size(); i++) {
-	    		String producto = productos.get(i);
+	    		Producto producto = productos.get(i);
 	    		
 	    		if(i != 0) {
 	    			if(produccion.get(productoMayorVendido) > produccion.get(producto)) {
@@ -213,26 +215,80 @@ public class Bodega implements Serializable {
     		return "Ha ocurrido un error.";
     	}
     }
+ // se añade un nuevo metodo para la funcionalidad #2
+    
+    public void guardarEnBodega(HashMap<Producto, Integer> tanda) {
+        for (Map.Entry<Producto, Integer> entry : tanda.entrySet()) {
+            Producto producto = entry.getKey();
+            Integer cantidad = entry.getValue();
+
+            if (contabilidadProductos.containsKey(producto)) {
+                // Si el producto ya existe en la contabilidad, actualiza la cantidad
+                int cantidadActual = contabilidadProductos.get(producto);
+                contabilidadProductos.put(producto, cantidadActual + cantidad);
+            } else {
+                // Si el producto no existe en la contabilidad, agrégalo
+                contabilidadProductos.put(producto, cantidad);
+            }
+        }
+    }
+    
+    // se añade un nuevo metodo para la funcionalidad #2
+    
+    public boolean verificarTandaBodega(HashMap<Producto, Integer> tanda) {
+		int suma=0;
+		for (Entry<Producto, Integer> entry : tanda.entrySet()) {
+            Producto producto = entry.getKey();
+            int cantidadNecesaria = entry.getValue();
+            suma+=cantidadNecesaria;
+		}
+		if (suma>this.espacioAlmacenamiento) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+    
+ // se añade un nuevo metodo para la funcionalidad #2
+    
+    public boolean disponibilidadBodega(HashMap<Producto, Integer> tanda) {
+		int suma=0;
+		for (Entry<Producto, Integer> entry : tanda.entrySet()) {
+	        Producto producto = entry.getKey();
+	        int cantidadNecesaria = entry.getValue();
+	        suma+=cantidadNecesaria;
+		}
+		if (suma >= this.espacioAlmacenamiento / 5) {
+			return false;
+		}else {
+			return true;
+		}
+	}
     
     // se añade un nuevo metodo para la funcionalidad #2 para descontar la materia prima
-    public void descontarMateriaPrimaNecesaria(List<Ingrediente> ingredientesRequeridos, int cantidadProduccion) {
+    public void descontarMateriaPrimaNecesaria(HashMap<Ingrediente, Integer> ingredientesRequeridos, int cantidadProduccion) {
         List<Ingrediente> inventarioIngredientes = this.getIngredientes();
 
-        for (Ingrediente ingredienteRequerido : ingredientesRequeridos) {
-            // Verificar si el ingrediente requerido está presente en el inventario
-            if (inventarioIngredientes.contains(ingredienteRequerido)) {
-                // Realizar las operaciones de descontar la cantidad de ingredientes necesaria
-                int index = inventarioIngredientes.indexOf(ingredienteRequerido);
-                Ingrediente ingredienteEnInventario = inventarioIngredientes.get(index);
+        for (Entry<Ingrediente, Integer> entry : ingredientesRequeridos.entrySet()) {
+            Ingrediente nombreIngrediente = entry.getKey();
+            int cantidadNecesaria = entry.getValue();
+            boolean ingredienteEncontrado = false;
 
-                // Realizar el descuento si hay suficiente cantidad en el inventario
-                if (ingredienteEnInventario.getCantidad() >= cantidadProduccion) {
-                    ingredienteEnInventario.setCantidad(ingredienteEnInventario.getCantidad() - cantidadProduccion);
-                } else {
-                    System.out.println("No hay suficiente cantidad de " + ingredienteRequerido.getNombre() + " en la bodega.");
+            for (Ingrediente ingredienteEnInventario : inventarioIngredientes) {
+                if (ingredienteEnInventario.getNombre().equals(nombreIngrediente)) {
+                    ingredienteEncontrado = true;
+
+                    if (ingredienteEnInventario.getCantidad() >= cantidadNecesaria) {
+                        ingredienteEnInventario.setCantidad(ingredienteEnInventario.getCantidad() - cantidadNecesaria);
+                    } else {
+                        System.out.println("No hay suficiente cantidad de " + nombreIngrediente + " en la bodega.");
+                    }
+                    break;
                 }
-            } else {
-                System.out.println("El ingrediente " + ingredienteRequerido.getNombre() + " no está disponible en la bodega.");
+            }
+
+            if (!ingredienteEncontrado) {
+                System.out.println("El ingrediente " + nombreIngrediente + " no está disponible en la bodega.");
             }
         }
 

@@ -113,11 +113,11 @@ public class Administrador implements Serializable {
 		 //Creación de fabrica
 		Fabrica fabrica=new Fabrica("CBS321","CRR52#75",bodega);
 	 	//Le seteamos una produccionDiariaInicial
-	 	HashMap<String, Integer> produccionDiaria = new HashMap<>();
-	 	produccionDiaria.put("torta", 1);
-	 	produccionDiaria.put("pastelFrito", 1);
-	 	produccionDiaria.put("dona", 1);
-	 	produccionDiaria.put("galleta", 1);
+	 	HashMap<Producto, Integer> produccionDiaria = new HashMap<>();
+	 	produccionDiaria.put(torta, 1);
+	 	produccionDiaria.put(pastelFrito, 1);
+	 	produccionDiaria.put(dona, 1);
+	 	produccionDiaria.put(galletas, 1);
 	 	fabrica.setProduccionDiaria(produccionDiaria);
 	 	fabrica.finalizarProduccion(produccionDiaria);
 	 	fabrica.finalizarProduccion(produccionDiaria);
@@ -268,10 +268,9 @@ public class Administrador implements Serializable {
             System.out.println("Entrada no válida. Ingrese un número entero válido.");
         }
     }
-    
+  //Funcionalidad #2
 	public void cambiarListaProduccionDiaria() {
 		Scanner sc = new Scanner(System.in);
-    	//Funcionalidad #2
     	
     	//Se muestra la produccion diaria
         System.out.println("Producción diaria actual:");
@@ -288,7 +287,7 @@ public class Administrador implements Serializable {
         if (this.getBodega().disponibilidadBodega(this.getFabrica().getProduccionDiaria())){
         	
         	//Se cambia la lista de producción diaria
-            System.out.println(this.getFabrica().cambiarProduccion(productoSeleccionado, nuevaCantidad));
+            System.out.println(this.getFabrica().cambiarProduccionn(productoSeleccionado, nuevaCantidad));
       
             //Se ajustan los costos de produccion
             this.getCaja().actualizarCostosProduccion(productoSeleccionado,nuevaCantidad);

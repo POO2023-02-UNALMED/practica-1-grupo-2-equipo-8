@@ -161,9 +161,5 @@ public class Envio implements Serializable {
 	public void setCodigoDeEnvio(long codigoDeEnvio) {
 		this.codigoDeEnvio = codigoDeEnvio;
 	}
-	 
-	 
-	 
-	 
-	 
+	  
 }

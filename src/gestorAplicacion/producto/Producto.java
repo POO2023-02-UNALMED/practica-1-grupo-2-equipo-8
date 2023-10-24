@@ -17,10 +17,11 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     private int peso;
     private int diasBodega;
     private boolean asignadoAEnvio=false;
+    private int costos;
 
     
     //Constructor
-    public Producto(String nombre, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+    public Producto(String nombreProducto, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
                     String ID, int peso) {
     	
     	//Se calcula el espacio acumulado según se especifico en el UML
@@ -38,7 +39,7 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
     	
     	
     	
-        this.nombre = nombre;
+        this.nombre = nombreProducto;
         this.espacioAlmacenamiento = espacioAproximado;
         this.ingredientesNecesarios = ingredientesNecesarios;
         this.precio = this.calcularPrecio(precioBase);
@@ -175,6 +176,18 @@ public abstract class Producto implements Serializable, IProductoIngrediente {
 
 	public void setAsignadoAEnvio(boolean asignadoAEnvio) {
 		this.asignadoAEnvio = asignadoAEnvio;
+	}
+
+
+
+	public int getCostos() {
+		return costos;
+	}
+
+
+
+	public void setCostos(int costos) {
+		this.costos = costos;
 	}
 }
 

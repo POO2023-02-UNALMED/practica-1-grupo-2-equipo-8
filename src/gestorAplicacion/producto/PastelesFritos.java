@@ -8,9 +8,9 @@ public class PastelesFritos extends Producto {
     private String salsa;
 
 
-	public PastelesFritos(String nombre, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
+	public PastelesFritos(String nombreProducto, int espacioAlmacenamiento, HashMap<Ingrediente, Integer> ingredientesNecesarios, int precioBase,
             String ID, int peso , boolean dulce, String salsa) {
-			super(nombre, ingredientesNecesarios, precioBase, ID, peso);
+			super(nombreProducto, ingredientesNecesarios, precioBase, ID, peso);
 			this.dulce = dulce;
 			this.salsa = salsa;
 	}

@@ -172,5 +172,5 @@ public class Ingrediente implements IProductoIngrediente, Serializable{
 		this.cantidad = cantidad;
 		
 	}
-    
+   
 }
