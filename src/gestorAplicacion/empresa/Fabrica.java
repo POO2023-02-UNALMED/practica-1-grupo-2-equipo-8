@@ -373,7 +373,7 @@ public class Fabrica implements Serializable {
         }
     }
 
-    
+    //Getters y Setters
     public String getDireccion() {
 		return direccion;
 	}

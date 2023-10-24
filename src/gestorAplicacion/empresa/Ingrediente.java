@@ -133,6 +133,10 @@ public class Ingrediente implements IProductoIngrediente, Serializable{
     	return (int) Math.round(p);
     }
     
+    
+    
+    
+ 
 
     //Setters y getters
     public static ArrayList<Ingrediente> getIngredientesDisponibles() {
